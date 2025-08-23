@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Слово</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div th:replace="~{fragments/navigation :: nav}"></div>
+<div class="container">
+    <h1 th:text="'Слово #' + ${word.id}"></h1>
+
+    <form th:action="@{/save}" th:object="${word}" method="post">
+
+
+        <input type="hidden" th:field="*{id}"/>
+        <input type="hidden" th:field="*{englishCnt}"/>
+        <input type="hidden" th:field="*{ukrainianCnt}"/>
+        <input type="hidden" th:field="*{lastTrain}"/>
+        <label>Англійське слово:</label><br>
+        <input type="text" th:field="*{english}" required/><br><br>
+
+        <label>Український переклад:</label><br>
+        <input type="text" th:field="*{ukrainian}" required/>
+        <a th:href="@{'https://translate.google.com/?sl=en&tl=uk&op=translate&text=' + ${word.english}}" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Google_Translate_logo.svg" width="20" height="20"/>
+        </a>
+        <br><br>
+
+        <label>Опис:</label><br>
+        <textarea th:field="*{description}"></textarea><br><br>
+
+        <label>Стан:</label><br>
+        <select th:field="*{state}">
+            <option th:each="s : ${T(org.sav.fornas.dto.cards.WordStateDto).values()}"
+                    th:value="${s}"
+                    th:text="${s}"
+                    th:selected="${s == word.state}">
+            </option>
+        </select>
+        <br><br>
+
+        <button type="submit">Зберегти</button>
+    </form>
+</div>
+</body>
+</html>

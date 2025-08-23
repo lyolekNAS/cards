@@ -1,0 +1,107 @@
+package org.sav.fornas.cards.controller;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
+import org.sav.fornas.cards.service.WordService;
+import org.sav.fornas.dto.cards.TrainedWordDto;
+import org.sav.fornas.dto.cards.WordDto;
+import org.sav.fornas.dto.cards.WordLangDto;
+import org.springframework.ui.Model;
+
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.*;
+
+class WordControllerTest {
+
+	private WordService wordService;
+	private WordController controller;
+	private Model model;
+
+	@BeforeEach
+	void setUp() {
+		wordService = mock(WordService.class);
+		controller = new WordController(wordService);
+		model = mock(Model.class);
+	}
+
+	@Test
+	void viewInfo_shouldAddWordsToModel() {
+		List<WordDto> mockWords = List.of(new WordDto());
+		when(wordService.getWordsByUser()).thenReturn(mockWords);
+
+		String view = controller.viewInfo(model);
+
+		verify(model).addAttribute("words", mockWords);
+		assertThat(view).isEqualTo("words");
+	}
+
+	@Test
+	void showForm_shouldReturnWordForm() {
+		WordDto dto = new WordDto();
+		when(wordService.findWord("dog")).thenReturn(dto);
+
+		String view = controller.showForm(model, "dog");
+
+		verify(model).addAttribute("word", dto);
+		assertThat(view).isEqualTo("word-form");
+	}
+
+	@Test
+	void saveWord_shouldRedirectToEdit() {
+		WordDto saved = new WordDto();
+		saved.setEnglish("table");
+		when(wordService.saveWord(any())).thenReturn(saved);
+
+		String view = controller.saveWord(saved);
+
+		verify(wordService).saveWord(saved);
+		assertThat(view).isEqualTo("redirect:/edit?w=table");
+	}
+
+	@Test
+	void deleteWord_shouldRedirectToWords() {
+		String view = controller.deleteWord(1L);
+
+		verify(wordService).deleteWord(1L);
+		assertThat(view).isEqualTo("redirect:/words");
+	}
+
+	@Test
+	void train_shouldAddWordAndReturnTrainView() {
+		WordDto dto = new WordDto();
+		when(wordService.getWord()).thenReturn(dto);
+
+		String view = controller.train(model);
+
+		verify(model).addAttribute("word", dto);
+		assertThat(view).isEqualTo("train");
+	}
+
+	@Test
+	void publicTrain_shouldPutStubWordInModel() {
+		String view = controller.publicTrain(model);
+
+		ArgumentCaptor<WordDto> captor = ArgumentCaptor.forClass(WordDto.class);
+		verify(model).addAttribute(eq("word"), captor.capture());
+
+		WordDto dto = captor.getValue();
+		assertThat(dto.getEnglish()).isEqualTo("chair");
+		assertThat(dto.getUkrainian()).contains("крісло");
+		assertThat(dto.getLang()).isEqualTo(WordLangDto.EN);
+
+		assertThat(view).isEqualTo("train");
+	}
+
+	@Test
+	void setTrained_shouldCallServiceAndRedirect() {
+		TrainedWordDto dto = new TrainedWordDto();
+
+		String view = controller.setTrained(dto);
+
+		verify(wordService).setTrained(dto);
+		assertThat(view).isEqualTo("redirect:/train");
+	}
+}

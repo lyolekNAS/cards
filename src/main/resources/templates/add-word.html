@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Слово</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div th:replace="{fragments/navigation :: nav}"></div>
+<div class="container">
+
+    <form action="/edit"  method="get">
+        <label>Англійське слово:</label><br>
+        <input type="text" id="w" name="w" required/>
+        <br/>
+        <br/>
+        <button type="submit">Далі</button>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Cards</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div th:replace="~{fragments/navigation :: nav}"></div>
+<div class="container">
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>English</th>
+            <th>Ukrainian</th>
+            <th>Description</th>
+            <th>State</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="word : ${words}">
+            <td>
+                <a th:href="@{'/delete?id=' + ${word.id}}" th:text="${word.id}"></a>
+            </td>
+            <td>
+                <a th:href="@{'/edit?w=' + ${word.english}}" th:text="${word.english}"></a>
+            </td>
+            <td th:text="${word.ukrainian}"></td>
+            <td th:text="${word.description}"></td>
+            <td th:text="${word.state}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="/add">Додати</a>
+</div>
+</body>
+</html>

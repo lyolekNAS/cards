@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Тренування!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div th:replace="~{fragments/navigation :: nav}"></div>
+<div class="container" onclick="showTranslation()">
+    <div class="word-card">
+        <p class="original-word" th:text="${word.lang.name() == 'EN' ? word.english : word.ukrainian}"></p>
+        <hr/>
+        <p class="translated-word" id="translation" style="visibility: hidden;" th:text="${word.lang.name() == 'EN' ? word.ukrainian : word.english}"></p>
+        <hr/>
+        <p class="description" th:text="${word.description}"></p>
+        <hr/>
+        <div sec:authorize="hasRole('ADMIN')" class="admin-info">
+            <p>en cnt: <span th:text="${word.englishCnt}"></span></p>
+            <p>ua cnt: <span th:text="${word.ukrainianCnt}"></span></p>
+        </div>
+    </div>
+    
+    <div class="actions" id="actions" style="visibility: hidden;">
+        <form th:action="@{/trained}" method="get" id="trainForm">
+            <input type="hidden" name="id" th:value="${word.id}">
+            <input type="hidden" name="success" id="successField" value="">
+            <input type="hidden" name="lang" th:value="${word.lang}">
+            <button type="button" onclick="submitForm(true)">Ок</button>
+            <button type="button" onclick="submitForm(false)">Ні</button>
+        </form>
+    </div>
+</div>
+<script>
+function showTranslation() {
+    document.getElementById('translation').style.visibility = 'visible';
+    document.getElementById('actions').style.visibility = 'visible';
+}
+
+function submitForm(success) {
+    document.getElementById('successField').value = success;
+    document.getElementById('trainForm').submit();
+}
+</script>
+</body>
+</html>
