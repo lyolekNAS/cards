@@ -54,6 +54,9 @@ public class WordController {
 	@GetMapping("/train")
 	public String train(Model model) {
 		WordDto word = wordService.getWord();
+		if(word == null){
+			return "redirect:/add";
+		}
 		model.addAttribute("word", word);
 		return "train";
 	}
