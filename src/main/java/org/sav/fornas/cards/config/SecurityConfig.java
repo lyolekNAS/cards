@@ -1,6 +1,7 @@
 package org.sav.fornas.cards.config;
 
 import lombok.extern.slf4j.Slf4j;
+import org.sav.fornas.cards.property.GoogleProperties;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -40,12 +41,6 @@ public class SecurityConfig {
 
 	@Value("${app-props.url.cards-back}")
 	private String cardsApiBaseUrl;
-
-	@Value("${app-props.google.api.key}")
-	private String googleApiKey;
-
-	@Value("${app-props.url.google.translate}")
-	private String gTranslateApiBaseUrl;
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -134,12 +129,13 @@ public class SecurityConfig {
 	}
 
 	@Bean
-	public RestTemplate gTranslateRestTemplate(RestTemplateBuilder builder) {
+	public RestTemplate gTranslateRestTemplate(RestTemplateBuilder builder, GoogleProperties googleProperties) {
+		log.debug(">>> gTranslateURL={}, key={}", googleProperties.getTranslateUrl(), googleProperties.getApiKey());
 		return builder
-				.rootUri(gTranslateApiBaseUrl)
+				.rootUri(googleProperties.getTranslateUrl())
 				.additionalInterceptors((request, body, execution) -> {
 					// Додаємо заголовок X-goog-api-key
-					request.getHeaders().add("X-goog-api-key", googleApiKey);
+					request.getHeaders().add("X-goog-api-key", googleProperties.getApiKey());
 					return execution.execute(request, body);
 				})
 				.build();
