@@ -10,7 +10,7 @@
 <div th:replace="~{fragments/navigation :: nav}"></div>
 <div class="container">
 
-    <form action="/edit"  method="get">
+    <form th:action="@{/edit}"  method="get">
         <label>Англійське слово:</label><br>
         <input type="text" id="w" name="w" required/>
         <br/>

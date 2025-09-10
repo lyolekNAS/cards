@@ -8,10 +8,10 @@
 <body>
 <div class="container">
     <h2>Вітаю, <span sec:authentication="principal.attributes['name']"></span> <span sec:authentication="principal.attributes['surname']"></span> (<span sec:authentication="name"></span>)</h2>
-    <div><a href="/train">Тренуватись</a></div>
-    <div><a href="/words">Слова</a></div>
-    <div><a href="/add">Додати</a></div>
-    <div><a href="/logout">Піти</a></div>
+    <div><a th:href="@{/train}">Тренуватись</a></div>
+    <div><a th:href="@{/words}">Слова</a></div>
+    <div><a th:href="@{/add}">Додати</a></div>
+    <div><a th:href="@{/logout}">Піти</a></div>
 </div>
 </body>
 </html>
