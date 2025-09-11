@@ -47,7 +47,7 @@ public class SecurityConfig {
 		http
 				.authorizeHttpRequests(auth -> auth
 						.requestMatchers("/error", "/public/**", "/css/**", "/js/**").permitAll()
-						.anyRequest().authenticated()
+						.anyRequest().hasRole("CARDS_USER")
 				)
 //				.redirectToHttps(Customizer.withDefaults())
 				.oauth2Login(oauth2 -> oauth2
