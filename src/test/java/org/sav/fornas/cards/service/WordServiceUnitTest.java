@@ -1,10 +1,9 @@
 package org.sav.fornas.cards.service;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
+import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.sav.fornas.dto.cards.TrainedWordDto;
 import org.sav.fornas.dto.cards.WordDto;
@@ -17,25 +16,34 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.eq;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
 
 @ExtendWith(MockitoExtension.class)
 class WordServiceUnitTest {
 
-	@Mock
-	private RestTemplate jwtRestTemplate;
 
-	@Mock
-	private RestTemplate gTranslateRestTemplate;
+	RestTemplate jwtRestTemplate;
+	RestTemplate gTranslateRestTemplate;
+	WordService wordService;
 
-	@InjectMocks
-	private WordService wordService;
+	@BeforeEach
+	void setUp() {
+		jwtRestTemplate = mock(RestTemplate.class);
+		gTranslateRestTemplate = mock(RestTemplate.class);
+		wordService = new WordService(jwtRestTemplate, gTranslateRestTemplate);
+	}
 
 	@Test
 	void testGetWordsByUser() {
+//		RestTemplate jwtRestTemplate = Mockito.mock(RestTemplate.class);
+//		WordService wordService = new WordService(jwtRestTemplate, null);
+
 		List<WordDto> mockWords = List.of(new WordDto(), new WordDto());
-		Mockito.when(jwtRestTemplate.exchange(
+
+		when(jwtRestTemplate.exchange(
 						eq("/word/user/all"),
 						eq(HttpMethod.GET),
 						Mockito.isNull(),
@@ -44,8 +52,10 @@ class WordServiceUnitTest {
 
 		List<WordDto> result = wordService.getWordsByUser();
 
+		assertNotNull(result);
 		assertEquals(2, result.size());
-		Mockito.verify(jwtRestTemplate).exchange(
+
+		verify(jwtRestTemplate).exchange(
 				eq("/word/user/all"),
 				eq(HttpMethod.GET),
 				Mockito.isNull(),
@@ -54,33 +64,42 @@ class WordServiceUnitTest {
 
 	@Test
 	void testSaveWord() {
+//		RestTemplate jwtRestTemplate = Mockito.mock(RestTemplate.class);
+//		WordService wordService = new WordService(jwtRestTemplate, null);
+
 		WordDto input = new WordDto();
 		input.setEnglish("chair");
 
 		WordDto saved = new WordDto();
 		saved.setEnglish("chair");
 
-		Mockito.when(jwtRestTemplate.postForObject("/word/save", input, WordDto.class))
+		when(jwtRestTemplate.postForObject("/word/save", input, WordDto.class))
 				.thenReturn(saved);
 
 		WordDto result = wordService.saveWord(input);
-
+		assertNotNull(result);
 		assertEquals("chair", result.getEnglish());
-		Mockito.verify(jwtRestTemplate).postForObject("/word/save", input, WordDto.class);
+		verify(jwtRestTemplate).postForObject("/word/save", input, WordDto.class);
 	}
 
 	@Test
 	void testDeleteWord() {
+//		RestTemplate jwtRestTemplate = Mockito.mock(RestTemplate.class);
+//		WordService wordService = new WordService(jwtRestTemplate, null);
+
 		Long id = 1L;
 		wordService.deleteWord(id);
-		Mockito.verify(jwtRestTemplate).delete("/word/delete?id=1");
+		verify(jwtRestTemplate).delete("/word/delete?id=1");
 	}
 
 	@Test
 	void testFindWord_existing() {
+//		RestTemplate jwtRestTemplate = Mockito.mock(RestTemplate.class);
+//		WordService wordService = new WordService(jwtRestTemplate, null);
+
 		WordDto word = new WordDto();
 		word.setEnglish("table");
-		Mockito.when(jwtRestTemplate.getForObject("/word/find?w=table", WordDto.class))
+		when(jwtRestTemplate.getForObject("/word/find?w=table", WordDto.class))
 				.thenReturn(word);
 
 		WordDto result = wordService.findWord("table");
@@ -90,7 +109,10 @@ class WordServiceUnitTest {
 
 	@Test
 	void testFindWord_notFound_callsTranslation() {
-		Mockito.when(jwtRestTemplate.getForObject("/word/find?w=sofa", WordDto.class))
+//		RestTemplate jwtRestTemplate = Mockito.mock(RestTemplate.class);
+//		RestTemplate gTranslateRestTemplate = Mockito.mock(RestTemplate.class);
+//		WordService wordService = new WordService(jwtRestTemplate, gTranslateRestTemplate);
+		when(jwtRestTemplate.getForObject("/word/find?w=sofa", WordDto.class))
 				.thenReturn(null);
 
 		TranslationResponse translationResponse = new TranslationResponse();
@@ -100,7 +122,7 @@ class WordServiceUnitTest {
 		translation.setTranslatedText("диван");
 		translationResponse.setData(data);
 
-		Mockito.when(gTranslateRestTemplate.postForObject(
+		when(gTranslateRestTemplate.postForObject(
 						Mockito.contains("/v2?target=uk&source=en&q=sofa"),
 						Mockito.isNull(),
 						eq(TranslationResponse.class)))
@@ -110,14 +132,22 @@ class WordServiceUnitTest {
 
 		assertEquals("sofa", result.getEnglish());
 		assertEquals("диван", result.getUkrainian());
+
+		verify(jwtRestTemplate).getForObject(anyString(), eq(WordDto.class));
+		verify(gTranslateRestTemplate).postForObject(anyString(), any(), eq(TranslationResponse.class));
 	}
 
 	@Test
 	void testGetWord() {
+//		RestTemplate jwtRestTemplate = Mockito.mock(RestTemplate.class);
+//		WordService wordService = new WordService(jwtRestTemplate, null);
+
 		WordDto word = new WordDto();
 		word.setEnglish("desk");
-		Mockito.when(jwtRestTemplate.getForObject("/word/train", WordDto.class))
-				.thenReturn(word);
+		when(jwtRestTemplate.getForObject(
+						contains("/word/train"),
+						eq(WordDto.class)
+		)).thenReturn(word);
 
 		WordDto result = wordService.getWord();
 
@@ -126,6 +156,9 @@ class WordServiceUnitTest {
 
 	@Test
 	void testSetTrained() {
+//		RestTemplate jwtRestTemplate = Mockito.mock(RestTemplate.class);
+//		WordService wordService = new WordService(jwtRestTemplate, null);
+
 		TrainedWordDto trained = new TrainedWordDto();
 		trained.setId(1L);
 

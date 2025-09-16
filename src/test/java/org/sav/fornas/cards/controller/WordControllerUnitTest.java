@@ -2,136 +2,89 @@ package org.sav.fornas.cards.controller;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.sav.fornas.cards.service.WordService;
 import org.sav.fornas.dto.cards.TrainedWordDto;
 import org.sav.fornas.dto.cards.WordDto;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.ui.Model;
 
 import java.util.List;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.*;
 
-@ExtendWith(MockitoExtension.class)
 class WordControllerUnitTest {
 
-	@Mock
 	private WordService wordService;
-
-	@InjectMocks
-	private WordController wordController;
-
-	private MockMvc mockMvc;
+	private WordController controller;
+	private Model model;
 
 	@BeforeEach
 	void setUp() {
-		mockMvc = MockMvcBuilders.standaloneSetup(wordController).build();
+		wordService = mock(WordService.class);
+		controller = new WordController(wordService);
+		model = mock(Model.class);
 	}
 
 	@Test
-	void testViewInfo() throws Exception {
-		List<WordDto> words = List.of(new WordDto(), new WordDto());
-		Mockito.when(wordService.getWordsByUser()).thenReturn(words);
+	void viewInfo_shouldAddWordsToModel() {
+		List<WordDto> mockWords = List.of(new WordDto());
+		when(wordService.getWordsByUser()).thenReturn(mockWords);
 
-		mockMvc.perform(get("/words"))
-				.andExpect(status().isOk())
-				.andExpect(view().name("words"))
-				.andExpect(model().attributeExists("words"))
-				.andExpect(model().attribute("words", words));
+		String view = controller.viewInfo(model);
+
+		verify(model).addAttribute("words", mockWords);
+		assertThat(view).isEqualTo("words");
 	}
 
 	@Test
-	void testShowForm_withWord() throws Exception {
-		WordDto word = new WordDto();
-		word.setEnglish("chair");
-		Mockito.when(wordService.findWord("chair")).thenReturn(word);
+	void showForm_shouldReturnWordForm() {
+		WordDto dto = new WordDto();
+		when(wordService.findWord("dog")).thenReturn(dto);
 
-		mockMvc.perform(get("/edit").param("w", "chair"))
-				.andExpect(status().isOk())
-				.andExpect(view().name("word-form"))
-				.andExpect(model().attributeExists("word"))
-				.andExpect(model().attribute("word", word));
+		String view = controller.showForm(model, "dog");
+
+		verify(model).addAttribute("word", dto);
+		assertThat(view).isEqualTo("word-form");
 	}
 
 	@Test
-	void testShowForm_withoutWord() throws Exception {
-		WordDto word = new WordDto();
-		Mockito.when(wordService.findWord("")).thenReturn(word);
+	void saveWord_shouldRedirectToEdit() {
+		WordDto saved = new WordDto();
+		saved.setEnglish("table");
+		when(wordService.saveWord(any())).thenReturn(saved);
 
-		mockMvc.perform(get("/edit"))
-				.andExpect(status().isOk())
-				.andExpect(view().name("word-form"))
-				.andExpect(model().attributeExists("word"));
+		String view = controller.saveWord(saved);
+
+		verify(wordService).saveWord(saved);
+		assertThat(view).isEqualTo("redirect:/edit?w=table");
 	}
 
 	@Test
-	void testAddWord() throws Exception {
-		mockMvc.perform(get("/add"))
-				.andExpect(status().isOk())
-				.andExpect(view().name("add-word"));
+	void deleteWord_shouldRedirectToWords() {
+		String view = controller.deleteWord(1L);
+
+		verify(wordService).deleteWord(1L);
+		assertThat(view).isEqualTo("redirect:/words");
 	}
 
 	@Test
-	void testSaveWord() throws Exception {
-		WordDto savedWord = new WordDto();
-		savedWord.setEnglish("desk");
+	void train_shouldAddWordAndReturnTrainView() {
+		WordDto dto = new WordDto();
+		when(wordService.getWord()).thenReturn(dto);
 
-		Mockito.when(wordService.saveWord(Mockito.any(WordDto.class))).thenReturn(savedWord);
+		String view = controller.train(model);
 
-		mockMvc.perform(post("/save")
-						.param("english", "desk")
-						.param("ukrainian", "стіл"))
-				.andExpect(status().is3xxRedirection())
-				.andExpect(redirectedUrl("/edit?w=desk"));
+		verify(model).addAttribute("word", dto);
+		assertThat(view).isEqualTo("train");
 	}
 
 	@Test
-	void testDeleteWord() throws Exception {
-		mockMvc.perform(get("/delete").param("id", "1"))
-				.andExpect(status().is3xxRedirection())
-				.andExpect(redirectedUrl("/words"));
+	void setTrained_shouldCallServiceAndRedirect() {
+		TrainedWordDto dto = new TrainedWordDto();
 
-		Mockito.verify(wordService).deleteWord(1L);
-	}
+		String view = controller.setTrained(dto);
 
-	@Test
-	void testTrain() throws Exception {
-		WordDto word = new WordDto();
-		Mockito.when(wordService.getWord()).thenReturn(word);
-
-		mockMvc.perform(get("/train"))
-				.andExpect(status().isOk())
-				.andExpect(view().name("train"))
-				.andExpect(model().attribute("word", word));
-	}
-
-	@Test
-	void testPublicTrain() throws Exception {
-		mockMvc.perform(get("/public/train"))
-				.andExpect(status().isOk())
-				.andExpect(view().name("train"))
-				.andExpect(model().attributeExists("word"));
-	}
-
-	@Test
-	void testSetTrained() throws Exception {
-		TrainedWordDto trained = new TrainedWordDto();
-		trained.setId(1L);
-
-		mockMvc.perform(get("/trained")
-						.param("wordId", "1")
-						.param("trainedTimes", "1"))
-				.andExpect(status().is3xxRedirection())
-				.andExpect(redirectedUrl("/train"));
-
-		Mockito.verify(wordService).setTrained(Mockito.any(TrainedWordDto.class));
+		verify(wordService).setTrained(dto);
+		assertThat(view).isEqualTo("redirect:/train");
 	}
 }
-

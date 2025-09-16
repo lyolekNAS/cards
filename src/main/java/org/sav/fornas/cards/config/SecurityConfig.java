@@ -30,6 +30,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.filter.ForwardedHeaderFilter;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -43,7 +44,7 @@ public class SecurityConfig {
 	private String cardsApiBaseUrl;
 
 	@Bean
-	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+	public SecurityFilterChain filterChain(HttpSecurity http, OidcUserService delegate) throws Exception {
 		http
 				.authorizeHttpRequests(auth -> auth
 						.requestMatchers("/error", "/public/**", "/css/**", "/js/**").permitAll()
@@ -52,7 +53,7 @@ public class SecurityConfig {
 //				.redirectToHttps(Customizer.withDefaults())
 				.oauth2Login(oauth2 -> oauth2
 						.userInfoEndpoint(userInfo -> userInfo
-								.oidcUserService(oidcUserService())
+								.oidcUserService(oidcUserService(delegate))
 						)
 				)
 				.logout(Customizer.withDefaults());
@@ -60,18 +61,20 @@ public class SecurityConfig {
 	}
 
 	@Bean
-	public OAuth2UserService<OidcUserRequest, OidcUser> oidcUserService() {
+	public OidcUserService oidcUserServiceDelegate() {
+		return new OidcUserService();
+	}
+
+	@Bean
+	public OAuth2UserService<OidcUserRequest, OidcUser> oidcUserService(OidcUserService delegate) {
 		return userRequest -> {
-			OidcUser oidcUser = new OidcUserService().loadUser(userRequest);
+			OidcUser oidcUser = delegate.loadUser(userRequest);
 
-			Map<String, Object> claims = oidcUser.getClaims();
-
-			List<GrantedAuthority> mappedAuthorities = new ArrayList<>();
-
-			if (claims.containsKey("roles")) {
-				List<String> roles = (List<String>) claims.get("roles");
-				roles.forEach(role -> mappedAuthorities.add(new SimpleGrantedAuthority(role)));
-			}
+			Collection<? extends GrantedAuthority> mappedAuthorities =
+					((List<String>) oidcUser.getClaims().getOrDefault("roles", List.of()))
+							.stream()
+							.map(SimpleGrantedAuthority::new)
+							.toList();
 
 			return new DefaultOidcUser(mappedAuthorities, oidcUser.getIdToken(), oidcUser.getUserInfo());
 		};

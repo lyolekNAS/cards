@@ -21,6 +21,7 @@ public class WordService {
 	private final RestTemplate gTranslateRestTemplate;
 
 	public List<WordDto> getWordsByUser(){
+		log.debug(">>> getWordsByUser()");
 		return jwtRestTemplate.exchange("/word/user/all", HttpMethod.GET, null, new ParameterizedTypeReference<List<WordDto>>(){}).getBody();
 	}
 
@@ -30,6 +31,7 @@ public class WordService {
 	}
 
 	public void deleteWord(Long id){
+		log.debug(">>> deleteWord({}})", id);
 		jwtRestTemplate.delete("/word/delete?id=" + id);
 	}
 
@@ -60,7 +62,10 @@ public class WordService {
 
 	private String getTranslated(String w){
 		TranslationResponse resp = gTranslateRestTemplate.postForObject("/v2?target=uk&source=en&q=" + w, null, TranslationResponse.class);
-		assert resp != null;
-		return resp.getData().getTranslations().getFirst().getTranslatedText();
+		if(resp != null){
+			return resp.getData().getTranslations().getFirst().getTranslatedText();
+		} else {
+			return "";
+		}
 	}
 }

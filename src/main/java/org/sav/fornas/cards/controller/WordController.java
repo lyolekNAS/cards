@@ -61,18 +61,6 @@ public class WordController {
 		return "train";
 	}
 
-	@GetMapping("/public/train")
-	public String publicTrain(Model model) {
-		WordDto word = new WordDto();
-		word.setEnglish("chair");
-		word.setUkrainian("крісло+");
-		word.setDescription("такі меблі");
-		word.setDescription("");
-		word.setLang(WordLangDto.EN);
-		model.addAttribute("word", word);
-		return "train";
-	}
-
 	@GetMapping("/trained")
 	public String setTrained(@ModelAttribute TrainedWordDto trainedWordDto) {
 		log.info(">>> trainedWord={}", trainedWordDto);

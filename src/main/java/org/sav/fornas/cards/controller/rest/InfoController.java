@@ -34,16 +34,4 @@ public class InfoController {
 		log.info("User:{}", user);
 		return user;
 	}
-
-	@PreAuthorize("hasRole('ADMIN')")
-	@RequestMapping("/admin")
-	public String admin() {
-		return "Wellcome to the club";
-	}
-
-	@PreAuthorize("hasRole('JUNIOR')")
-	@RequestMapping("/junior")
-	public String junior() {
-		return "Junior";
-	}
 }
