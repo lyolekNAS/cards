@@ -38,8 +38,6 @@ class WordServiceUnitTest {
 
 	@Test
 	void testGetWordsByUser() {
-//		RestTemplate jwtRestTemplate = Mockito.mock(RestTemplate.class);
-//		WordService wordService = new WordService(jwtRestTemplate, null);
 
 		List<WordDto> mockWords = List.of(new WordDto(), new WordDto());
 
@@ -64,8 +62,6 @@ class WordServiceUnitTest {
 
 	@Test
 	void testSaveWord() {
-//		RestTemplate jwtRestTemplate = Mockito.mock(RestTemplate.class);
-//		WordService wordService = new WordService(jwtRestTemplate, null);
 
 		WordDto input = new WordDto();
 		input.setEnglish("chair");
@@ -84,8 +80,6 @@ class WordServiceUnitTest {
 
 	@Test
 	void testDeleteWord() {
-//		RestTemplate jwtRestTemplate = Mockito.mock(RestTemplate.class);
-//		WordService wordService = new WordService(jwtRestTemplate, null);
 
 		Long id = 1L;
 		wordService.deleteWord(id);
@@ -94,8 +88,6 @@ class WordServiceUnitTest {
 
 	@Test
 	void testFindWord_existing() {
-//		RestTemplate jwtRestTemplate = Mockito.mock(RestTemplate.class);
-//		WordService wordService = new WordService(jwtRestTemplate, null);
 
 		WordDto word = new WordDto();
 		word.setEnglish("table");
@@ -109,9 +101,6 @@ class WordServiceUnitTest {
 
 	@Test
 	void testFindWord_notFound_callsTranslation() {
-//		RestTemplate jwtRestTemplate = Mockito.mock(RestTemplate.class);
-//		RestTemplate gTranslateRestTemplate = Mockito.mock(RestTemplate.class);
-//		WordService wordService = new WordService(jwtRestTemplate, gTranslateRestTemplate);
 		when(jwtRestTemplate.getForObject("/word/find?w=sofa", WordDto.class))
 				.thenReturn(null);
 
@@ -139,8 +128,6 @@ class WordServiceUnitTest {
 
 	@Test
 	void testGetWord() {
-//		RestTemplate jwtRestTemplate = Mockito.mock(RestTemplate.class);
-//		WordService wordService = new WordService(jwtRestTemplate, null);
 
 		WordDto word = new WordDto();
 		word.setEnglish("desk");
@@ -156,8 +143,6 @@ class WordServiceUnitTest {
 
 	@Test
 	void testSetTrained() {
-//		RestTemplate jwtRestTemplate = Mockito.mock(RestTemplate.class);
-//		WordService wordService = new WordService(jwtRestTemplate, null);
 
 		TrainedWordDto trained = new TrainedWordDto();
 		trained.setId(1L);
