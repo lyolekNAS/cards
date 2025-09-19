@@ -18,8 +18,6 @@ public class InfoController {
 
 	private final OAuth2AuthorizedClientService authorizedClientService;
 
-
-
 	@RequestMapping("/me")
 	public Authentication me(@AuthenticationPrincipal OidcUser oidcUser) {
 		return SecurityContextHolder.getContext().getAuthentication();
