@@ -8,6 +8,12 @@
 <body>
 <div th:replace="~{fragments/navigation :: nav}"></div>
 <div class="container" onclick="showTranslation()">
+    <table class="progress-table">
+        <tr>
+            <td th:each="i : ${#numbers.sequence(1, stateLimit.attempt)}" 
+                th:style="${i <= T(java.lang.Math).min(word.englishCnt, word.ukrainianCnt)} ? 'background-color: ' + ${stateLimit.color} : ''"></td>
+        </tr>
+    </table>
     <div class="word-card">
         <p class="original-word" th:text="${word.lang.name() == 'EN' ? word.english : word.ukrainian}"></p>
         <hr/>
@@ -15,7 +21,7 @@
         <hr/>
         <p class="description" th:text="${word.description}"></p>
         <hr/>
-        <div sec:authorize="hasRole('ADMIN')" class="admin-info">
+        <div sec:authorize="hasRole('CARDS_ADMIN')" class="admin-info">
             <p>en cnt: <span th:text="${word.englishCnt}"></span></p>
             <p>ua cnt: <span th:text="${word.ukrainianCnt}"></span></p>
         </div>

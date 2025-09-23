@@ -58,6 +58,7 @@ public class WordController {
 			return "redirect:/add";
 		}
 		model.addAttribute("word", word);
+		model.addAttribute("stateLimit", wordService.getStateLimit(word.getState().getId()));
 		return "train";
 	}
 

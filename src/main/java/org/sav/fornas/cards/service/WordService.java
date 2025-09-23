@@ -2,6 +2,7 @@ package org.sav.fornas.cards.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.sav.fornas.dto.cards.StateLimitDto;
 import org.sav.fornas.dto.cards.TrainedWordDto;
 import org.sav.fornas.dto.cards.WordDto;
 import org.sav.fornas.dto.google.TranslationResponse;
@@ -10,6 +11,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import javax.swing.plaf.nimbus.State;
 import java.util.List;
 
 @Service
@@ -54,6 +56,9 @@ public class WordService {
 
 	public WordDto getWord(){
 		return jwtRestTemplate.getForObject("/word/train", WordDto.class);
+	}
+	public StateLimitDto getStateLimit(int id){
+		return jwtRestTemplate.getForObject("/state/id/" + id, StateLimitDto.class);
 	}
 
 	public void setTrained(TrainedWordDto trainedWordDto){

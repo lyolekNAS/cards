@@ -194,3 +194,17 @@ button:hover {
         font-size: 16px;
     }
 }
+.progress-table {
+    height: 10px;
+    line-height: 10px;
+    font-size: 1px;
+    border-collapse: collapse;
+    margin-top: -20px;
+    margin-bottom: 20px;
+}
+
+.progress-table td {
+    height: 10px;
+    padding: 0;
+    margin: 0;
+}
