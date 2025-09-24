@@ -10,6 +10,7 @@
 <div class="container" onclick="showTranslation()">
     <table class="progress-table">
         <tr>
+            <td th:style="'background-color: ' + ${stateLimit.color}"></td>
             <td th:each="i : ${#numbers.sequence(1, stateLimit.attempt)}" 
                 th:style="${i <= T(java.lang.Math).min(word.englishCnt, word.ukrainianCnt)} ? 'background-color: ' + ${stateLimit.color} : ''"></td>
         </tr>
