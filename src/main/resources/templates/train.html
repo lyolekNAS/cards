@@ -21,10 +21,6 @@
         <hr/>
         <p class="description" th:text="${word.description}"></p>
         <hr/>
-        <div sec:authorize="hasRole('CARDS_ADMIN')" class="admin-info">
-            <p>en cnt: <span th:text="${word.englishCnt}"></span></p>
-            <p>ua cnt: <span th:text="${word.ukrainianCnt}"></span></p>
-        </div>
     </div>
     
     <div class="actions" id="actions" style="visibility: hidden;">
