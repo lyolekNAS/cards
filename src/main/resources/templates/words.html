@@ -19,16 +19,16 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="word : ${words}">
+        <tr th:each="word : ${words}" th:object="${word}">
             <td>
-                <a th:href="@{'/delete?id=' + ${word.id}}" th:text="${word.id}"></a>
+                <a th:href="@{'/delete(id=*{id})}" th:text="*{id}"></a>
             </td>
             <td>
-                <a th:href="@{'/edit?w=' + ${word.english}}" th:text="${word.english}"></a>
+                <a th:href="@{/edit(w=*{english})}" th:text="*{english}"></a>
             </td>
-            <td th:text="${word.ukrainian}"></td>
-            <td th:text="${word.description}"></td>
-            <td th:text="${word.state}"></td>
+            <td th:text="*{ukrainian}"></td>
+            <td th:text="*{description}"></td>
+            <td th:text="*{state}"></td>
         </tr>
         </tbody>
     </table>

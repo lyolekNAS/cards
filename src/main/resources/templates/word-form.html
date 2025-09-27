@@ -9,7 +9,7 @@
 <body>
 <div th:replace="~{fragments/navigation :: nav}"></div>
 <div class="container">
-    <h1 th:text="'Слово #' + ${word.id}"></h1>
+    <h1 th:text="|Слово # ${word.id}|"></h1>
 
     <form th:action="@{/save}" th:object="${word}" method="post">
 
@@ -23,7 +23,7 @@
 
         <label>Український переклад:</label><br>
         <input type="text" th:field="*{ukrainian}" required/>
-        <a th:href="@{'https://translate.google.com/?sl=en&tl=uk&op=translate&text=' + ${word.english}}" target="_blank">
+        <a th:href="@{https://translate.google.com(sl='en', tl='uk', op='translate', text=${word.english})}" target="_blank">
             <img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Google_Translate_logo.svg" width="20" height="20"/>
         </a>
         <br><br>
