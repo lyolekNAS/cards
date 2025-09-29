@@ -3,9 +3,9 @@ package org.sav.fornas.cards.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.sav.fornas.cards.service.WordService;
+import org.sav.fornas.dto.cards.StatisticDto;
 import org.sav.fornas.dto.cards.WordDto;
 import org.sav.fornas.dto.cards.TrainedWordDto;
-import org.sav.fornas.dto.cards.WordLangDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -49,6 +49,14 @@ public class WordController {
 	public String deleteWord(@RequestParam("id") Long id) {
 		wordService.deleteWord(id);
 		return "redirect:/words";
+	}
+
+	@GetMapping("/statistic")
+	public String statistic(Model model) {
+		StatisticDto statisticDto = wordService.getStatistics();
+		log.info(">>> statistic={}", statisticDto);
+		model.addAttribute("statistics", statisticDto);
+		return "statistic";
 	}
 
 	@GetMapping("/train")

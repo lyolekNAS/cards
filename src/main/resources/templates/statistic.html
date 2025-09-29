@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Cards</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div class="container">
+    <table>
+        <thead>
+        <tr>
+            <th>State</th>
+            <th>Всього</th>
+            <th>Доступно</th>
+            <th>Спроб</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="statCommon : ${statistics.statisticsComonDto}" th:with="attempt=${statistics.statisticsAttemptDto[statCommonStat.index]}">
+            <td th:text="${statCommon.stateId}"></td>
+            <td th:text="${statCommon.count}"></td>
+            <td th:text="${attempt.count}"></td>
+            <td th:text="${attempt.englishCnt + attempt.ukrainianCnt}"></td>
+        </tr>
+        <tr>
+            <td><b>Σ</b></td>
+            <td th:text="${statistics.totalCommonCount}"></td>
+            <td th:text="${statistics.totalAttemptCount}"></td>
+            <td th:text="${statistics.totalAttemptSum}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

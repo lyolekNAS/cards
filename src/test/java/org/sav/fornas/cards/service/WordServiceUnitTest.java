@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.sav.fornas.dto.cards.StatisticDto;
 import org.sav.fornas.dto.cards.TrainedWordDto;
 import org.sav.fornas.dto.cards.WordDto;
 import org.sav.fornas.dto.google.TranslationResponse;
@@ -150,5 +151,16 @@ class WordServiceUnitTest {
 		wordService.setTrained(trained);
 
 		Mockito.verify(jwtRestTemplate).postForObject("/word/trained", trained, String.class);
+	}
+
+	@Test
+	void getStatistics_ReturnsStatisticDto() {
+		StatisticDto expectedStatistic = new StatisticDto();
+		when(jwtRestTemplate.getForObject("/word/statistic", StatisticDto.class))
+				.thenReturn(expectedStatistic);
+
+		StatisticDto result = wordService.getStatistics();
+
+		assertEquals(expectedStatistic, result);
 	}
 }

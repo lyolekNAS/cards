@@ -3,6 +3,7 @@ package org.sav.fornas.cards.controller;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.sav.fornas.cards.service.WordService;
+import org.sav.fornas.dto.cards.StatisticDto;
 import org.sav.fornas.dto.cards.TrainedWordDto;
 import org.sav.fornas.dto.cards.WordDto;
 import org.springframework.ui.Model;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 class WordControllerUnitTest {
@@ -86,5 +88,16 @@ class WordControllerUnitTest {
 
 		verify(wordService).setTrained(dto);
 		assertThat(view).isEqualTo("redirect:/train");
+	}
+
+	@Test
+	void statistic_ReturnsStatisticView() {
+		StatisticDto statisticDto = new StatisticDto();
+		when(wordService.getStatistics()).thenReturn(statisticDto);
+
+		String result = controller.statistic(model);
+
+		assertEquals("statistic", result);
+		verify(model).addAttribute("statistics", statisticDto);
 	}
 }

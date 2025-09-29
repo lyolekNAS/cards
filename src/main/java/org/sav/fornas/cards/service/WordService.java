@@ -3,6 +3,7 @@ package org.sav.fornas.cards.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.sav.fornas.dto.cards.StateLimitDto;
+import org.sav.fornas.dto.cards.StatisticDto;
 import org.sav.fornas.dto.cards.TrainedWordDto;
 import org.sav.fornas.dto.cards.WordDto;
 import org.sav.fornas.dto.google.TranslationResponse;
@@ -56,6 +57,10 @@ public class WordService {
 
 	public WordDto getWord(){
 		return jwtRestTemplate.getForObject("/word/train", WordDto.class);
+	}
+
+	public StatisticDto getStatistics(){
+		return jwtRestTemplate.getForObject("/word/statistic", StatisticDto.class);
 	}
 	public StateLimitDto getStateLimit(int id){
 		return jwtRestTemplate.getForObject("/state/id/" + id, StateLimitDto.class);
