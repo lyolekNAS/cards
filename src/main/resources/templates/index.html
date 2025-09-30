@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
-<head th:replace="~{fragments/navigation :: header(null)}"></head>
+<head th:replace="~{fragments/navigation :: header(_)}"></head>
 <body>
 <div class="container">
     <h2>Вітаю, <span sec:authentication="principal.attributes['name']"></span> <span sec:authentication="principal.attributes['surname']"></span> (<span sec:authentication="name"></span>)</h2>
