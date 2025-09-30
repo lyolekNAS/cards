@@ -23,6 +23,7 @@
         <tr>
             <td><b>Σ</b></td>
             <td th:text="${statistics.totalCommonCount}"></td>
+            <!--/*td th:text="${#aggregates.sum(statistics.statisticsComonDto.![count])}"></td*/-->
             <td th:text="${statistics.totalAttemptCount}"></td>
             <td th:text="${statistics.totalAttemptSum}"></td>
         </tr>
