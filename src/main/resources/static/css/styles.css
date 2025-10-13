@@ -1,3 +1,4 @@
-.min-width-400 {
+.min-max-width{
     min-width: 400px;
+    max-width: 500px;
 }

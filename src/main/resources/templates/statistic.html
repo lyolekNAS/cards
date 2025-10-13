@@ -1,49 +1,49 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head th:replace="~{fragments/navigation :: header('Статистика')}"></head>
-<body class="vh-100 d-flex justify-content-center align-items-center bg-light">
+<body class="min-vh-100 d-flex justify-content-center align-items-center bg-light">
 
-<div class="container container-md p-4 bg-white shadow-lg rounded-3 text-center">
+    <div class="container container-sm p-4 bg-white shadow-lg rounded-3 text-center my-4 flex-shrink-0">
 
-    <div th:replace="~{fragments/navigation :: nav}"></div>
 
-    <h3 class="mb-4 text-primary">Статистика словника</h3>
+        <div th:replace="~{fragments/navigation :: nav}"></div>
 
-    <div class="table-responsive">
-        <table class="table table-striped table-hover table-sm text-start caption-top align-middle">
+        <h3 class="mb-4 text-primary">Статистика словника</h3>
 
-            <thead>
-            <tr class="table-primary">
-                <th>Стан</th>
-                <th class="text-center">Всього слів</th>
-                <th class="text-center">Доступно</th>
-                <th class="text-center">Спроб (Σ)</th>
-            </tr>
-            </thead>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover table-sm text-start caption-top align-middle">
 
-            <tbody>
-            <tr th:each="statCommon, statCommonStat : ${statistics.statisticsComonDto}"
-                th:with="attempt=${statistics.statisticsAttemptDto[statCommonStat.index]}">
+                <thead>
+                <tr class="table-primary">
+                    <th>Стан</th>
+                    <th class="text-center">Всього слів</th>
+                    <th class="text-center">Доступно</th>
+                    <th class="text-center">Спроб (Σ)</th>
+                </tr>
+                </thead>
 
-                <td th:text="${statCommon.stateId}" class="fw-bold"></td>
+                <tbody>
+                <tr th:each="statCommon, statCommonStat : ${statistics.statisticsComonDto}"
+                    th:with="attempt=${statistics.statisticsAttemptDto[statCommonStat.index]}">
 
-                <td th:text="${statCommon.count}" class="text-center"></td>
+                    <td th:text="${statCommon.stateId}" class="fw-bold"></td>
 
-                <td th:text="${attempt.count}" class="text-center"></td>
+                    <td th:text="${statCommon.count}" class="text-center"></td>
 
-                <td th:text="${attempt.englishCnt + attempt.ukrainianCnt}" class="text-center"></td>
-            </tr>
+                    <td th:text="${attempt.count}" class="text-center"></td>
 
-            <tr class="table-dark fw-bold">
-                <td>Σ (Сума)</td>
-                <td th:text="${statistics.totalCommonCount}" class="text-center"></td>
-                <td th:text="${statistics.totalAttemptCount}" class="text-center"></td>
-                <td th:text="${statistics.totalAttemptSum}" class="text-center"></td>
-            </tr>
-            </tbody>
-        </table>
+                    <td th:text="${attempt.englishCnt + attempt.ukrainianCnt}" class="text-center"></td>
+                </tr>
+
+                <tr class="table-dark fw-bold">
+                    <td>Σ (Сума)</td>
+                    <td th:text="${statistics.totalCommonCount}" class="text-center"></td>
+                    <td th:text="${statistics.totalAttemptCount}" class="text-center"></td>
+                    <td th:text="${statistics.totalAttemptSum}" class="text-center"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-
-</div>
 </body>
 </html>

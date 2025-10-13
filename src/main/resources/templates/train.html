@@ -2,11 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{fragments/navigation :: header('Тренування')}"></head>
 
-<body class="vh-100 d-flex justify-content-center align-items-center bg-light">
-    <div>
-        <div class="container container-sm p-4 bg-white shadow-lg rounded-3 min-width-400 text-center"  onclick="showTranslation()">
-            <div th:replace="~{fragments/navigation :: nav}"></div>
+<body class="min-vh-100 d-flex justify-content-center align-items-center bg-light">
 
+    <div class="container container-sm p-4 bg-white shadow-lg rounded-3 text-center my-4 flex-shrink-0">
+
+        <div th:replace="~{fragments/navigation :: nav}"></div>
+
+        <div onclick="showTranslation()">
             <div class="mb-4">
                 <div class="progress" role="progressbar" style="height: 10px;">
                     <div class="progress-bar"

@@ -1,63 +1,64 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head th:replace="~{fragments/navigation :: header('Слова')}"></head>
-<body class="vh-100 d-flex justify-content-center align-items-center bg-light">
-    <div>
-        <div class="container container-md p-4 bg-white shadow-lg rounded-3 text-center">
-            <div th:replace="~{fragments/navigation :: nav}"></div>
+<body class="min-vh-100 d-flex justify-content-center align-items-center bg-light">
 
-            <h3 class="mb-4 text-primary">Керування словником</h3>
+    <div class="container container-sm p-4 bg-white shadow-lg rounded-3 text-center my-4 flex-shrink-0">
 
-            <div class="table-responsive">
-                <table class="table table-hover table-sm text-start caption-top align-middle">
+        <div th:replace="~{fragments/navigation :: nav}"></div>
 
-                    <thead>
-                    <tr class="table-dark">
-                        <th>ID</th>
-                        <th>Англійське</th>
-                        <th>Українське</th>
-                        <th>Опис</th>
-                        <th class="text-center">Стан</th>
-                    </tr>
-                    </thead>
+        <h3 class="mb-4 text-primary">Керування словником</h3>
 
-                    <tbody>
-                    <tr th:each="word : ${words}" th:object="${word}">
+        <div class="table-responsive">
+            <table class="table table-hover table-sm text-start caption-top align-middle">
 
-                        <td>
-                            <a th:href="@{'/delete(id=*{id})}"
-                               class="btn btn-sm btn-outline-danger"
-                               title="Видалити слово"
-                               onclick="return confirm('Ви впевнені, що хочете видалити слово?');">
-                                <span th:text="*{id}"></span>
-                            </a>
-                        </td>
+                <thead>
+                <tr class="table-dark">
+                    <th>ID</th>
+                    <th>Англійське</th>
+                    <th>Українське</th>
+                    <th>Опис</th>
+                    <th class="text-center">Стан</th>
+                </tr>
+                </thead>
 
-                        <td>
-                            <a th:href="@{'/edit?id=' + *{id}}" class="fw-bold text-decoration-none">
-                                <span th:text="*{english}"></span>
-                            </a>
-                        </td>
+                <tbody>
+                <tr th:each="word : ${words}" th:object="${word}">
 
-                        <td th:text="*{ukrainian}"></td>
+                    <td>
+                        <a th:href="@{'/delete(id=*{id})}"
+                           class="btn btn-sm btn-outline-danger"
+                           title="Видалити слово"
+                           onclick="return confirm('Ви впевнені, що хочете видалити слово?');">
+                            <span th:text="*{id}"></span>
+                        </a>
+                    </td>
 
-                        <td class="text-truncate" style="max-width: 150px;" th:text="*{description}"></td>
+                    <td>
+                        <a th:href="@{'/edit?id=' + *{id}}" class="fw-bold text-decoration-none">
+                            <span th:text="*{english}"></span>
+                        </a>
+                    </td>
 
-                        <td class="text-center">
-                            <span th:text="*{state}"class="badge bg-info"></span>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+                    <td th:text="*{ukrainian}"></td>
 
-            <div class="mt-4 d-grid gap-2">
-                <a th:href="@{/add}" class="btn btn-primary btn-lg">
-                    <i class="bi bi-plus-circle-fill"></i> Додати нове слово
-                </a>
-            </div>
+                    <td class="text-truncate" style="max-width: 150px;" th:text="*{description}"></td>
 
+                    <td class="text-center">
+                        <span th:text="*{state}"class="badge bg-info"></span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
+
+        <div class="mt-4 d-grid gap-2">
+            <a th:href="@{/add}" class="btn btn-primary btn-lg">
+                <i class="bi bi-plus-circle-fill"></i> Додати нове слово
+            </a>
+        </div>
+
     </div>
+</div>
 </body>
 </html>

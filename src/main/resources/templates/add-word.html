@@ -2,19 +2,19 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head th:replace="~{fragments/navigation :: header('Нове слово')}"></head>
-<body class="vh-100 d-flex justify-content-center align-items-center bg-light">
-    <div>
-        <div class="container container-sm p-4 bg-white shadow-lg rounded-3 min-width-400 text-center"  onclick="showTranslation()">
-            <div th:replace="~{fragments/navigation :: nav}"></div>
+<body class="min-vh-100 d-flex justify-content-center align-items-center bg-light">
 
-            <form th:action="@{/edit}"  method="get">
-                <label>Англійське слово:</label><br>
-                <input type="text" id="w" name="w" required/>
-                <br/>
-                <br/>
-                <button type="submit">Далі</button>
-            </form>
-        </div>
+    <div class="container container-sm p-4 bg-white shadow-lg rounded-3 text-center my-4 flex-shrink-0">
+
+        <div th:replace="~{fragments/navigation :: nav}"></div>
+
+        <form th:action="@{/edit}"  method="get" class="justify-content-around">
+            <label>Англійське слово:</label><br>
+            <input type="text" id="w" name="w" required class="form-control"/>
+            <br/>
+            <br/>
+            <button type="submit" >Далі</button>
+        </form>
     </div>
 </body>
 </html>
