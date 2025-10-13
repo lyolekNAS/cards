@@ -3,9 +3,7 @@ package org.sav.fornas.cards.controller;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.sav.fornas.cards.service.WordService;
-import org.sav.fornas.dto.cards.StatisticDto;
-import org.sav.fornas.dto.cards.TrainedWordDto;
-import org.sav.fornas.dto.cards.WordDto;
+import org.sav.fornas.dto.cards.*;
 import org.springframework.ui.Model;
 
 import java.util.List;
@@ -69,14 +67,39 @@ class WordControllerUnitTest {
 		assertThat(view).isEqualTo("redirect:/words");
 	}
 
-	@Test
-	void train_shouldAddWordAndReturnTrainView() {
-		WordDto dto = new WordDto();
-		when(wordService.getWord()).thenReturn(dto);
+//	@Test
+//	void train_shouldAddWordAndReturnTrainView() {
+//		WordDto dto = new WordDto();
+//		when(wordService.getWord()).thenReturn(dto);
+//
+//		String view = controller.train(model);
+//
+//		verify(model).addAttribute("word", dto);
+//		assertThat(view).isEqualTo("train");
+//	}
 
+	@Test
+	void train_shouldAddAttributesAndReturnTrainView() {
+		// given
+		WordDto word = new WordDto();
+		word.setState(WordStateDto.STAGE_1);
+		word.setEnglishCnt(2);
+		word.setUkrainianCnt(3);
+
+		StateLimitDto stateLimit = new StateLimitDto();
+		stateLimit.setAttempt(5);
+		stateLimit.setColor("green");
+
+		when(wordService.getWord()).thenReturn(word);
+		when(wordService.getStateLimit(WordStateDto.STAGE_1.getId())).thenReturn(stateLimit);
+
+		// when
 		String view = controller.train(model);
 
-		verify(model).addAttribute("word", dto);
+		// then
+		verify(model).addAttribute("word", word);
+		verify(model).addAttribute("stateColor", "green");
+		verify(model).addAttribute(eq("progressPercent"), anyDouble());
 		assertThat(view).isEqualTo("train");
 	}
 

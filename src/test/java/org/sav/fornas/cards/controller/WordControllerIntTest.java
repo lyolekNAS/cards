@@ -8,9 +8,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.sav.fornas.cards.service.WordService;
-import org.sav.fornas.dto.cards.TrainedWordDto;
-import org.sav.fornas.dto.cards.WordDto;
-import org.sav.fornas.dto.cards.WordLangDto;
+import org.sav.fornas.dto.cards.*;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -120,16 +118,41 @@ class WordControllerIntTest {
 		verify(wordService).deleteWord(1L);
 	}
 
-	@Test
-	void testTrain() throws Exception {
-		WordDto word = new WordDto();
-		when(wordService.getWord()).thenReturn(word);
+//	@Test
+//	void testTrain() throws Exception {
+//		WordDto word = new WordDto();
+//		when(wordService.getWord()).thenReturn(word);
+//
+//		mockMvc.perform(get("/train"))
+//				.andExpect(status().isOk())
+//				.andExpect(view().name("train"))
+//				.andExpect(model().attribute("word", word));
+//	}
 
+	@Test
+	void train_shouldReturnTrainViewWithModelAttributes() throws Exception {
+		// given
+		WordDto word = new WordDto();
+		word.setState(WordStateDto.STAGE_1);
+		word.setEnglishCnt(2);
+		word.setUkrainianCnt(3);
+
+		StateLimitDto stateLimit = new StateLimitDto();
+		stateLimit.setAttempt(5);
+		stateLimit.setColor("green");
+
+		when(wordService.getWord()).thenReturn(word);
+		when(wordService.getStateLimit(WordStateDto.STAGE_1.getId())).thenReturn(stateLimit);
+
+		// when & then
 		mockMvc.perform(get("/train"))
 				.andExpect(status().isOk())
 				.andExpect(view().name("train"))
-				.andExpect(model().attribute("word", word));
+				.andExpect(model().attribute("word", word))
+				.andExpect(model().attributeExists("progressPercent"))
+				.andExpect(model().attribute("stateColor", "green"));
 	}
+
 
 	@Test
 	void testSetTrained() throws Exception {
