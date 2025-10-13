@@ -2,43 +2,61 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head th:replace="~{fragments/navigation :: header(_)}"></head>
-<body>
-<div th:replace="~{fragments/navigation :: nav}"></div>
-<div class="container">
-    <h1 th:text="|Слово # ${word.id}|"></h1>
+<body class="vh-100 d-flex justify-content-center align-items-center bg-light">
+    <div>
+        <div class="container container-sm p-4 bg-white shadow-lg rounded-3 min-width-400 text-center"  onclick="showTranslation()">
+            <div th:replace="~{fragments/navigation :: nav}"></div>
+            <h3 class="mb-4 text-primary" th:text="|Редагування слова №${word.id}|"></h3>
 
-    <form th:action="@{/save}" th:object="${word}" method="post">
+            <form th:action="@{/save}" th:object="${word}" method="post" class="text-start">
 
 
-        <input type="hidden" th:field="*{id}"/>
-        <input type="hidden" th:field="*{englishCnt}"/>
-        <input type="hidden" th:field="*{ukrainianCnt}"/>
-        <input type="hidden" th:field="*{lastTrain}"/>
-        <label>Англійське слово:</label><br>
-        <input type="text" th:field="*{english}" required/><br><br>
+                <input type="hidden" th:field="*{id}"/>
+                <input type="hidden" th:field="*{englishCnt}"/>
+                <input type="hidden" th:field="*{ukrainianCnt}"/>
+                <input type="hidden" th:field="*{lastTrain}"/>
+                <div class="mb-3">
+                    <label for="englishInput" class="form-label fw-bold">Англійське слово</label>
+                    <input type="text" th:field="*{english}" class="form-control" id="englishInput" required/>
+                </div>
 
-        <label>Український переклад:</label><br>
-        <input type="text" th:field="*{ukrainian}" required/>
-        <a th:href="@{https://translate.google.com(sl='en', tl='uk', op='translate', text=${word.english})}" target="_blank">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Google_Translate_logo.svg" width="20" height="20"/>
-        </a>
-        <br><br>
+                <div class="mb-3">
+                    <label for="ukrainianInput" class="form-label fw-bold">Український переклад</label>
+                    <div class="input-group">
+                        <input type="text" th:field="*{ukrainian}" class="form-control" id="ukrainianInput" required/>
 
-        <label>Опис:</label><br>
-        <textarea th:field="*{description}"></textarea><br><br>
+                        <a th:href="@{https://translate.google.com(sl='en', tl='uk', op='translate', text=${word.english})}"
+                           target="_blank"
+                           class="btn btn-outline-secondary"
+                           title="Перекласти у Google Translate">
 
-        <label>Стан:</label><br>
-        <select th:field="*{state}">
-            <option th:each="s : ${T(org.sav.fornas.dto.cards.WordStateDto).values()}"
-                    th:value="${s}"
-                    th:text="${s}"
-                    th:selected="${s == word.state}">
-            </option>
-        </select>
-        <br><br>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Google_Translate_logo.svg"
+                                 width="20" height="20" alt="Google Translate"/>
+                        </a>
+                    </div>
+                </div>
 
-        <button type="submit">Зберегти</button>
-    </form>
-</div>
+                <div class="mb-3">
+                    <label for="descriptionTextarea" class="form-label fw-bold">Опис</label>
+                    <textarea th:field="*{description}" class="form-control" id="descriptionTextarea" rows="4"></textarea>
+                </div>
+
+                <div class="mb-4">
+                    <label for="stateSelect" class="form-label fw-bold">Стан вивчення</label>
+                    <select th:field="*{state}" class="form-select" id="stateSelect">
+                        <option th:each="s : ${T(org.sav.fornas.dto.cards.WordStateDto).values()}"
+                                th:value="${s}"
+                                th:text="${s}"
+                                th:selected="${s == word.state}">
+                        </option>
+                    </select>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-lg">Зберегти зміни</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

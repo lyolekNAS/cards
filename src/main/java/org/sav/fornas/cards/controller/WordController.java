@@ -3,6 +3,7 @@ package org.sav.fornas.cards.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.sav.fornas.cards.service.WordService;
+import org.sav.fornas.dto.cards.StateLimitDto;
 import org.sav.fornas.dto.cards.StatisticDto;
 import org.sav.fornas.dto.cards.WordDto;
 import org.sav.fornas.dto.cards.TrainedWordDto;
@@ -65,8 +66,13 @@ public class WordController {
 		if(word == null){
 			return "redirect:/add";
 		}
+		StateLimitDto stateLimit = wordService.getStateLimit(word.getState().getId());
+		int minCnt = Math.min(word.getEnglishCnt(), word.getUkrainianCnt());
+		double progressPercent = (double) (minCnt + 1) * 100 / (stateLimit.getAttempt() + 1);
+
+		model.addAttribute("progressPercent", progressPercent);
 		model.addAttribute("word", word);
-		model.addAttribute("stateLimit", wordService.getStateLimit(word.getState().getId()));
+		model.addAttribute("stateColor", stateLimit.getColor());
 		return "train";
 	}
 
