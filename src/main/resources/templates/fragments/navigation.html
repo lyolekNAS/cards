@@ -4,12 +4,12 @@
     <head th:fragment="header(pageName)">
         <title th:text="${pageName}">Cards</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" type="image/x-icon" href="favicon.png">
+        <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.png}">
         <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
         <link rel="stylesheet" th:href="@{/css/styles.css}">
     </head>
     <div th:fragment="nav" class="navigation">
-        <a th:href="@{/}"><img th:src="favicon.png" alt="Головна" width="40" height="40" /></a>
+        <a th:href="@{/}"><img th:src="@{/images/favicon.png}" alt="Головна" width="40" height="40" /></a>
     </div>
 </body>
 </html>

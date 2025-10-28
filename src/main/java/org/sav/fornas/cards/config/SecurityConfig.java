@@ -47,7 +47,7 @@ public class SecurityConfig {
 	public SecurityFilterChain filterChain(HttpSecurity http, OidcUserService delegate) throws Exception {
 		http
 				.authorizeHttpRequests(auth -> auth
-						.requestMatchers("/error", "/public/**", "/css/**", "/js/**").permitAll()
+						.requestMatchers("/error", "/public/**", "/css/**", "/js/**", "/images/**").permitAll()
 						.anyRequest().hasRole("CARDS_USER")
 				)
 //				.redirectToHttps(Customizer.withDefaults())
