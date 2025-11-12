@@ -7,16 +7,16 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.sav.fornas.cards.client.cardsback.model.StateLimitDto;
+import org.sav.fornas.cards.client.cardsback.model.TrainedWordDto;
+import org.sav.fornas.cards.client.cardsback.model.WordDto;
 import org.sav.fornas.cards.service.WordService;
-import org.sav.fornas.dto.cards.*;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -133,7 +133,7 @@ class WordControllerIntTest {
 	void train_shouldReturnTrainViewWithModelAttributes() throws Exception {
 		// given
 		WordDto word = new WordDto();
-		word.setState(WordStateDto.STAGE_1);
+		word.setState(WordDto.StateEnum.STAGE_1);
 		word.setEnglishCnt(2);
 		word.setUkrainianCnt(3);
 
@@ -142,7 +142,7 @@ class WordControllerIntTest {
 		stateLimit.setColor("green");
 
 		when(wordService.getWord()).thenReturn(word);
-		when(wordService.getStateLimit(WordStateDto.STAGE_1.getId())).thenReturn(stateLimit);
+		when(wordService.getStateLimit(WordDto.StateEnum.STAGE_1.getValue())).thenReturn(stateLimit);
 
 		// when & then
 		mockMvc.perform(get("/train"))
@@ -158,12 +158,12 @@ class WordControllerIntTest {
 	void testSetTrained() throws Exception {
 		TrainedWordDto word = new TrainedWordDto();
 		word.setId(1L);
-		word.setLang(WordLangDto.EN);
+		word.setLang(TrainedWordDto.LangEnum.EN);
 		word.setSuccess(true);
 
 		mockMvc.perform(get("/trained")
 						.param("id", String.valueOf(word.getId()))
-						.param("success", String.valueOf(word.isSuccess()))
+						.param("success", String.valueOf(word.getSuccess()))
 						.param("lang", word.getLang().name()))
 				.andExpect(status().is3xxRedirection())
 				.andExpect(redirectedUrl("/train"));

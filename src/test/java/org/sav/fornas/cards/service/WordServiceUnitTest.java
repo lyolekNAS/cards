@@ -5,9 +5,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.sav.fornas.dto.cards.StatisticDto;
-import org.sav.fornas.dto.cards.TrainedWordDto;
-import org.sav.fornas.dto.cards.WordDto;
+import org.sav.fornas.cards.client.cardsback.api.StateLimitControllerApi;
+import org.sav.fornas.cards.client.cardsback.api.WordControllerApi;
+import org.sav.fornas.cards.client.cardsback.model.StatisticDto;
+import org.sav.fornas.cards.client.cardsback.model.TrainedWordDto;
+import org.sav.fornas.cards.client.cardsback.model.WordDto;
 import org.sav.fornas.dto.google.TranslationResponse;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -26,15 +28,22 @@ import static org.mockito.Mockito.mock;
 class WordServiceUnitTest {
 
 
-	RestTemplate jwtRestTemplate;
-	RestTemplate gTranslateRestTemplate;
-	WordService wordService;
+	private RestTemplate jwtRestTemplate;
+	private RestTemplate gTranslateRestTemplate;
+	@Mock
+	private WordControllerApi wordControllerApi;
+	private StateLimitControllerApi stateLimitControllerApi;
+	@InjectMocks
+	private WordService wordService;
 
 	@BeforeEach
 	void setUp() {
 		jwtRestTemplate = mock(RestTemplate.class);
 		gTranslateRestTemplate = mock(RestTemplate.class);
-		wordService = new WordService(jwtRestTemplate, gTranslateRestTemplate);
+		wordControllerApi = mock(WordControllerApi.class);
+		stateLimitControllerApi = mock(StateLimitControllerApi.class);
+
+		wordService = new WordService(jwtRestTemplate, gTranslateRestTemplate, wordControllerApi, stateLimitControllerApi);
 	}
 
 	@Test
@@ -42,23 +51,15 @@ class WordServiceUnitTest {
 
 		List<WordDto> mockWords = List.of(new WordDto(), new WordDto());
 
-		when(jwtRestTemplate.exchange(
-						eq("/word/user/all"),
-						eq(HttpMethod.GET),
-						Mockito.isNull(),
-						Mockito.<ParameterizedTypeReference<List<WordDto>>>any()))
-				.thenReturn(new ResponseEntity<>(mockWords, HttpStatus.OK));
+		when(wordControllerApi.getAllByUser())
+				.thenReturn(mockWords);
 
 		List<WordDto> result = wordService.getWordsByUser();
 
 		assertNotNull(result);
 		assertEquals(2, result.size());
 
-		verify(jwtRestTemplate).exchange(
-				eq("/word/user/all"),
-				eq(HttpMethod.GET),
-				Mockito.isNull(),
-				Mockito.<ParameterizedTypeReference<List<WordDto>>>any());
+		verify(wordControllerApi).getAllByUser();
 	}
 
 	@Test
@@ -70,13 +71,13 @@ class WordServiceUnitTest {
 		WordDto saved = new WordDto();
 		saved.setEnglish("chair");
 
-		when(jwtRestTemplate.postForObject("/word/save", input, WordDto.class))
+		when(wordControllerApi.addWord(input))
 				.thenReturn(saved);
 
 		WordDto result = wordService.saveWord(input);
 		assertNotNull(result);
 		assertEquals("chair", result.getEnglish());
-		verify(jwtRestTemplate).postForObject("/word/save", input, WordDto.class);
+		verify(wordControllerApi).addWord(input);
 	}
 
 	@Test
@@ -84,7 +85,7 @@ class WordServiceUnitTest {
 
 		Long id = 1L;
 		wordService.deleteWord(id);
-		verify(jwtRestTemplate).delete("/word/delete?id=1");
+		verify(wordControllerApi).deleteWord(1L);
 	}
 
 	@Test
@@ -92,8 +93,7 @@ class WordServiceUnitTest {
 
 		WordDto word = new WordDto();
 		word.setEnglish("table");
-		when(jwtRestTemplate.getForObject("/word/find?w=table", WordDto.class))
-				.thenReturn(word);
+		when(wordControllerApi.findWord("table")).thenReturn(word);
 
 		WordDto result = wordService.findWord("table");
 
@@ -102,7 +102,7 @@ class WordServiceUnitTest {
 
 	@Test
 	void testFindWord_notFound_callsTranslation() {
-		when(jwtRestTemplate.getForObject("/word/find?w=sofa", WordDto.class))
+		when(wordControllerApi.findWord("sofa"))
 				.thenReturn(null);
 
 		TranslationResponse translationResponse = new TranslationResponse();
@@ -123,7 +123,7 @@ class WordServiceUnitTest {
 		assertEquals("sofa", result.getEnglish());
 		assertEquals("диван", result.getUkrainian());
 
-		verify(jwtRestTemplate).getForObject(anyString(), eq(WordDto.class));
+		verify(wordControllerApi).findWord("sofa");
 		verify(gTranslateRestTemplate).postForObject(anyString(), any(), eq(TranslationResponse.class));
 	}
 
@@ -132,10 +132,7 @@ class WordServiceUnitTest {
 
 		WordDto word = new WordDto();
 		word.setEnglish("desk");
-		when(jwtRestTemplate.getForObject(
-						contains("/word/train"),
-						eq(WordDto.class)
-		)).thenReturn(word);
+		when(wordControllerApi.findWordToTrain()).thenReturn(word);
 
 		WordDto result = wordService.getWord();
 
@@ -150,13 +147,13 @@ class WordServiceUnitTest {
 
 		wordService.setTrained(trained);
 
-		Mockito.verify(jwtRestTemplate).postForObject("/word/trained", trained, String.class);
+		Mockito.verify(wordControllerApi).processTrainedWord(trained);
 	}
 
 	@Test
 	void getStatistics_ReturnsStatisticDto() {
 		StatisticDto expectedStatistic = new StatisticDto();
-		when(jwtRestTemplate.getForObject("/word/statistic", StatisticDto.class))
+		when(wordControllerApi.getStatistic())
 				.thenReturn(expectedStatistic);
 
 		StatisticDto result = wordService.getStatistics();

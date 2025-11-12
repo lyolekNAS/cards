@@ -96,6 +96,34 @@
 			<version>1.18.38</version>
 		</dependency>
 
+		<dependency>
+			<groupId>io.swagger.core.v3</groupId>
+			<artifactId>swagger-annotations</artifactId>
+			<version>2.2.22</version>
+		</dependency>
+		<dependency>
+			<groupId>jakarta.validation</groupId>
+			<artifactId>jakarta.validation-api</artifactId>
+			<version>3.0.2</version>
+		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>com.google.code.gson</groupId>-->
+<!--			<artifactId>gson</artifactId>-->
+<!--			<version>2.11.0</version>-->
+<!--		</dependency>-->
+		<!--dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency-->
+		<!--dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jsr310</artifactId>
+		</dependency-->
+
 
 		<dependency>
 			<groupId>org.sav.fornas</groupId>
@@ -153,6 +181,59 @@
 					<target>21</target>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>org.openapitools</groupId>
+				<artifactId>openapi-generator-maven-plugin</artifactId>
+				<version>7.0.0</version>
+
+
+				<configuration>
+					<inputSpec>http://localhost:8052/v3/api-docs</inputSpec>
+					<generatorName>java</generatorName>
+					<library>resttemplate</library>
+					<output>${project.basedir}/src/generated/openapi</output>
+					<apiPackage>org.sav.fornas.cards.client.cardsback.api</apiPackage>
+					<modelPackage>org.sav.fornas.cards.client.cardsback.model</modelPackage>
+					<configOptions>
+						<useJakartaEe>true</useJakartaEe>
+						<dateLibrary>java8</dateLibrary>
+						<useLombok>true</useLombok>
+						<openApiNullable>false</openApiNullable>
+						<skipSupportingFiles>true</skipSupportingFiles>
+						<java8LocalDateTime>true</java8LocalDateTime>
+					</configOptions>
+				</configuration>
+
+				<!--executions>
+					<execution>
+						<id>generate-api</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions-->
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>3.4.0</version>
+				<executions>
+					<execution>
+						<id>add-source</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>${project.basedir}/src/generated/openapi/src/main/java</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
 		</plugins>
 	</build>
 

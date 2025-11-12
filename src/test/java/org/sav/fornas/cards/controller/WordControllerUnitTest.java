@@ -2,8 +2,11 @@ package org.sav.fornas.cards.controller;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.sav.fornas.cards.client.cardsback.model.StateLimitDto;
+import org.sav.fornas.cards.client.cardsback.model.StatisticDto;
+import org.sav.fornas.cards.client.cardsback.model.TrainedWordDto;
+import org.sav.fornas.cards.client.cardsback.model.WordDto;
 import org.sav.fornas.cards.service.WordService;
-import org.sav.fornas.dto.cards.*;
 import org.springframework.ui.Model;
 
 import java.util.List;
@@ -82,7 +85,7 @@ class WordControllerUnitTest {
 	void train_shouldAddAttributesAndReturnTrainView() {
 		// given
 		WordDto word = new WordDto();
-		word.setState(WordStateDto.STAGE_1);
+		word.setState(WordDto.StateEnum.STAGE_1);
 		word.setEnglishCnt(2);
 		word.setUkrainianCnt(3);
 
@@ -91,7 +94,7 @@ class WordControllerUnitTest {
 		stateLimit.setColor("green");
 
 		when(wordService.getWord()).thenReturn(word);
-		when(wordService.getStateLimit(WordStateDto.STAGE_1.getId())).thenReturn(stateLimit);
+		when(wordService.getStateLimit(WordDto.StateEnum.STAGE_1.getValue())).thenReturn(stateLimit);
 
 		// when
 		String view = controller.train(model);

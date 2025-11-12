@@ -1,0 +1,465 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- description: Generated server url
+  url: http://localhost:8052
+paths:
+  /api/word/trained:
+    post:
+      operationId: processTrainedWord
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TrainedWordDto'
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                type: string
+          description: OK
+      tags:
+      - word-controller
+      x-content-type: application/json
+      x-accepts: '*/*'
+  /api/word/save:
+    post:
+      operationId: addWord
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WordDto'
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WordDto'
+          description: OK
+      tags:
+      - word-controller
+      x-content-type: application/json
+      x-accepts: '*/*'
+  /api/word/user/all:
+    get:
+      operationId: getAllByUser
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: '#/components/schemas/WordDto'
+                type: array
+          description: OK
+      tags:
+      - word-controller
+      x-accepts: '*/*'
+  /api/word/train:
+    get:
+      operationId: findWordToTrain
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WordDto'
+          description: OK
+      tags:
+      - word-controller
+      x-accepts: '*/*'
+  /api/word/statistic:
+    get:
+      operationId: getStatistic
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/StatisticDto'
+          description: OK
+      tags:
+      - word-controller
+      x-accepts: '*/*'
+  /api/word/find:
+    get:
+      operationId: findWord
+      parameters:
+      - explode: true
+        in: query
+        name: w
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WordDto'
+          description: OK
+      tags:
+      - word-controller
+      x-accepts: '*/*'
+  /api/word/all:
+    get:
+      operationId: getAll
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: '#/components/schemas/Word'
+                type: array
+          description: OK
+      tags:
+      - word-controller
+      x-accepts: '*/*'
+  /api/state/id/{state}:
+    get:
+      operationId: getById
+      parameters:
+      - explode: false
+        in: path
+        name: state
+        required: true
+        schema:
+          enum:
+          - PAUSED
+          - STAGE_1
+          - STAGE_2
+          - STAGE_3
+          - STAGE_4
+          - STAGE_5
+          - STAGE_6
+          - STAGE_7
+          - DONE
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/StateLimitDto'
+          description: OK
+      tags:
+      - state-limit-controller
+      x-accepts: '*/*'
+  /api/state/all:
+    get:
+      operationId: getAll_1
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: '#/components/schemas/StateLimitDto'
+                type: array
+          description: OK
+      tags:
+      - state-limit-controller
+      x-accepts: '*/*'
+  /api/junior/me:
+    get:
+      operationId: meJunior
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                additionalProperties:
+                  type: object
+                type: object
+          description: OK
+      tags:
+      - me-controller
+      x-accepts: '*/*'
+  /api/all/me:
+    get:
+      operationId: meAll
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                additionalProperties:
+                  type: object
+                type: object
+          description: OK
+      tags:
+      - me-controller
+      x-accepts: '*/*'
+  /api/admin/me:
+    get:
+      operationId: meAdmin
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                additionalProperties:
+                  type: object
+                type: object
+          description: OK
+      tags:
+      - me-controller
+      x-accepts: '*/*'
+  /api/word/delete:
+    delete:
+      operationId: deleteWord
+      parameters:
+      - explode: true
+        in: query
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                type: string
+          description: OK
+      tags:
+      - word-controller
+      x-accepts: '*/*'
+components:
+  schemas:
+    TrainedWordDto:
+      example:
+        success: true
+        id: 0
+        lang: EN
+      properties:
+        id:
+          format: int64
+          type: integer
+        success:
+          type: boolean
+        lang:
+          enum:
+          - EN
+          - UA
+          type: string
+      type: object
+    WordDto:
+      example:
+        ukrainian: ukrainian
+        englishCnt: 1
+        ukrainianCnt: 5
+        nextTrain: 2000-01-23T04:56:07.000+00:00
+        lastTrain: 2000-01-23T04:56:07.000+00:00
+        english: english
+        description: description
+        id: 0
+        state: PAUSED
+        lang: EN
+        userId: 6
+      properties:
+        id:
+          format: int64
+          type: integer
+        english:
+          type: string
+        ukrainian:
+          type: string
+        description:
+          type: string
+        userId:
+          format: int64
+          type: integer
+        englishCnt:
+          format: int32
+          type: integer
+        ukrainianCnt:
+          format: int32
+          type: integer
+        lastTrain:
+          format: date-time
+          type: string
+        nextTrain:
+          format: date-time
+          type: string
+        lang:
+          enum:
+          - EN
+          - UA
+          type: string
+        state:
+          enum:
+          - PAUSED
+          - STAGE_1
+          - STAGE_2
+          - STAGE_3
+          - STAGE_4
+          - STAGE_5
+          - STAGE_6
+          - STAGE_7
+          - DONE
+          type: string
+      type: object
+    StatisticAttemptDto:
+      example:
+        englishCnt: 1
+        ukrainianCnt: 5
+        stateId: 0
+        count: 6
+      properties:
+        stateId:
+          format: int32
+          type: integer
+        count:
+          format: int64
+          type: integer
+        englishCnt:
+          format: int64
+          type: integer
+        ukrainianCnt:
+          format: int64
+          type: integer
+      type: object
+    StatisticComonDto:
+      example:
+        stateId: 5
+        count: 2
+      properties:
+        stateId:
+          format: int32
+          type: integer
+        count:
+          format: int64
+          type: integer
+      type: object
+    StatisticDto:
+      example:
+        totalAttemptCount: 9
+        totalAttemptSum: 3
+        totalCommonCount: 7
+        statisticsAttemptDto:
+        - englishCnt: 1
+          ukrainianCnt: 5
+          stateId: 0
+          count: 6
+        - englishCnt: 1
+          ukrainianCnt: 5
+          stateId: 0
+          count: 6
+        statisticsComonDto:
+        - stateId: 5
+          count: 2
+        - stateId: 5
+          count: 2
+      properties:
+        statisticsAttemptDto:
+          items:
+            $ref: '#/components/schemas/StatisticAttemptDto'
+          type: array
+        statisticsComonDto:
+          items:
+            $ref: '#/components/schemas/StatisticComonDto'
+          type: array
+        totalCommonCount:
+          format: int64
+          type: integer
+        totalAttemptCount:
+          format: int64
+          type: integer
+        totalAttemptSum:
+          format: int64
+          type: integer
+      type: object
+    Word:
+      example:
+        ukrainian: ukrainian
+        englishCnt: 1
+        ukrainianCnt: 5
+        nextTrain: 2000-01-23T04:56:07.000+00:00
+        lastTrain: 2000-01-23T04:56:07.000+00:00
+        english: english
+        description: description
+        id: 0
+        state:
+          name: name
+          id: 5
+        userId: 6
+      properties:
+        id:
+          format: int64
+          type: integer
+        english:
+          type: string
+        ukrainian:
+          type: string
+        description:
+          type: string
+        userId:
+          format: int64
+          type: integer
+        englishCnt:
+          format: int32
+          type: integer
+        ukrainianCnt:
+          format: int32
+          type: integer
+        lastTrain:
+          format: date-time
+          type: string
+        nextTrain:
+          format: date-time
+          type: string
+        state:
+          $ref: '#/components/schemas/WordState'
+      type: object
+    WordState:
+      example:
+        name: name
+        id: 5
+      properties:
+        id:
+          format: int32
+          type: integer
+        name:
+          type: string
+      type: object
+    StateLimitDto:
+      example:
+        delay: 6
+        color: color
+        state: PAUSED
+        attempt: 0
+      properties:
+        state:
+          enum:
+          - PAUSED
+          - STAGE_1
+          - STAGE_2
+          - STAGE_3
+          - STAGE_4
+          - STAGE_5
+          - STAGE_6
+          - STAGE_7
+          - DONE
+          type: string
+        attempt:
+          format: int32
+          type: integer
+        delay:
+          format: int32
+          type: integer
+        color:
+          type: string
+      type: object
+

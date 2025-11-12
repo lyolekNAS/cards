@@ -2,15 +2,21 @@ package org.sav.fornas.cards.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.sav.fornas.cards.client.cardsback.model.StateLimitDto;
+import org.sav.fornas.cards.client.cardsback.model.StatisticDto;
+import org.sav.fornas.cards.client.cardsback.model.TrainedWordDto;
+import org.sav.fornas.cards.client.cardsback.model.WordDto;
 import org.sav.fornas.cards.service.WordService;
-import org.sav.fornas.dto.cards.StateLimitDto;
-import org.sav.fornas.dto.cards.StatisticDto;
-import org.sav.fornas.dto.cards.WordDto;
-import org.sav.fornas.dto.cards.TrainedWordDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import java.beans.PropertyEditorSupport;
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -30,6 +36,9 @@ public class WordController {
 	@GetMapping("/edit")
 	public String showForm(Model model, @RequestParam(name = "w", defaultValue = "") String w) {
 		WordDto word = wordService.findWord(w.toLowerCase());
+		if (word.getState() == null) {
+			word.setState(WordDto.StateEnum.STAGE_1);
+		}
 		model.addAttribute("word", word);
 		return "word-form";
 	}
@@ -41,8 +50,9 @@ public class WordController {
 
 	@PostMapping("/save")
 	public String saveWord(@ModelAttribute WordDto wordDto) {
-		WordDto newWord = wordService.saveWord(wordDto);
 
+		log.debug(">>> saveWord={}", wordDto);
+		WordDto newWord = wordService.saveWord(wordDto);
 		return "redirect:/edit?w=" + newWord.getEnglish();
 	}
 
@@ -55,7 +65,7 @@ public class WordController {
 	@GetMapping("/statistic")
 	public String statistic(Model model) {
 		StatisticDto statisticDto = wordService.getStatistics();
-		log.info(">>> statistic={}", statisticDto);
+		log.debug(">>> statistic={}", statisticDto);
 		model.addAttribute("statistics", statisticDto);
 		return "statistic";
 	}
@@ -66,7 +76,7 @@ public class WordController {
 		if(word == null){
 			return "redirect:/add";
 		}
-		StateLimitDto stateLimit = wordService.getStateLimit(word.getState().getId());
+		StateLimitDto stateLimit = wordService.getStateLimit(word.getState().getValue());
 		int minCnt = Math.min(word.getEnglishCnt(), word.getUkrainianCnt());
 		double progressPercent = (double) (minCnt + 1) * 100 / (stateLimit.getAttempt() + 1);
 
@@ -78,8 +88,24 @@ public class WordController {
 
 	@GetMapping("/trained")
 	public String setTrained(@ModelAttribute TrainedWordDto trainedWordDto) {
-		log.info(">>> trainedWord={}", trainedWordDto);
+		log.debug(">>> trainedWord={}", trainedWordDto);
 		wordService.setTrained(trainedWordDto);
 		return "redirect:/train";
+	}
+
+
+
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		binder.registerCustomEditor(OffsetDateTime.class, new PropertyEditorSupport() {
+			@Override
+			public void setAsText(String text) {
+				if (text == null || text.isEmpty()) {
+					setValue(null);
+				} else {
+					setValue(OffsetDateTime.parse(text));
+				}
+			}
+		});
 	}
 }

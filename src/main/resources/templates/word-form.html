@@ -45,10 +45,9 @@
             <div class="mb-4">
                 <label for="stateSelect" class="form-label fw-bold">Стан вивчення</label>
                 <select th:field="*{state}" class="form-select" id="stateSelect">
-                    <option th:each="s : ${T(org.sav.fornas.dto.cards.WordStateDto).values()}"
+                    <option th:each="s : ${T(org.sav.fornas.cards.client.cardsback.model.WordDto.StateEnum).values()}"
                             th:value="${s}"
-                            th:text="${s}"
-                            th:selected="${s == word.state}">
+                            th:text="${s}">
                     </option>
                 </select>
             </div>

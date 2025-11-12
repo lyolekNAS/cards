@@ -1,0 +1,50 @@
+spring:
+    security:
+        oauth2:
+            client:
+                registration:
+                    cards:
+                        client-id: test-client
+                        client-secret: test-secret
+                        authorization-grant-type: authorization_code
+                        redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+                provider:
+                    cards:
+                        authorization-uri: http://localhost/dummy-auth
+                        token-uri: http://localhost/dummy-token
+                        jwk-set-uri: http://localhost/dummy-jwks
+
+    main:
+        allow-bean-definition-overriding: true
+
+    devtools:
+        restart:
+            enabled: true
+        livereload:
+            enabled: true
+
+app:
+    security:
+        oauth2:
+            base-url: https://sites.localhost.org/cards
+
+server:
+    error:
+        whitelabel:
+            enabled: false
+    forward-headers-strategy: framework
+    port: 8051
+    servlet:
+        session:
+            cookie:
+                name: JSESSION_${spring.application.name}
+                same-site: none
+                secure: true
+        context-path: /${spring.application.name}
+
+app-props:
+    url:
+        cards-back: http://cards-back:8052
+    google:
+        api-key: ${google_api_key}
+        translate-url: https://translation.googleapis.com/language/translate

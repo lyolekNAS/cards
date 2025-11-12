@@ -2,9 +2,10 @@ package org.sav.fornas.cards.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
-import org.sav.fornas.dto.cards.TrainedWordDto;
-import org.sav.fornas.dto.cards.WordDto;
+import org.sav.fornas.cards.client.cardsback.api.StateLimitControllerApi;
+import org.sav.fornas.cards.client.cardsback.api.WordControllerApi;
+import org.sav.fornas.cards.client.cardsback.model.TrainedWordDto;
+import org.sav.fornas.cards.client.cardsback.model.WordDto;
 import org.sav.fornas.dto.google.TranslationResponse;
 import org.sav.fornas.dto.google.TranslationResponse.Translation;
 import org.springframework.core.ParameterizedTypeReference;
@@ -20,21 +21,25 @@ class WordServiceTest {
 
 	private RestTemplate jwtRestTemplate;
 	private RestTemplate gTranslateRestTemplate;
+	private WordControllerApi wordControllerApi;
+	private StateLimitControllerApi stateLimitControllerApi;
 	private WordService service;
 
 	@BeforeEach
 	void setUp() {
 		jwtRestTemplate = mock(RestTemplate.class);
 		gTranslateRestTemplate = mock(RestTemplate.class);
-		service = new WordService(jwtRestTemplate, gTranslateRestTemplate);
+		wordControllerApi = mock(WordControllerApi.class);
+		stateLimitControllerApi = mock(StateLimitControllerApi.class);
+
+		service = new WordService(jwtRestTemplate, gTranslateRestTemplate, wordControllerApi, stateLimitControllerApi);
 	}
 
 	@Test
 	void getWordsByUser_shouldCallJwtRestTemplate() {
 		List<WordDto> expected = List.of(new WordDto());
-		when(jwtRestTemplate.exchange(eq("/word/user/all"), eq(HttpMethod.GET),
-				isNull(), any(ParameterizedTypeReference.class)))
-				.thenReturn(new org.springframework.http.ResponseEntity<>(expected, org.springframework.http.HttpStatus.OK));
+		when(wordControllerApi.getAllByUser())
+				.thenReturn(expected);
 
 		List<WordDto> result = service.getWordsByUser();
 
@@ -45,7 +50,7 @@ class WordServiceTest {
 	void saveWord_shouldPostWordDto() {
 		WordDto input = new WordDto();
 		WordDto output = new WordDto();
-		when(jwtRestTemplate.postForObject("/word/save", input, WordDto.class)).thenReturn(output);
+		when(wordControllerApi.addWord(input)).thenReturn(output);
 
 		WordDto result = service.saveWord(input);
 
@@ -55,13 +60,13 @@ class WordServiceTest {
 	@Test
 	void deleteWord_shouldCallDelete() {
 		service.deleteWord(123L);
-		verify(jwtRestTemplate).delete("/word/delete?id=123");
+		verify(wordControllerApi).deleteWord(123L);
 	}
 
 	@Test
 	void findWord_existing_shouldReturnFromService() {
 		WordDto dto = new WordDto();
-		when(jwtRestTemplate.getForObject("/word/find?w=cat", WordDto.class)).thenReturn(dto);
+		when(wordControllerApi.findWord("cat")).thenReturn(dto);
 
 		WordDto result = service.findWord("cat");
 
@@ -70,7 +75,7 @@ class WordServiceTest {
 
 	@Test
 	void findWord_missing_shouldTranslate() {
-		when(jwtRestTemplate.getForObject("/word/find?w=dog", WordDto.class)).thenReturn(null);
+		when(wordControllerApi.findWord("dog")).thenReturn(null);
 
 		TranslationResponse response = new TranslationResponse();
 		Translation translation = new Translation();
@@ -89,6 +94,7 @@ class WordServiceTest {
 	@Test
 	void getWord_shouldCallRestTemplate() {
 		WordDto dto = new WordDto();
+		when(wordControllerApi.findWordToTrain()).thenReturn(dto);
 		when(jwtRestTemplate.getForObject("/word/train", WordDto.class)).thenReturn(dto);
 
 		WordDto result = service.getWord();
@@ -100,6 +106,6 @@ class WordServiceTest {
 	void setTrained_shouldPostToJwtRestTemplate() {
 		TrainedWordDto dto = new TrainedWordDto();
 		service.setTrained(dto);
-		verify(jwtRestTemplate).postForObject("/word/trained", dto, String.class);
+		verify(wordControllerApi).processTrainedWord(dto);
 	}
 }
