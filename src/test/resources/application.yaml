@@ -17,6 +17,13 @@ spring:
     main:
         allow-bean-definition-overriding: true
 
+    config:
+        import:
+            - optional:configserver:${config.server.url}
+    cloud:
+        vault:
+            enabled: false
+
     devtools:
         restart:
             enabled: true
