@@ -4,12 +4,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.sav.fornas.cards.client.cardsback.api.StateLimitControllerApi;
 import org.sav.fornas.cards.client.cardsback.api.WordControllerApi;
+import org.sav.fornas.cards.client.cardsback.model.StatisticDto;
 import org.sav.fornas.cards.client.cardsback.model.TrainedWordDto;
 import org.sav.fornas.cards.client.cardsback.model.WordDto;
 import org.sav.fornas.dto.google.TranslationResponse;
 import org.sav.fornas.dto.google.TranslationResponse.Translation;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
@@ -19,7 +18,6 @@ import static org.mockito.Mockito.*;
 
 class WordServiceTest {
 
-	private RestTemplate jwtRestTemplate;
 	private RestTemplate gTranslateRestTemplate;
 	private WordControllerApi wordControllerApi;
 	private StateLimitControllerApi stateLimitControllerApi;
@@ -27,12 +25,11 @@ class WordServiceTest {
 
 	@BeforeEach
 	void setUp() {
-		jwtRestTemplate = mock(RestTemplate.class);
 		gTranslateRestTemplate = mock(RestTemplate.class);
 		wordControllerApi = mock(WordControllerApi.class);
 		stateLimitControllerApi = mock(StateLimitControllerApi.class);
 
-		service = new WordService(jwtRestTemplate, gTranslateRestTemplate, wordControllerApi, stateLimitControllerApi);
+		service = new WordService(gTranslateRestTemplate, wordControllerApi, stateLimitControllerApi);
 	}
 
 	@Test
@@ -95,7 +92,6 @@ class WordServiceTest {
 	void getWord_shouldCallRestTemplate() {
 		WordDto dto = new WordDto();
 		when(wordControllerApi.findWordToTrain()).thenReturn(dto);
-		when(jwtRestTemplate.getForObject("/word/train", WordDto.class)).thenReturn(dto);
 
 		WordDto result = service.getWord();
 
@@ -107,5 +103,19 @@ class WordServiceTest {
 		TrainedWordDto dto = new TrainedWordDto();
 		service.setTrained(dto);
 		verify(wordControllerApi).processTrainedWord(dto);
+	}
+
+	@Test
+	void getStatistics_shouldCallApi(){
+		service.getStatistics();
+		verify(wordControllerApi).getStatistic();
+	}
+
+	@Test
+	void getStatistics_shouldReturn(){
+		StatisticDto statDto = new StatisticDto();
+		when(wordControllerApi.getStatistic()).thenReturn(statDto);
+		StatisticDto result = service.getStatistics();
+		assertThat(result).isEqualTo(statDto);
 	}
 }

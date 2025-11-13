@@ -19,7 +19,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class WordService {
 
-	private final RestTemplate jwtRestTemplate;
 	private final RestTemplate gTranslateRestTemplate;
 	private final WordControllerApi wordControllerApi;
 	private final StateLimitControllerApi stateLimitControllerApi;
@@ -27,26 +26,22 @@ public class WordService {
 	public List<WordDto> getWordsByUser(){
 		log.debug(">>> getWordsByUser()");
 		return wordControllerApi.getAllByUser();
-//		return jwtRestTemplate.exchange("/word/user/all", HttpMethod.GET, null, new ParameterizedTypeReference<List<WordDto>>(){}).getBody();
 	}
 
 	public WordDto saveWord(WordDto wordDto){
 		log.debug(">>> saveWord({}})", wordDto);
 		return wordControllerApi.addWord(wordDto);
-//		return jwtRestTemplate.postForObject("/word/save", wordDto, WordDto.class);
 	}
 
 	public void deleteWord(Long id){
 		log.debug(">>> deleteWord({}})", id);
 		wordControllerApi.deleteWord(id);
-//		jwtRestTemplate.delete("/word/delete?id=" + id);
 	}
 
 	public WordDto findWord(String w){
 		WordDto word;
 		if(!w.isEmpty()) {
 			word = wordControllerApi.findWord(w);
-//			word = jwtRestTemplate.getForObject("/word/find?w=" + w, WordDto.class);
 			log.debug(">>> Word found: {}", word);
 			if(word == null){
 				word = new WordDto();
@@ -62,22 +57,18 @@ public class WordService {
 
 	public WordDto getWord(){
 		return wordControllerApi.findWordToTrain();
-//		return jwtRestTemplate.getForObject("/word/train", WordDto.class);
 	}
 
 	public StatisticDto getStatistics(){
 		return wordControllerApi.getStatistic();
-//		return jwtRestTemplate.getForObject("/word/statistic", StatisticDto.class);
 	}
 
 	public StateLimitDto getStateLimit(String value){
 		return stateLimitControllerApi.getById(value);
-//		return jwtRestTemplate.getForObject("/state/id/" + id, StateLimitDto.class);
 	}
 
 	public void setTrained(TrainedWordDto trainedWordDto){
 		wordControllerApi.processTrainedWord(trainedWordDto);
-//		jwtRestTemplate.postForObject("/word/trained", trainedWordDto, String.class);
 	}
 
 	private String getTranslated(String w){

@@ -11,10 +11,6 @@ import org.sav.fornas.cards.client.cardsback.model.StatisticDto;
 import org.sav.fornas.cards.client.cardsback.model.TrainedWordDto;
 import org.sav.fornas.cards.client.cardsback.model.WordDto;
 import org.sav.fornas.dto.google.TranslationResponse;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
@@ -27,8 +23,6 @@ import static org.mockito.Mockito.mock;
 @ExtendWith(MockitoExtension.class)
 class WordServiceUnitTest {
 
-
-	private RestTemplate jwtRestTemplate;
 	private RestTemplate gTranslateRestTemplate;
 	@Mock
 	private WordControllerApi wordControllerApi;
@@ -38,12 +32,11 @@ class WordServiceUnitTest {
 
 	@BeforeEach
 	void setUp() {
-		jwtRestTemplate = mock(RestTemplate.class);
 		gTranslateRestTemplate = mock(RestTemplate.class);
 		wordControllerApi = mock(WordControllerApi.class);
 		stateLimitControllerApi = mock(StateLimitControllerApi.class);
 
-		wordService = new WordService(jwtRestTemplate, gTranslateRestTemplate, wordControllerApi, stateLimitControllerApi);
+		wordService = new WordService(gTranslateRestTemplate, wordControllerApi, stateLimitControllerApi);
 	}
 
 	@Test

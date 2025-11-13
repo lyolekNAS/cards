@@ -2,6 +2,7 @@ package org.sav.fornas.cards.config;
 
 import lombok.RequiredArgsConstructor;
 import org.sav.fornas.cards.client.cardsback.ApiClient;
+import org.sav.fornas.cards.client.cardsback.api.DictionaryControllerApi;
 import org.sav.fornas.cards.client.cardsback.api.MeControllerApi;
 import org.sav.fornas.cards.client.cardsback.api.StateLimitControllerApi;
 import org.sav.fornas.cards.client.cardsback.api.WordControllerApi;
@@ -40,5 +41,10 @@ public class OpenApiClientConfig {
 	@Bean
 	public StateLimitControllerApi stateLimitControllerApi(ApiClient apiClient) {
 		return new StateLimitControllerApi(apiClient);
+	}
+
+	@Bean
+	public DictionaryControllerApi dictionaryControllerApi(ApiClient apiClient) {
+		return new DictionaryControllerApi(apiClient);
 	}
 }

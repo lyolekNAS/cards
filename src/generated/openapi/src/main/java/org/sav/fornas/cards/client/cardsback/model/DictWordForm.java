@@ -24,24 +24,28 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
- * WordState
+ * DictWordForm
  */
 @JsonPropertyOrder({
-  WordState.JSON_PROPERTY_ID,
-  WordState.JSON_PROPERTY_NAME
+  DictWordForm.JSON_PROPERTY_ID,
+  DictWordForm.JSON_PROPERTY_WORD_TEXT,
+  DictWordForm.JSON_PROPERTY_FREQ
 })
 @jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-12T19:49:29.509529125+02:00[Europe/Kyiv]")
-public class WordState {
+public class DictWordForm {
   public static final String JSON_PROPERTY_ID = "id";
-  private Integer id;
+  private Long id;
 
-  public static final String JSON_PROPERTY_NAME = "name";
-  private String name;
+  public static final String JSON_PROPERTY_WORD_TEXT = "wordText";
+  private String wordText;
 
-  public WordState() {
+  public static final String JSON_PROPERTY_FREQ = "freq";
+  private Long freq;
+
+  public DictWordForm() {
   }
 
-  public WordState id(Integer id) {
+  public DictWordForm id(Long id) {
     
     this.id = id;
     return this;
@@ -55,41 +59,67 @@ public class WordState {
   @JsonProperty(JSON_PROPERTY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public Integer getId() {
+  public Long getId() {
     return id;
   }
 
 
   @JsonProperty(JSON_PROPERTY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
 
-  public WordState name(String name) {
+  public DictWordForm wordText(String wordText) {
     
-    this.name = name;
+    this.wordText = wordText;
     return this;
   }
 
    /**
-   * Get name
-   * @return name
+   * Get wordText
+   * @return wordText
   **/
   @jakarta.annotation.Nullable
-  @JsonProperty(JSON_PROPERTY_NAME)
+  @JsonProperty(JSON_PROPERTY_WORD_TEXT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public String getName() {
-    return name;
+  public String getWordText() {
+    return wordText;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_NAME)
+  @JsonProperty(JSON_PROPERTY_WORD_TEXT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setName(String name) {
-    this.name = name;
+  public void setWordText(String wordText) {
+    this.wordText = wordText;
+  }
+
+
+  public DictWordForm freq(Long freq) {
+    
+    this.freq = freq;
+    return this;
+  }
+
+   /**
+   * Get freq
+   * @return freq
+  **/
+  @jakarta.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_FREQ)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public Long getFreq() {
+    return freq;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_FREQ)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setFreq(Long freq) {
+    this.freq = freq;
   }
 
   @Override
@@ -100,22 +130,24 @@ public class WordState {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    WordState wordState = (WordState) o;
-    return Objects.equals(this.id, wordState.id) &&
-        Objects.equals(this.name, wordState.name);
+    DictWordForm dictWordForm = (DictWordForm) o;
+    return Objects.equals(this.id, dictWordForm.id) &&
+        Objects.equals(this.wordText, dictWordForm.wordText) &&
+        Objects.equals(this.freq, dictWordForm.freq);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name);
+    return Objects.hash(id, wordText, freq);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class WordState {\n");
+    sb.append("class DictWordForm {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    wordText: ").append(toIndentedString(wordText)).append("\n");
+    sb.append("    freq: ").append(toIndentedString(freq)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -184,6 +184,21 @@ paths:
       tags:
       - me-controller
       x-accepts: '*/*'
+  /api/dict/get-new:
+    get:
+      operationId: getNewWords
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: '#/components/schemas/DictWord'
+                type: array
+          description: OK
+      tags:
+      - dictionary-controller
+      x-accepts: '*/*'
   /api/all/me:
     get:
       operationId: meAll
@@ -461,5 +476,91 @@ components:
           type: integer
         color:
           type: string
+      type: object
+    DictTrans:
+      example:
+        wordText: wordText
+        id: 2
+      properties:
+        id:
+          format: int64
+          type: integer
+        wordText:
+          type: string
+      type: object
+    DictWord:
+      example:
+        translations:
+        - wordText: wordText
+          id: 2
+        - wordText: wordText
+          id: 2
+        wordText: wordText
+        id: 0
+        state: 6
+        definitions:
+        - definitionText: definitionText
+          partOfSpeach: partOfSpeach
+          id: 5
+        - definitionText: definitionText
+          partOfSpeach: partOfSpeach
+          id: 5
+        forms:
+        - wordText: wordText
+          freq: 5
+          id: 1
+        - wordText: wordText
+          freq: 5
+          id: 1
+      properties:
+        id:
+          format: int64
+          type: integer
+        wordText:
+          type: string
+        state:
+          format: int32
+          type: integer
+        forms:
+          items:
+            $ref: '#/components/schemas/DictWordForm'
+          type: array
+        definitions:
+          items:
+            $ref: '#/components/schemas/DictWordDefinition'
+          type: array
+        translations:
+          items:
+            $ref: '#/components/schemas/DictTrans'
+          type: array
+      type: object
+    DictWordDefinition:
+      example:
+        definitionText: definitionText
+        partOfSpeach: partOfSpeach
+        id: 5
+      properties:
+        id:
+          format: int64
+          type: integer
+        partOfSpeach:
+          type: string
+        definitionText:
+          type: string
+      type: object
+    DictWordForm:
+      example:
+        wordText: wordText
+        freq: 5
+        id: 1
+      properties:
+        id:
+          format: int64
+          type: integer
+        wordText:
+          type: string
+        freq:
+          format: int64
+          type: integer
       type: object
 

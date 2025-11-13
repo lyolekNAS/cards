@@ -24,24 +24,28 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
- * WordState
+ * DictWordDefinition
  */
 @JsonPropertyOrder({
-  WordState.JSON_PROPERTY_ID,
-  WordState.JSON_PROPERTY_NAME
+  DictWordDefinition.JSON_PROPERTY_ID,
+  DictWordDefinition.JSON_PROPERTY_PART_OF_SPEACH,
+  DictWordDefinition.JSON_PROPERTY_DEFINITION_TEXT
 })
 @jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-12T19:49:29.509529125+02:00[Europe/Kyiv]")
-public class WordState {
+public class DictWordDefinition {
   public static final String JSON_PROPERTY_ID = "id";
-  private Integer id;
+  private Long id;
 
-  public static final String JSON_PROPERTY_NAME = "name";
-  private String name;
+  public static final String JSON_PROPERTY_PART_OF_SPEACH = "partOfSpeach";
+  private String partOfSpeach;
 
-  public WordState() {
+  public static final String JSON_PROPERTY_DEFINITION_TEXT = "definitionText";
+  private String definitionText;
+
+  public DictWordDefinition() {
   }
 
-  public WordState id(Integer id) {
+  public DictWordDefinition id(Long id) {
     
     this.id = id;
     return this;
@@ -55,41 +59,67 @@ public class WordState {
   @JsonProperty(JSON_PROPERTY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public Integer getId() {
+  public Long getId() {
     return id;
   }
 
 
   @JsonProperty(JSON_PROPERTY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
 
-  public WordState name(String name) {
+  public DictWordDefinition partOfSpeach(String partOfSpeach) {
     
-    this.name = name;
+    this.partOfSpeach = partOfSpeach;
     return this;
   }
 
    /**
-   * Get name
-   * @return name
+   * Get partOfSpeach
+   * @return partOfSpeach
   **/
   @jakarta.annotation.Nullable
-  @JsonProperty(JSON_PROPERTY_NAME)
+  @JsonProperty(JSON_PROPERTY_PART_OF_SPEACH)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public String getName() {
-    return name;
+  public String getPartOfSpeach() {
+    return partOfSpeach;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_NAME)
+  @JsonProperty(JSON_PROPERTY_PART_OF_SPEACH)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setName(String name) {
-    this.name = name;
+  public void setPartOfSpeach(String partOfSpeach) {
+    this.partOfSpeach = partOfSpeach;
+  }
+
+
+  public DictWordDefinition definitionText(String definitionText) {
+    
+    this.definitionText = definitionText;
+    return this;
+  }
+
+   /**
+   * Get definitionText
+   * @return definitionText
+  **/
+  @jakarta.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_DEFINITION_TEXT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public String getDefinitionText() {
+    return definitionText;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_DEFINITION_TEXT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setDefinitionText(String definitionText) {
+    this.definitionText = definitionText;
   }
 
   @Override
@@ -100,22 +130,24 @@ public class WordState {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    WordState wordState = (WordState) o;
-    return Objects.equals(this.id, wordState.id) &&
-        Objects.equals(this.name, wordState.name);
+    DictWordDefinition dictWordDefinition = (DictWordDefinition) o;
+    return Objects.equals(this.id, dictWordDefinition.id) &&
+        Objects.equals(this.partOfSpeach, dictWordDefinition.partOfSpeach) &&
+        Objects.equals(this.definitionText, dictWordDefinition.definitionText);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name);
+    return Objects.hash(id, partOfSpeach, definitionText);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class WordState {\n");
+    sb.append("class DictWordDefinition {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    partOfSpeach: ").append(toIndentedString(partOfSpeach)).append("\n");
+    sb.append("    definitionText: ").append(toIndentedString(definitionText)).append("\n");
     sb.append("}");
     return sb.toString();
   }

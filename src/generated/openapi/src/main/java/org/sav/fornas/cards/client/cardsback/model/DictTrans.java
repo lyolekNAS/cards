@@ -24,24 +24,24 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
- * WordState
+ * DictTrans
  */
 @JsonPropertyOrder({
-  WordState.JSON_PROPERTY_ID,
-  WordState.JSON_PROPERTY_NAME
+  DictTrans.JSON_PROPERTY_ID,
+  DictTrans.JSON_PROPERTY_WORD_TEXT
 })
 @jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-12T19:49:29.509529125+02:00[Europe/Kyiv]")
-public class WordState {
+public class DictTrans {
   public static final String JSON_PROPERTY_ID = "id";
-  private Integer id;
+  private Long id;
 
-  public static final String JSON_PROPERTY_NAME = "name";
-  private String name;
+  public static final String JSON_PROPERTY_WORD_TEXT = "wordText";
+  private String wordText;
 
-  public WordState() {
+  public DictTrans() {
   }
 
-  public WordState id(Integer id) {
+  public DictTrans id(Long id) {
     
     this.id = id;
     return this;
@@ -55,41 +55,41 @@ public class WordState {
   @JsonProperty(JSON_PROPERTY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public Integer getId() {
+  public Long getId() {
     return id;
   }
 
 
   @JsonProperty(JSON_PROPERTY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
 
-  public WordState name(String name) {
+  public DictTrans wordText(String wordText) {
     
-    this.name = name;
+    this.wordText = wordText;
     return this;
   }
 
    /**
-   * Get name
-   * @return name
+   * Get wordText
+   * @return wordText
   **/
   @jakarta.annotation.Nullable
-  @JsonProperty(JSON_PROPERTY_NAME)
+  @JsonProperty(JSON_PROPERTY_WORD_TEXT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public String getName() {
-    return name;
+  public String getWordText() {
+    return wordText;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_NAME)
+  @JsonProperty(JSON_PROPERTY_WORD_TEXT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setName(String name) {
-    this.name = name;
+  public void setWordText(String wordText) {
+    this.wordText = wordText;
   }
 
   @Override
@@ -100,22 +100,22 @@ public class WordState {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    WordState wordState = (WordState) o;
-    return Objects.equals(this.id, wordState.id) &&
-        Objects.equals(this.name, wordState.name);
+    DictTrans dictTrans = (DictTrans) o;
+    return Objects.equals(this.id, dictTrans.id) &&
+        Objects.equals(this.wordText, dictTrans.wordText);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name);
+    return Objects.hash(id, wordText);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class WordState {\n");
+    sb.append("class DictTrans {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    wordText: ").append(toIndentedString(wordText)).append("\n");
     sb.append("}");
     return sb.toString();
   }

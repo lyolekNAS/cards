@@ -38,7 +38,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   StatisticDto.JSON_PROPERTY_TOTAL_ATTEMPT_COUNT,
   StatisticDto.JSON_PROPERTY_TOTAL_ATTEMPT_SUM
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-11T18:39:02.020186812+02:00[Europe/Kyiv]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-12T19:49:29.509529125+02:00[Europe/Kyiv]")
 public class StatisticDto {
   public static final String JSON_PROPERTY_STATISTICS_ATTEMPT_DTO = "statisticsAttemptDto";
   private List<StatisticAttemptDto> statisticsAttemptDto;

@@ -5,6 +5,11 @@ README.md
 api/openapi.yaml
 build.gradle
 build.sbt
+docs/DictTrans.md
+docs/DictWord.md
+docs/DictWordDefinition.md
+docs/DictWordForm.md
+docs/DictionaryControllerApi.md
 docs/MeControllerApi.md
 docs/StateLimitControllerApi.md
 docs/StateLimitDto.md
@@ -30,6 +35,7 @@ src/main/java/org/sav/fornas/cards/client/cardsback/JavaTimeFormatter.java
 src/main/java/org/sav/fornas/cards/client/cardsback/RFC3339DateFormat.java
 src/main/java/org/sav/fornas/cards/client/cardsback/ServerConfiguration.java
 src/main/java/org/sav/fornas/cards/client/cardsback/ServerVariable.java
+src/main/java/org/sav/fornas/cards/client/cardsback/api/DictionaryControllerApi.java
 src/main/java/org/sav/fornas/cards/client/cardsback/api/MeControllerApi.java
 src/main/java/org/sav/fornas/cards/client/cardsback/api/StateLimitControllerApi.java
 src/main/java/org/sav/fornas/cards/client/cardsback/api/WordControllerApi.java
@@ -37,6 +43,10 @@ src/main/java/org/sav/fornas/cards/client/cardsback/auth/ApiKeyAuth.java
 src/main/java/org/sav/fornas/cards/client/cardsback/auth/Authentication.java
 src/main/java/org/sav/fornas/cards/client/cardsback/auth/HttpBasicAuth.java
 src/main/java/org/sav/fornas/cards/client/cardsback/auth/HttpBearerAuth.java
+src/main/java/org/sav/fornas/cards/client/cardsback/model/DictTrans.java
+src/main/java/org/sav/fornas/cards/client/cardsback/model/DictWord.java
+src/main/java/org/sav/fornas/cards/client/cardsback/model/DictWordDefinition.java
+src/main/java/org/sav/fornas/cards/client/cardsback/model/DictWordForm.java
 src/main/java/org/sav/fornas/cards/client/cardsback/model/StateLimitDto.java
 src/main/java/org/sav/fornas/cards/client/cardsback/model/StatisticAttemptDto.java
 src/main/java/org/sav/fornas/cards/client/cardsback/model/StatisticComonDto.java
