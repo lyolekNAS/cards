@@ -6,6 +6,8 @@ import org.sav.fornas.cards.client.cardsback.model.StateLimitDto;
 import org.sav.fornas.cards.client.cardsback.model.StatisticDto;
 import org.sav.fornas.cards.client.cardsback.model.TrainedWordDto;
 import org.sav.fornas.cards.client.cardsback.model.WordDto;
+import org.sav.fornas.cards.security.TokenService;
+import org.sav.fornas.cards.service.DictionaryService;
 import org.sav.fornas.cards.service.WordService;
 import org.springframework.ui.Model;
 
@@ -18,13 +20,17 @@ import static org.mockito.Mockito.*;
 class WordControllerUnitTest {
 
 	private WordService wordService;
+	private DictionaryService dictionaryService;
+	private TokenService tokenService;
 	private WordController controller;
 	private Model model;
 
 	@BeforeEach
 	void setUp() {
 		wordService = mock(WordService.class);
-		controller = new WordController(wordService);
+		dictionaryService = mock(DictionaryService.class);
+		tokenService = mock(TokenService.class);
+		controller = new WordController(wordService, dictionaryService, tokenService);
 		model = mock(Model.class);
 	}
 

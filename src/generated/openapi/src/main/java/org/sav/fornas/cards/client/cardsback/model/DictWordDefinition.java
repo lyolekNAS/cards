@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   DictWordDefinition.JSON_PROPERTY_PART_OF_SPEACH,
   DictWordDefinition.JSON_PROPERTY_DEFINITION_TEXT
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-12T19:49:29.509529125+02:00[Europe/Kyiv]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-14T19:50:35.461482557+02:00[Europe/Kyiv]")
 public class DictWordDefinition {
   public static final String JSON_PROPERTY_ID = "id";
   private Long id;

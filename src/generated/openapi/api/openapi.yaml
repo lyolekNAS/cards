@@ -184,7 +184,28 @@ paths:
       tags:
       - me-controller
       x-accepts: '*/*'
-  /api/dict/get-new:
+  /api/dict/getWord/{word}:
+    get:
+      operationId: getWord
+      parameters:
+      - explode: false
+        in: path
+        name: word
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DictWord'
+          description: OK
+      tags:
+      - dictionary-controller
+      x-accepts: '*/*'
+  /api/dict/getNewWords:
     get:
       operationId: getNewWords
       responses:
@@ -193,7 +214,7 @@ paths:
             '*/*':
               schema:
                 items:
-                  $ref: '#/components/schemas/DictWord'
+                  $ref: '#/components/schemas/WordDto'
                 type: array
           description: OK
       tags:
@@ -281,6 +302,7 @@ components:
         description: description
         id: 0
         state: PAUSED
+        dictWordId: 5
         lang: EN
         userId: 6
       properties:
@@ -325,6 +347,9 @@ components:
           - STAGE_7
           - DONE
           type: string
+        dictWordId:
+          format: int64
+          type: integer
       type: object
     StatisticAttemptDto:
       example:
@@ -396,6 +421,92 @@ components:
           format: int64
           type: integer
       type: object
+    DictTrans:
+      example:
+        wordText: wordText
+        id: 4
+      properties:
+        id:
+          format: int64
+          type: integer
+        wordText:
+          type: string
+      type: object
+    DictWord:
+      example:
+        translations:
+        - wordText: wordText
+          id: 4
+        - wordText: wordText
+          id: 4
+        wordText: wordText
+        id: 2
+        state: 7
+        definitions:
+        - definitionText: definitionText
+          partOfSpeach: partOfSpeach
+          id: 2
+        - definitionText: definitionText
+          partOfSpeach: partOfSpeach
+          id: 2
+        forms:
+        - wordText: wordText
+          freq: 3
+          id: 9
+        - wordText: wordText
+          freq: 3
+          id: 9
+      properties:
+        id:
+          format: int64
+          type: integer
+        wordText:
+          type: string
+        state:
+          format: int32
+          type: integer
+        forms:
+          items:
+            $ref: '#/components/schemas/DictWordForm'
+          type: array
+        definitions:
+          items:
+            $ref: '#/components/schemas/DictWordDefinition'
+          type: array
+        translations:
+          items:
+            $ref: '#/components/schemas/DictTrans'
+          type: array
+      type: object
+    DictWordDefinition:
+      example:
+        definitionText: definitionText
+        partOfSpeach: partOfSpeach
+        id: 2
+      properties:
+        id:
+          format: int64
+          type: integer
+        partOfSpeach:
+          type: string
+        definitionText:
+          type: string
+      type: object
+    DictWordForm:
+      example:
+        wordText: wordText
+        freq: 3
+        id: 9
+      properties:
+        id:
+          format: int64
+          type: integer
+        wordText:
+          type: string
+        freq:
+          format: int64
+          type: integer
+      type: object
     Word:
       example:
         ukrainian: ukrainian
@@ -410,6 +521,29 @@ components:
           name: name
           id: 5
         userId: 6
+        dictWord:
+          translations:
+          - wordText: wordText
+            id: 4
+          - wordText: wordText
+            id: 4
+          wordText: wordText
+          id: 2
+          state: 7
+          definitions:
+          - definitionText: definitionText
+            partOfSpeach: partOfSpeach
+            id: 2
+          - definitionText: definitionText
+            partOfSpeach: partOfSpeach
+            id: 2
+          forms:
+          - wordText: wordText
+            freq: 3
+            id: 9
+          - wordText: wordText
+            freq: 3
+            id: 9
       properties:
         id:
           format: int64
@@ -437,6 +571,8 @@ components:
           type: string
         state:
           $ref: '#/components/schemas/WordState'
+        dictWord:
+          $ref: '#/components/schemas/DictWord'
       type: object
     WordState:
       example:
@@ -476,91 +612,5 @@ components:
           type: integer
         color:
           type: string
-      type: object
-    DictTrans:
-      example:
-        wordText: wordText
-        id: 2
-      properties:
-        id:
-          format: int64
-          type: integer
-        wordText:
-          type: string
-      type: object
-    DictWord:
-      example:
-        translations:
-        - wordText: wordText
-          id: 2
-        - wordText: wordText
-          id: 2
-        wordText: wordText
-        id: 0
-        state: 6
-        definitions:
-        - definitionText: definitionText
-          partOfSpeach: partOfSpeach
-          id: 5
-        - definitionText: definitionText
-          partOfSpeach: partOfSpeach
-          id: 5
-        forms:
-        - wordText: wordText
-          freq: 5
-          id: 1
-        - wordText: wordText
-          freq: 5
-          id: 1
-      properties:
-        id:
-          format: int64
-          type: integer
-        wordText:
-          type: string
-        state:
-          format: int32
-          type: integer
-        forms:
-          items:
-            $ref: '#/components/schemas/DictWordForm'
-          type: array
-        definitions:
-          items:
-            $ref: '#/components/schemas/DictWordDefinition'
-          type: array
-        translations:
-          items:
-            $ref: '#/components/schemas/DictTrans'
-          type: array
-      type: object
-    DictWordDefinition:
-      example:
-        definitionText: definitionText
-        partOfSpeach: partOfSpeach
-        id: 5
-      properties:
-        id:
-          format: int64
-          type: integer
-        partOfSpeach:
-          type: string
-        definitionText:
-          type: string
-      type: object
-    DictWordForm:
-      example:
-        wordText: wordText
-        freq: 5
-        id: 1
-      properties:
-        id:
-          format: int64
-          type: integer
-        wordText:
-          type: string
-        freq:
-          format: int64
-          type: integer
       type: object
 

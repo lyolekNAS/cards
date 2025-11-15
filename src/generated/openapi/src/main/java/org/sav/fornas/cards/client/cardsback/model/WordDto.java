@@ -38,9 +38,10 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   WordDto.JSON_PROPERTY_LAST_TRAIN,
   WordDto.JSON_PROPERTY_NEXT_TRAIN,
   WordDto.JSON_PROPERTY_LANG,
-  WordDto.JSON_PROPERTY_STATE
+  WordDto.JSON_PROPERTY_STATE,
+  WordDto.JSON_PROPERTY_DICT_WORD_ID
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-12T19:49:29.509529125+02:00[Europe/Kyiv]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-14T19:50:35.461482557+02:00[Europe/Kyiv]")
 public class WordDto {
   public static final String JSON_PROPERTY_ID = "id";
   private Long id;
@@ -158,6 +159,9 @@ public class WordDto {
 
   public static final String JSON_PROPERTY_STATE = "state";
   private StateEnum state;
+
+  public static final String JSON_PROPERTY_DICT_WORD_ID = "dictWordId";
+  private Long dictWordId;
 
   public WordDto() {
   }
@@ -447,6 +451,32 @@ public class WordDto {
     this.state = state;
   }
 
+
+  public WordDto dictWordId(Long dictWordId) {
+    
+    this.dictWordId = dictWordId;
+    return this;
+  }
+
+   /**
+   * Get dictWordId
+   * @return dictWordId
+  **/
+  @jakarta.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_DICT_WORD_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public Long getDictWordId() {
+    return dictWordId;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_DICT_WORD_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setDictWordId(Long dictWordId) {
+    this.dictWordId = dictWordId;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -466,12 +496,13 @@ public class WordDto {
         Objects.equals(this.lastTrain, wordDto.lastTrain) &&
         Objects.equals(this.nextTrain, wordDto.nextTrain) &&
         Objects.equals(this.lang, wordDto.lang) &&
-        Objects.equals(this.state, wordDto.state);
+        Objects.equals(this.state, wordDto.state) &&
+        Objects.equals(this.dictWordId, wordDto.dictWordId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, english, ukrainian, description, userId, englishCnt, ukrainianCnt, lastTrain, nextTrain, lang, state);
+    return Objects.hash(id, english, ukrainian, description, userId, englishCnt, ukrainianCnt, lastTrain, nextTrain, lang, state, dictWordId);
   }
 
   @Override
@@ -489,6 +520,7 @@ public class WordDto {
     sb.append("    nextTrain: ").append(toIndentedString(nextTrain)).append("\n");
     sb.append("    lang: ").append(toIndentedString(lang)).append("\n");
     sb.append("    state: ").append(toIndentedString(state)).append("\n");
+    sb.append("    dictWordId: ").append(toIndentedString(dictWordId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

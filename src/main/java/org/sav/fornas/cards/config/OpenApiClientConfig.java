@@ -16,6 +16,7 @@ import org.springframework.web.client.RestTemplate;
 public class OpenApiClientConfig {
 
 	private final RestTemplate jwtRestTemplate;
+	private final RestTemplate restTemplateCommon;
 
 	@Value("${app-props.url.cards-back}")
 	private String cardsApiBaseUrl;
@@ -24,6 +25,12 @@ public class OpenApiClientConfig {
 	@Bean
 	public ApiClient apiClient() {
 		ApiClient client = new ApiClient(jwtRestTemplate);
+		client.setBasePath(cardsApiBaseUrl);
+		return client;
+	}
+	@Bean
+	public ApiClient apiClientAsync() {
+		ApiClient client = new ApiClient(restTemplateCommon);
 		client.setBasePath(cardsApiBaseUrl);
 		return client;
 	}
@@ -46,5 +53,10 @@ public class OpenApiClientConfig {
 	@Bean
 	public DictionaryControllerApi dictionaryControllerApi(ApiClient apiClient) {
 		return new DictionaryControllerApi(apiClient);
+	}
+
+	@Bean
+	public DictionaryControllerApi dictionaryControllerApiAsync(ApiClient apiClientAsync) {
+		return new DictionaryControllerApi(apiClientAsync);
 	}
 }

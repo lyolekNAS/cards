@@ -25,6 +25,7 @@ import static org.mockito.Mockito.*;
 class SecurityConfigGPTTest {
 
 	private final SecurityConfig config = new SecurityConfig();
+	private final RestTemplateConfig rtConfig = new RestTemplateConfig();
 	private final RestTemplateBuilder builder = new RestTemplateBuilder();
 
 	@Test
@@ -61,7 +62,7 @@ class SecurityConfigGPTTest {
 	@Test
 	void jwtRestTemplate_shouldContainInterceptor() {
 		OAuth2AuthorizedClientManager mockManager = mock(OAuth2AuthorizedClientManager.class);
-		RestTemplate restTemplate = config.jwtRestTemplate(builder, mockManager);
+		RestTemplate restTemplate = rtConfig.jwtRestTemplate(builder, mockManager);
 
 		assertThat(restTemplate.getInterceptors()).hasSize(1);
 	}
@@ -72,7 +73,7 @@ class SecurityConfigGPTTest {
 		props.setTranslateUrl("https://fake");
 		props.setApiKey("test-key");
 
-		RestTemplate rt = config.gTranslateRestTemplate(builder, props);
+		RestTemplate rt = rtConfig.gTranslateRestTemplate(builder, props);
 
 		assertThat(rt.getInterceptors()).hasSize(1);
 	}

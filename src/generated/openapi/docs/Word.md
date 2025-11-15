@@ -17,6 +17,7 @@
 |**lastTrain** | **OffsetDateTime** |  |  [optional] |
 |**nextTrain** | **OffsetDateTime** |  |  [optional] |
 |**state** | [**WordState**](WordState.md) |  |  [optional] |
+|**dictWord** | [**DictWord**](DictWord.md) |  |  [optional] |
 
 
 

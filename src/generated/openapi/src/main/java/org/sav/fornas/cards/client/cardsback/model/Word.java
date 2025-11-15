@@ -21,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.time.OffsetDateTime;
+import org.sav.fornas.cards.client.cardsback.model.DictWord;
 import org.sav.fornas.cards.client.cardsback.model.WordState;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -38,9 +39,10 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   Word.JSON_PROPERTY_UKRAINIAN_CNT,
   Word.JSON_PROPERTY_LAST_TRAIN,
   Word.JSON_PROPERTY_NEXT_TRAIN,
-  Word.JSON_PROPERTY_STATE
+  Word.JSON_PROPERTY_STATE,
+  Word.JSON_PROPERTY_DICT_WORD
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-12T19:49:29.509529125+02:00[Europe/Kyiv]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-14T19:50:35.461482557+02:00[Europe/Kyiv]")
 public class Word {
   public static final String JSON_PROPERTY_ID = "id";
   private Long id;
@@ -71,6 +73,9 @@ public class Word {
 
   public static final String JSON_PROPERTY_STATE = "state";
   private WordState state;
+
+  public static final String JSON_PROPERTY_DICT_WORD = "dictWord";
+  private DictWord dictWord;
 
   public Word() {
   }
@@ -334,6 +339,32 @@ public class Word {
     this.state = state;
   }
 
+
+  public Word dictWord(DictWord dictWord) {
+    
+    this.dictWord = dictWord;
+    return this;
+  }
+
+   /**
+   * Get dictWord
+   * @return dictWord
+  **/
+  @jakarta.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_DICT_WORD)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public DictWord getDictWord() {
+    return dictWord;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_DICT_WORD)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setDictWord(DictWord dictWord) {
+    this.dictWord = dictWord;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -352,12 +383,13 @@ public class Word {
         Objects.equals(this.ukrainianCnt, word.ukrainianCnt) &&
         Objects.equals(this.lastTrain, word.lastTrain) &&
         Objects.equals(this.nextTrain, word.nextTrain) &&
-        Objects.equals(this.state, word.state);
+        Objects.equals(this.state, word.state) &&
+        Objects.equals(this.dictWord, word.dictWord);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, english, ukrainian, description, userId, englishCnt, ukrainianCnt, lastTrain, nextTrain, state);
+    return Objects.hash(id, english, ukrainian, description, userId, englishCnt, ukrainianCnt, lastTrain, nextTrain, state, dictWord);
   }
 
   @Override
@@ -374,6 +406,7 @@ public class Word {
     sb.append("    lastTrain: ").append(toIndentedString(lastTrain)).append("\n");
     sb.append("    nextTrain: ").append(toIndentedString(nextTrain)).append("\n");
     sb.append("    state: ").append(toIndentedString(state)).append("\n");
+    sb.append("    dictWord: ").append(toIndentedString(dictWord)).append("\n");
     sb.append("}");
     return sb.toString();
   }

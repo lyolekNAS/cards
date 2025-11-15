@@ -3,6 +3,7 @@ package org.sav.fornas.cards.client.cardsback.api;
 import org.sav.fornas.cards.client.cardsback.ApiClient;
 
 import org.sav.fornas.cards.client.cardsback.model.DictWord;
+import org.sav.fornas.cards.client.cardsback.model.WordDto;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -25,7 +26,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-12T19:49:29.509529125+02:00[Europe/Kyiv]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-14T19:50:35.461482557+02:00[Europe/Kyiv]")
 public class DictionaryControllerApi {
     private ApiClient apiClient;
 
@@ -49,10 +50,10 @@ public class DictionaryControllerApi {
      * 
      * 
      * <p><b>200</b> - OK
-     * @return List&lt;DictWord&gt;
+     * @return List&lt;WordDto&gt;
      * @throws RestClientException if an error occurs while attempting to invoke the API
      */
-    public List<DictWord> getNewWords() throws RestClientException {
+    public List<WordDto> getNewWords() throws RestClientException {
         return getNewWordsWithHttpInfo().getBody();
     }
 
@@ -60,10 +61,10 @@ public class DictionaryControllerApi {
      * 
      * 
      * <p><b>200</b> - OK
-     * @return ResponseEntity&lt;List&lt;DictWord&gt;&gt;
+     * @return ResponseEntity&lt;List&lt;WordDto&gt;&gt;
      * @throws RestClientException if an error occurs while attempting to invoke the API
      */
-    public ResponseEntity<List<DictWord>> getNewWordsWithHttpInfo() throws RestClientException {
+    public ResponseEntity<List<WordDto>> getNewWordsWithHttpInfo() throws RestClientException {
         Object localVarPostBody = null;
         
 
@@ -81,7 +82,56 @@ public class DictionaryControllerApi {
 
         String[] localVarAuthNames = new String[] {  };
 
-        ParameterizedTypeReference<List<DictWord>> localReturnType = new ParameterizedTypeReference<List<DictWord>>() {};
-        return apiClient.invokeAPI("/api/dict/get-new", HttpMethod.GET, Collections.<String, Object>emptyMap(), localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localReturnType);
+        ParameterizedTypeReference<List<WordDto>> localReturnType = new ParameterizedTypeReference<List<WordDto>>() {};
+        return apiClient.invokeAPI("/api/dict/getNewWords", HttpMethod.GET, Collections.<String, Object>emptyMap(), localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localReturnType);
+    }
+    /**
+     * 
+     * 
+     * <p><b>200</b> - OK
+     * @param word  (required)
+     * @return DictWord
+     * @throws RestClientException if an error occurs while attempting to invoke the API
+     */
+    public DictWord getWord(String word) throws RestClientException {
+        return getWordWithHttpInfo(word).getBody();
+    }
+
+    /**
+     * 
+     * 
+     * <p><b>200</b> - OK
+     * @param word  (required)
+     * @return ResponseEntity&lt;DictWord&gt;
+     * @throws RestClientException if an error occurs while attempting to invoke the API
+     */
+    public ResponseEntity<DictWord> getWordWithHttpInfo(String word) throws RestClientException {
+        Object localVarPostBody = null;
+        
+        // verify the required parameter 'word' is set
+        if (word == null) {
+            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Missing the required parameter 'word' when calling getWord");
+        }
+        
+        // create path and map variables
+        final Map<String, Object> uriVariables = new HashMap<String, Object>();
+        uriVariables.put("word", word);
+
+        final MultiValueMap<String, String> localVarQueryParams = new LinkedMultiValueMap<String, String>();
+        final HttpHeaders localVarHeaderParams = new HttpHeaders();
+        final MultiValueMap<String, String> localVarCookieParams = new LinkedMultiValueMap<String, String>();
+        final MultiValueMap<String, Object> localVarFormParams = new LinkedMultiValueMap<String, Object>();
+
+        final String[] localVarAccepts = { 
+            "*/*"
+         };
+        final List<MediaType> localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        final String[] localVarContentTypes = {  };
+        final MediaType localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+        String[] localVarAuthNames = new String[] {  };
+
+        ParameterizedTypeReference<DictWord> localReturnType = new ParameterizedTypeReference<DictWord>() {};
+        return apiClient.invokeAPI("/api/dict/getWord/{word}", HttpMethod.GET, uriVariables, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localReturnType);
     }
 }

@@ -1,11 +1,14 @@
 package org.sav.fornas.cards.controller;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.sav.fornas.cards.client.cardsback.model.StateLimitDto;
 import org.sav.fornas.cards.client.cardsback.model.StatisticDto;
 import org.sav.fornas.cards.client.cardsback.model.TrainedWordDto;
 import org.sav.fornas.cards.client.cardsback.model.WordDto;
+import org.sav.fornas.cards.security.TokenService;
+import org.sav.fornas.cards.service.DictionaryService;
 import org.sav.fornas.cards.service.WordService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,11 +16,9 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.beans.PropertyEditorSupport;
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @Slf4j
@@ -25,6 +26,8 @@ import java.util.List;
 public class WordController {
 
 	private final WordService wordService;
+	private final DictionaryService dictionaryService;
+	private final TokenService tokenService;
 
 	@GetMapping("/words")
 	public String viewInfo(Model model) {
@@ -40,6 +43,39 @@ public class WordController {
 			word.setState(WordDto.StateEnum.STAGE_1);
 		}
 		model.addAttribute("word", word);
+		return "word-form";
+	}
+
+	@GetMapping("/random")
+	public String randomWord(HttpSession session, Model model,
+							 @RequestParam(name = "w", defaultValue = "") String w) {
+
+		String key = (String) session.getAttribute("wordsKey");
+		if(key == null){
+			key = UUID.randomUUID().toString();
+			session.setAttribute("wordsKey", key);
+		}
+		log.debug(">>> key={}", key);
+		boolean isUpdating = dictionaryService.isUpdating(key);
+
+		log.debug(">>> isUpdating={}", isUpdating);
+		List<WordDto> words = dictionaryService.getWords(key);
+		if(words.size() <= 2 && !isUpdating) {
+			log.debug(">>> initiating update");
+
+			String token = tokenService.getAccessToken();
+
+			String localKey = key;
+			dictionaryService.getNewWordsAsync(key, token)
+					.thenRun(() -> {
+						log.debug(">>> async update finished for key {}", localKey);
+					});
+
+		}
+
+		WordDto word = !words.isEmpty() ? words.removeFirst() : null;
+		model.addAttribute("word", word);
+		model.addAttribute("randomListSize", words.size());
 		return "word-form";
 	}
 

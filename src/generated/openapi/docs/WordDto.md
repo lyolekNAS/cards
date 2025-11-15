@@ -18,6 +18,7 @@
 |**nextTrain** | **OffsetDateTime** |  |  [optional] |
 |**lang** | [**LangEnum**](#LangEnum) |  |  [optional] |
 |**state** | [**StateEnum**](#StateEnum) |  |  [optional] |
+|**dictWordId** | **Long** |  |  [optional] |
 
 
 
