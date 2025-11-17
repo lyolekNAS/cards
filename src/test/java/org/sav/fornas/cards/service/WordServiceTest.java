@@ -2,6 +2,7 @@ package org.sav.fornas.cards.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.sav.fornas.cards.client.cardsback.api.DictionaryControllerApi;
 import org.sav.fornas.cards.client.cardsback.api.StateLimitControllerApi;
 import org.sav.fornas.cards.client.cardsback.api.WordControllerApi;
 import org.sav.fornas.cards.client.cardsback.model.StatisticDto;
@@ -20,6 +21,7 @@ class WordServiceTest {
 
 	private RestTemplate gTranslateRestTemplate;
 	private WordControllerApi wordControllerApi;
+	private DictionaryControllerApi dictionaryControllerApi;
 	private StateLimitControllerApi stateLimitControllerApi;
 	private WordService service;
 
@@ -27,9 +29,10 @@ class WordServiceTest {
 	void setUp() {
 		gTranslateRestTemplate = mock(RestTemplate.class);
 		wordControllerApi = mock(WordControllerApi.class);
+		dictionaryControllerApi = mock(DictionaryControllerApi.class);
 		stateLimitControllerApi = mock(StateLimitControllerApi.class);
 
-		service = new WordService(gTranslateRestTemplate, wordControllerApi, stateLimitControllerApi);
+		service = new WordService(gTranslateRestTemplate, wordControllerApi, dictionaryControllerApi, stateLimitControllerApi);
 	}
 
 	@Test

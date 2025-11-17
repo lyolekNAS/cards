@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.sav.fornas.cards.client.cardsback.api.DictionaryControllerApi;
 import org.sav.fornas.cards.client.cardsback.api.StateLimitControllerApi;
 import org.sav.fornas.cards.client.cardsback.api.WordControllerApi;
 import org.sav.fornas.cards.client.cardsback.model.StatisticDto;
@@ -26,6 +27,7 @@ class WordServiceUnitTest {
 	private RestTemplate gTranslateRestTemplate;
 	@Mock
 	private WordControllerApi wordControllerApi;
+	private DictionaryControllerApi dictionaryControllerApi;
 	private StateLimitControllerApi stateLimitControllerApi;
 	@InjectMocks
 	private WordService wordService;
@@ -34,9 +36,10 @@ class WordServiceUnitTest {
 	void setUp() {
 		gTranslateRestTemplate = mock(RestTemplate.class);
 		wordControllerApi = mock(WordControllerApi.class);
+		dictionaryControllerApi = mock(DictionaryControllerApi.class);
 		stateLimitControllerApi = mock(StateLimitControllerApi.class);
 
-		wordService = new WordService(gTranslateRestTemplate, wordControllerApi, stateLimitControllerApi);
+		wordService = new WordService(gTranslateRestTemplate, wordControllerApi, dictionaryControllerApi, stateLimitControllerApi);
 	}
 
 	@Test
