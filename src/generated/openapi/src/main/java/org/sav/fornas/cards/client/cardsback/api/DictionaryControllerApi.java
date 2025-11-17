@@ -26,7 +26,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-14T19:50:35.461482557+02:00[Europe/Kyiv]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-17T11:31:12.547724671+02:00[Europe/Kyiv]")
 public class DictionaryControllerApi {
     private ApiClient apiClient;
 
@@ -133,5 +133,59 @@ public class DictionaryControllerApi {
 
         ParameterizedTypeReference<DictWord> localReturnType = new ParameterizedTypeReference<DictWord>() {};
         return apiClient.invokeAPI("/api/dict/getWord/{word}", HttpMethod.GET, uriVariables, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localReturnType);
+    }
+    /**
+     * 
+     * 
+     * <p><b>200</b> - OK
+     * @param wordId  (required)
+     * @param mark  (required)
+     * @throws RestClientException if an error occurs while attempting to invoke the API
+     */
+    public void setMarkOnWord(Long wordId, String mark) throws RestClientException {
+        setMarkOnWordWithHttpInfo(wordId, mark);
+    }
+
+    /**
+     * 
+     * 
+     * <p><b>200</b> - OK
+     * @param wordId  (required)
+     * @param mark  (required)
+     * @return ResponseEntity&lt;Void&gt;
+     * @throws RestClientException if an error occurs while attempting to invoke the API
+     */
+    public ResponseEntity<Void> setMarkOnWordWithHttpInfo(Long wordId, String mark) throws RestClientException {
+        Object localVarPostBody = null;
+        
+        // verify the required parameter 'wordId' is set
+        if (wordId == null) {
+            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Missing the required parameter 'wordId' when calling setMarkOnWord");
+        }
+        
+        // verify the required parameter 'mark' is set
+        if (mark == null) {
+            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Missing the required parameter 'mark' when calling setMarkOnWord");
+        }
+        
+
+        final MultiValueMap<String, String> localVarQueryParams = new LinkedMultiValueMap<String, String>();
+        final HttpHeaders localVarHeaderParams = new HttpHeaders();
+        final MultiValueMap<String, String> localVarCookieParams = new LinkedMultiValueMap<String, String>();
+        final MultiValueMap<String, Object> localVarFormParams = new LinkedMultiValueMap<String, Object>();
+
+        localVarQueryParams.putAll(apiClient.parameterToMultiValueMap(null, "wordId", wordId));
+        localVarQueryParams.putAll(apiClient.parameterToMultiValueMap(null, "mark", mark));
+
+
+        final String[] localVarAccepts = {  };
+        final List<MediaType> localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        final String[] localVarContentTypes = {  };
+        final MediaType localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+        String[] localVarAuthNames = new String[] {  };
+
+        ParameterizedTypeReference<Void> localReturnType = new ParameterizedTypeReference<Void>() {};
+        return apiClient.invokeAPI("/api/dict/setMark", HttpMethod.POST, Collections.<String, Object>emptyMap(), localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localReturnType);
     }
 }

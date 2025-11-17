@@ -46,6 +46,31 @@ paths:
       - word-controller
       x-content-type: application/json
       x-accepts: '*/*'
+  /api/dict/setMark:
+    post:
+      operationId: setMarkOnWord
+      parameters:
+      - explode: true
+        in: query
+        name: wordId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: mark
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          description: OK
+      tags:
+      - dictionary-controller
+      x-accepts: application/json
   /api/word/user/all:
     get:
       operationId: getAllByUser
