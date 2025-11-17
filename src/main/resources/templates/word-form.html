@@ -17,6 +17,7 @@
                 <input type="hidden" th:field="*{englishCnt}"/>
                 <input type="hidden" th:field="*{ukrainianCnt}"/>
                 <input type="hidden" th:field="*{lastTrain}"/>
+                <input type="hidden" th:field="*{dictWordId}"/>
                 <div class="mb-3">
                     <label for="englishInput" class="form-label fw-bold">Англійське слово</label>
                     <input type="text" th:field="*{english}" class="form-control" id="englishInput" required/>
@@ -53,9 +54,22 @@
                     </select>
                 </div>
 
-                <div class="d-grid">
-                    <button type="submit" class="btn btn-primary btn-lg">Зберегти зміни</button>
+                <div class="d-flex gap-2 mt-4">
+
+                    <button th:if="${word.id == 0}" type="submit" th:formaction="@{/setSkipped}" class="btn btn-secondary w-100">
+                        Не цікаво
+                    </button>
+
+                    <button type="submit" class="btn btn-primary w-100">
+                        Зберегти зміни
+                    </button>
+
+                    <button th:if="${word.id == 0}" type="submit" th:formaction="@{/setKnown}" class="btn btn-success w-100">
+                        Знаю
+                    </button>
+
                 </div>
+
             </form>
         </div>
         <div th:if="${word == null}">То мабуть ще завантажується</div>

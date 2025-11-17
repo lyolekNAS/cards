@@ -2,6 +2,7 @@ package org.sav.fornas.cards.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.sav.fornas.cards.client.cardsback.api.DictionaryControllerApi;
 import org.sav.fornas.cards.client.cardsback.api.StateLimitControllerApi;
 import org.sav.fornas.cards.client.cardsback.api.WordControllerApi;
 import org.sav.fornas.cards.client.cardsback.model.StateLimitDto;
@@ -21,6 +22,7 @@ public class WordService {
 
 	private final RestTemplate gTranslateRestTemplate;
 	private final WordControllerApi wordControllerApi;
+	private final DictionaryControllerApi dictionaryControllerApi;
 	private final StateLimitControllerApi stateLimitControllerApi;
 
 	public List<WordDto> getWordsByUser(){
@@ -31,6 +33,10 @@ public class WordService {
 	public WordDto saveWord(WordDto wordDto){
 		log.debug(">>> saveWord({}})", wordDto);
 		return wordControllerApi.addWord(wordDto);
+	}
+
+	public void setMark(Long wordId, String mark){
+		dictionaryControllerApi.setMarkOnWord(wordId, mark);
 	}
 
 	public void deleteWord(Long id){

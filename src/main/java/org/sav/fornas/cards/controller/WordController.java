@@ -92,6 +92,18 @@ public class WordController {
 		return "redirect:/edit?w=" + newWord.getEnglish();
 	}
 
+	@PostMapping("/setSkipped")
+	public String setSkipped(@RequestParam Long dictWordId) {
+		wordService.setMark(dictWordId, "SKIP");
+		return "redirect:/random";
+	}
+
+	@PostMapping("/setKnown")
+	public String setKnown(@RequestParam Long dictWordId) {
+		wordService.setMark(dictWordId, "KNOWN");
+		return "redirect:/random";
+	}
+
 	@GetMapping("/delete")
 	public String deleteWord(@RequestParam("id") Long id) {
 		wordService.deleteWord(id);
