@@ -413,6 +413,7 @@ components:
         totalAttemptCount: 9
         totalAttemptSum: 3
         totalCommonCount: 7
+        totalKnown: 2
         statisticsAttemptDto:
         - englishCnt: 1
           ukrainianCnt: 5
@@ -427,6 +428,7 @@ components:
           count: 2
         - stateId: 5
           count: 2
+        totalUninteresting: 4
       properties:
         statisticsAttemptDto:
           items:
@@ -443,6 +445,12 @@ components:
           format: int64
           type: integer
         totalAttemptSum:
+          format: int64
+          type: integer
+        totalKnown:
+          format: int64
+          type: integer
+        totalUninteresting:
           format: int64
           type: integer
       type: object

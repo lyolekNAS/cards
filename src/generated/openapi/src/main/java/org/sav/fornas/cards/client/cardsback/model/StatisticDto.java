@@ -36,9 +36,11 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   StatisticDto.JSON_PROPERTY_STATISTICS_COMON_DTO,
   StatisticDto.JSON_PROPERTY_TOTAL_COMMON_COUNT,
   StatisticDto.JSON_PROPERTY_TOTAL_ATTEMPT_COUNT,
-  StatisticDto.JSON_PROPERTY_TOTAL_ATTEMPT_SUM
+  StatisticDto.JSON_PROPERTY_TOTAL_ATTEMPT_SUM,
+  StatisticDto.JSON_PROPERTY_TOTAL_KNOWN,
+  StatisticDto.JSON_PROPERTY_TOTAL_UNINTERESTING
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-17T11:31:12.547724671+02:00[Europe/Kyiv]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-19T10:57:34.683753620+02:00[Europe/Kyiv]")
 public class StatisticDto {
   public static final String JSON_PROPERTY_STATISTICS_ATTEMPT_DTO = "statisticsAttemptDto";
   private List<StatisticAttemptDto> statisticsAttemptDto;
@@ -54,6 +56,12 @@ public class StatisticDto {
 
   public static final String JSON_PROPERTY_TOTAL_ATTEMPT_SUM = "totalAttemptSum";
   private Long totalAttemptSum;
+
+  public static final String JSON_PROPERTY_TOTAL_KNOWN = "totalKnown";
+  private Long totalKnown;
+
+  public static final String JSON_PROPERTY_TOTAL_UNINTERESTING = "totalUninteresting";
+  private Long totalUninteresting;
 
   public StatisticDto() {
   }
@@ -203,6 +211,58 @@ public class StatisticDto {
     this.totalAttemptSum = totalAttemptSum;
   }
 
+
+  public StatisticDto totalKnown(Long totalKnown) {
+    
+    this.totalKnown = totalKnown;
+    return this;
+  }
+
+   /**
+   * Get totalKnown
+   * @return totalKnown
+  **/
+  @jakarta.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_TOTAL_KNOWN)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public Long getTotalKnown() {
+    return totalKnown;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_TOTAL_KNOWN)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setTotalKnown(Long totalKnown) {
+    this.totalKnown = totalKnown;
+  }
+
+
+  public StatisticDto totalUninteresting(Long totalUninteresting) {
+    
+    this.totalUninteresting = totalUninteresting;
+    return this;
+  }
+
+   /**
+   * Get totalUninteresting
+   * @return totalUninteresting
+  **/
+  @jakarta.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_TOTAL_UNINTERESTING)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public Long getTotalUninteresting() {
+    return totalUninteresting;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_TOTAL_UNINTERESTING)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setTotalUninteresting(Long totalUninteresting) {
+    this.totalUninteresting = totalUninteresting;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -216,12 +276,14 @@ public class StatisticDto {
         Objects.equals(this.statisticsComonDto, statisticDto.statisticsComonDto) &&
         Objects.equals(this.totalCommonCount, statisticDto.totalCommonCount) &&
         Objects.equals(this.totalAttemptCount, statisticDto.totalAttemptCount) &&
-        Objects.equals(this.totalAttemptSum, statisticDto.totalAttemptSum);
+        Objects.equals(this.totalAttemptSum, statisticDto.totalAttemptSum) &&
+        Objects.equals(this.totalKnown, statisticDto.totalKnown) &&
+        Objects.equals(this.totalUninteresting, statisticDto.totalUninteresting);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(statisticsAttemptDto, statisticsComonDto, totalCommonCount, totalAttemptCount, totalAttemptSum);
+    return Objects.hash(statisticsAttemptDto, statisticsComonDto, totalCommonCount, totalAttemptCount, totalAttemptSum, totalKnown, totalUninteresting);
   }
 
   @Override
@@ -233,6 +295,8 @@ public class StatisticDto {
     sb.append("    totalCommonCount: ").append(toIndentedString(totalCommonCount)).append("\n");
     sb.append("    totalAttemptCount: ").append(toIndentedString(totalAttemptCount)).append("\n");
     sb.append("    totalAttemptSum: ").append(toIndentedString(totalAttemptSum)).append("\n");
+    sb.append("    totalKnown: ").append(toIndentedString(totalKnown)).append("\n");
+    sb.append("    totalUninteresting: ").append(toIndentedString(totalUninteresting)).append("\n");
     sb.append("}");
     return sb.toString();
   }

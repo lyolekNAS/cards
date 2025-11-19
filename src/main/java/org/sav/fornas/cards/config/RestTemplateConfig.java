@@ -29,32 +29,22 @@ public class RestTemplateConfig {
 					Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 					if (auth != null && auth.getPrincipal() instanceof OidcUser) {
 
-						log.debug(">>> inside if");
 						String clientRegistrationId = "cards";
 
-						log.debug(">>> inside if 2");
 						OAuth2AuthorizeRequest authorizeRequest = OAuth2AuthorizeRequest
 								.withClientRegistrationId(clientRegistrationId)
 								.principal(auth)
 								.build();
 
-						log.debug(">>> inside if 3");
-						log.debug(">>> authorizeRequest:{}", authorizeRequest);
 						OAuth2AuthorizedClient authorizedClient = clientManager.authorize(authorizeRequest);
 
-						log.debug(">>> inside if 4");
 						if (authorizedClient != null && authorizedClient.getAccessToken() != null) {
-							log.debug(">>> inside if 5");
 							String token = authorizedClient.getAccessToken().getTokenValue();
-							log.debug(">>> inside if 6");
 							request.getHeaders().setBearerAuth(token);
-							log.debug(">>> Adding refreshed Bearer token: {}", token);
 						} else {
 							log.info(">>> Could not obtain access token");
 						}
 					}
-
-					log.debug(">>> before return");
 					return execution.execute(request, body);
 				})
 				.build();

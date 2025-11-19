@@ -12,6 +12,8 @@
 |**totalCommonCount** | **Long** |  |  [optional] |
 |**totalAttemptCount** | **Long** |  |  [optional] |
 |**totalAttemptSum** | **Long** |  |  [optional] |
+|**totalKnown** | **Long** |  |  [optional] |
+|**totalUninteresting** | **Long** |  |  [optional] |
 
 
 
