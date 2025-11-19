@@ -20,8 +20,17 @@
             <div class="card text-center border-0" onclick="showTranslation()">
                 <div class="card-body">
 
-                    <h2 class="card-title fw-bolder mb-3"
-                        th:text="${word.lang.name() == 'EN' ? word.english : word.ukrainian}"></h2>
+                    <div class="d-flex justify-content-center align-items-center mb-3">
+                        <h2 class="card-title fw-bolder mb-0"
+                            th:text="${word.lang.name() == 'EN' ? word.english : word.ukrainian}"></h2>
+
+                        <a id="editButton"
+                           th:href="@{/edit(w=${word.english})}"
+                           class="btn btn-sm btn-outline-secondary ms-3"
+                           style="visibility: hidden;">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+                    </div>
 
                     <hr class="my-3" />
 
@@ -58,6 +67,7 @@
 function showTranslation() {
     document.getElementById('translation').style.visibility = 'visible';
     document.getElementById('actions').style.visibility = 'visible';
+    document.getElementById('editButton').style.visibility = 'visible';
 }
 
 function submitForm(success) {
