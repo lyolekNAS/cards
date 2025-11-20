@@ -33,8 +33,9 @@
                            class="btn btn-outline-secondary"
                            title="Перекласти у Google Translate">
 
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Google_Translate_logo.svg"
-                                 width="20" height="20" alt="Google Translate"/>
+                            <i class="bi bi-translate"
+                               style="font-size: 1.25rem;"
+                               aria-label="Google Translate Icon"></i>
                         </a>
                     </div>
                 </div>
@@ -56,16 +57,20 @@
 
                 <div class="d-flex gap-2 mt-4">
 
-                    <button th:if="${word.id == 0}" type="submit" th:formaction="@{/setSkipped}" class="btn btn-secondary w-100">
-                        Не цікаво
+                    <button th:if="${word.id == 0}" type="submit" th:formaction="@{/setSkipped}"
+                            class="btn btn-secondary w-100"
+                            title="Не цікаво / Пропустити">
+                        <i class="bi-emoji-dizzy" style="font-size: 1.5rem;"></i>
                     </button>
 
-                    <button type="submit" class="btn btn-primary w-100">
-                        Зберегти зміни
+                    <button type="submit" class="btn btn-primary w-100" title="Зберегти зміни">
+                        <i class="bi bi-emoji-heart-eyes" style="font-size: 1.5rem;"></i>
                     </button>
 
-                    <button th:if="${word.id == 0}" type="submit" th:formaction="@{/setKnown}" class="btn btn-success w-100">
-                        Знаю
+                    <button th:if="${word.id == 0}" type="submit" th:formaction="@{/setKnown}"
+                            class="btn btn-success w-100"
+                            title="Знаю">
+                        <i class="bi bi-emoji-sunglasses" style="font-size: 1.5rem;"></i>
                     </button>
 
                 </div>

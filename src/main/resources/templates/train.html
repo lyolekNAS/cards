@@ -20,17 +20,8 @@
             <div class="card text-center border-0" onclick="showTranslation()">
                 <div class="card-body">
 
-                    <div class="d-flex justify-content-center align-items-center mb-3">
-                        <h2 class="card-title fw-bolder mb-0"
-                            th:text="${word.lang.name() == 'EN' ? word.english : word.ukrainian}"></h2>
-
-                        <a id="editButton"
-                           th:href="@{/edit(w=${word.english})}"
-                           class="btn btn-sm btn-outline-secondary ms-3"
-                           style="visibility: hidden;">
-                            <i class="bi bi-pencil"></i>
-                        </a>
-                    </div>
+                    <h2 class="card-title fw-bolder mb-0"
+                        th:text="${word.lang.name() == 'EN' ? word.english : word.ukrainian}"></h2>
 
                     <hr class="my-3" />
 
@@ -47,20 +38,40 @@
             </div>
 
             <div id="actions" class="d-flex justify-content-center mt-4" style="visibility: hidden;">
-                <form th:action="@{/trained}" method="get" id="trainForm" class="d-flex w-100 justify-content-around">
+                <form th:action="@{/trained}" method="get" id="trainForm"
+                      class="d-flex w-100 gap-2">
+
                     <input type="hidden" name="id" th:value="${word.id}">
                     <input type="hidden" name="success" id="successField" value="">
                     <input type="hidden" name="lang" th:value="${word.lang}">
 
-                    <button type="button" onclick="submitForm(true)" class="btn btn-success btn-lg mx-2 w-50">
-                        <i class="bi bi-check-circle-fill"></i> Ок
+                    <!-- 40% -->
+                    <button type="button"
+                            onclick="submitForm(true)"
+                            class="btn btn-success btn-lg"
+                            style="flex: 4;">
+                        <i class="bi bi-check-circle-fill" style="font-size: 1.5rem;"></i>
                     </button>
 
-                    <button type="button" onclick="submitForm(false)" class="btn btn-danger btn-lg mx-2 w-50">
-                        <i class="bi bi-x-circle-fill"></i> Ні
+                    <!-- 20% -->
+                    <a id="editButton"
+                       th:href="@{/edit(w=${word.english})}"
+                       class="btn btn-primary btn-lg"
+                       style="visibility: hidden; flex: 2;"
+                       title="Редагувати слово">
+                        <i class="bi bi-pencil" style="font-size: 1.5rem;"></i>
+                    </a>
+
+                    <!-- 40% -->
+                    <button type="button"
+                            onclick="submitForm(false)"
+                            class="btn btn-danger btn-lg"
+                            style="flex: 4;">
+                        <i class="bi bi-x-circle-fill" style="font-size: 1.5rem;"></i>
                     </button>
                 </form>
             </div>
+
         </div>
     </div>
 <script>
