@@ -45,7 +45,6 @@
                     <input type="hidden" name="success" id="successField" value="">
                     <input type="hidden" name="lang" th:value="${word.lang}">
 
-                    <!-- 40% -->
                     <button type="button"
                             onclick="submitForm(true)"
                             class="btn btn-success btn-lg"
@@ -53,7 +52,6 @@
                         <i class="bi bi-check-circle-fill" style="font-size: 1.5rem;"></i>
                     </button>
 
-                    <!-- 20% -->
                     <a id="editButton"
                        th:href="@{/edit(w=${word.english})}"
                        class="btn btn-primary btn-lg"
@@ -62,7 +60,6 @@
                         <i class="bi bi-pencil" style="font-size: 1.5rem;"></i>
                     </a>
 
-                    <!-- 40% -->
                     <button type="button"
                             onclick="submitForm(false)"
                             class="btn btn-danger btn-lg"

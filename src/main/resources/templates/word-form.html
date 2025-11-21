@@ -79,5 +79,17 @@
         </div>
         <div th:if="${word == null}">То мабуть ще завантажується</div>
     </div>
+<script th:inline="javascript">
+
+    const editBaseUrl = /*[[@{/edit}]]*/ '';
+
+    document.getElementById('englishInput').addEventListener('change', function () {
+        const value = this.value.trim();
+        if (value.length > 0) {
+            window.location.href = editBaseUrl + '?w=' + encodeURIComponent(value);
+        }
+    });
+
+</script>
 </body>
 </html>
