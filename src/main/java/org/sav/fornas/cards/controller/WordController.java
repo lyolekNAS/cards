@@ -3,13 +3,11 @@ package org.sav.fornas.cards.controller;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.sav.fornas.cards.client.cardsback.model.StateLimitDto;
-import org.sav.fornas.cards.client.cardsback.model.StatisticDto;
-import org.sav.fornas.cards.client.cardsback.model.TrainedWordDto;
-import org.sav.fornas.cards.client.cardsback.model.WordDto;
+import org.sav.fornas.cards.client.cardsback.model.*;
 import org.sav.fornas.cards.security.TokenService;
 import org.sav.fornas.cards.service.DictionaryService;
 import org.sav.fornas.cards.service.WordService;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -30,8 +28,13 @@ public class WordController {
 	private final TokenService tokenService;
 
 	@GetMapping("/words")
-	public String viewInfo(Model model) {
-		List<WordDto> words = wordService.getWordsByUser();
+	public String viewInfo(
+			@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "20") int size,
+			@RequestParam(defaultValue = "") String state,
+			Model model) {
+
+		WordsPageDtoWordDto words = wordService.getWordsByUser(page, size, state);
 		model.addAttribute("words", words);
 		return "words";
 	}
@@ -60,7 +63,7 @@ public class WordController {
 
 		log.debug(">>> isUpdating={}", isUpdating);
 		List<WordDto> words = dictionaryService.getWords(key);
-		if(words.size() <= 2 && !isUpdating) {
+		if(words.size() <= 3 && !isUpdating) {
 			log.debug(">>> initiating update");
 
 			String token = tokenService.getAccessToken();

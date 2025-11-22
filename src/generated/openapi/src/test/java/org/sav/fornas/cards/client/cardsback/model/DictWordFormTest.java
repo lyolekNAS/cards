@@ -18,7 +18,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
-import org.sav.fornas.cards.client.cardsback.model.DictWord;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -59,14 +58,6 @@ public class DictWordFormTest {
     @Test
     public void freqTest() {
         // TODO: test freq
-    }
-
-    /**
-     * Test the property 'lemma'
-     */
-    @Test
-    public void lemmaTest() {
-        // TODO: test lemma
     }
 
 }

@@ -2,18 +2,17 @@ package org.sav.fornas.cards.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.coyote.http11.filters.SavedRequestInputFilter;
 import org.sav.fornas.cards.client.cardsback.api.DictionaryControllerApi;
 import org.sav.fornas.cards.client.cardsback.api.StateLimitControllerApi;
 import org.sav.fornas.cards.client.cardsback.api.WordControllerApi;
-import org.sav.fornas.cards.client.cardsback.model.StateLimitDto;
-import org.sav.fornas.cards.client.cardsback.model.StatisticDto;
-import org.sav.fornas.cards.client.cardsback.model.TrainedWordDto;
-import org.sav.fornas.cards.client.cardsback.model.WordDto;
+import org.sav.fornas.cards.client.cardsback.model.*;
 import org.sav.fornas.dto.google.TranslationResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Slf4j
@@ -25,9 +24,10 @@ public class WordService {
 	private final DictionaryControllerApi dictionaryControllerApi;
 	private final StateLimitControllerApi stateLimitControllerApi;
 
-	public List<WordDto> getWordsByUser(){
-		log.debug(">>> getWordsByUser()");
-		return wordControllerApi.getAllByUser();
+	public WordsPageDtoWordDto getWordsByUser(Integer page, Integer size, String state){
+		state = Objects.requireNonNullElse(state, "");
+		log.debug(">>> getWordsByUser({})", state);
+		return wordControllerApi.getAllByUser(page, size, state);
 	}
 
 	public WordDto saveWord(WordDto wordDto){
@@ -62,7 +62,11 @@ public class WordService {
 	}
 
 	public WordDto getWord(){
-		return wordControllerApi.findWordToTrain();
+		WordDto w = wordControllerApi.findWordToTrain();
+		if(w.getDescription() != null) {
+			w.description(w.getDescription().replace("\n", "<br/>"));
+		}
+		return w;
 	}
 
 	public StatisticDto getStatistics(){
@@ -71,6 +75,10 @@ public class WordService {
 
 	public StateLimitDto getStateLimit(String value){
 		return stateLimitControllerApi.getById(value);
+	}
+
+	public List<StateLimitDto> getStateLimits(){
+		return stateLimitControllerApi.getAllStateLimits();
 	}
 
 	public void setTrained(TrainedWordDto trainedWordDto){

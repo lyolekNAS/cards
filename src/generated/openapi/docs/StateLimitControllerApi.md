@@ -4,16 +4,16 @@ All URIs are relative to *http://localhost:8052*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**getAll1**](StateLimitControllerApi.md#getAll1) | **GET** /api/state/all |  |
+| [**getAllStateLimits**](StateLimitControllerApi.md#getAllStateLimits) | **GET** /api/state/all | Get all state limits |
 | [**getById**](StateLimitControllerApi.md#getById) | **GET** /api/state/id/{state} |  |
 
 
 
-## getAll1
+## getAllStateLimits
 
-> List&lt;StateLimitDto&gt; getAll1()
+> List&lt;StateLimitDto&gt; getAllStateLimits()
 
-
+Get all state limits
 
 ### Example
 
@@ -32,10 +32,10 @@ public class Example {
 
         StateLimitControllerApi apiInstance = new StateLimitControllerApi(defaultClient);
         try {
-            List<StateLimitDto> result = apiInstance.getAll1();
+            List<StateLimitDto> result = apiInstance.getAllStateLimits();
             System.out.println(result);
         } catch (ApiException e) {
-            System.err.println("Exception when calling StateLimitControllerApi#getAll1");
+            System.err.println("Exception when calling StateLimitControllerApi#getAllStateLimits");
             System.err.println("Status code: " + e.getCode());
             System.err.println("Reason: " + e.getResponseBody());
             System.err.println("Response headers: " + e.getResponseHeaders());

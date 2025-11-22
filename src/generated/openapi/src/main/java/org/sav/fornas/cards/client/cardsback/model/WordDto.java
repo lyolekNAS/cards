@@ -41,7 +41,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   WordDto.JSON_PROPERTY_STATE,
   WordDto.JSON_PROPERTY_DICT_WORD_ID
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-19T10:57:34.683753620+02:00[Europe/Kyiv]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-22T14:32:06.688142937+02:00[Europe/Kyiv]")
 public class WordDto {
   public static final String JSON_PROPERTY_ID = "id";
   private Long id;

@@ -329,7 +329,7 @@ No authorization required
 
 ## getAllByUser
 
-> List&lt;WordDto&gt; getAllByUser()
+> WordsPageDtoWordDto getAllByUser(page, size, state)
 
 
 
@@ -349,8 +349,11 @@ public class Example {
         defaultClient.setBasePath("http://localhost:8052");
 
         WordControllerApi apiInstance = new WordControllerApi(defaultClient);
+        Integer page = 0; // Integer | 
+        Integer size = 20; // Integer | 
+        String state = ""; // String | 
         try {
-            List<WordDto> result = apiInstance.getAllByUser();
+            WordsPageDtoWordDto result = apiInstance.getAllByUser(page, size, state);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling WordControllerApi#getAllByUser");
@@ -365,11 +368,16 @@ public class Example {
 
 ### Parameters
 
-This endpoint does not need any parameter.
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **page** | **Integer**|  | [optional] [default to 0] |
+| **size** | **Integer**|  | [optional] [default to 20] |
+| **state** | **String**|  | [optional] [default to ] |
 
 ### Return type
 
-[**List&lt;WordDto&gt;**](WordDto.md)
+[**WordsPageDtoWordDto**](WordsPageDtoWordDto.md)
 
 ### Authorization
 

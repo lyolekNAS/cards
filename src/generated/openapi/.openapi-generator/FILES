@@ -21,6 +21,7 @@ docs/Word.md
 docs/WordControllerApi.md
 docs/WordDto.md
 docs/WordState.md
+docs/WordsPageDtoWordDto.md
 git_push.sh
 gradle.properties
 gradle/wrapper/gradle-wrapper.jar
@@ -55,3 +56,4 @@ src/main/java/org/sav/fornas/cards/client/cardsback/model/TrainedWordDto.java
 src/main/java/org/sav/fornas/cards/client/cardsback/model/Word.java
 src/main/java/org/sav/fornas/cards/client/cardsback/model/WordDto.java
 src/main/java/org/sav/fornas/cards/client/cardsback/model/WordState.java
+src/main/java/org/sav/fornas/cards/client/cardsback/model/WordsPageDtoWordDto.java

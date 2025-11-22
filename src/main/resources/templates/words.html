@@ -9,6 +9,62 @@
 
         <h3 class="mb-4 text-primary">Керування словником</h3>
 
+
+        <!-- Пагінація -->
+        <div class="d-flex justify-content-center mt-3">
+
+            <nav>
+                <ul class="pagination">
+
+                    <!-- Previous -->
+                    <li class="page-item" th:classappend="${words.first} ? 'disabled'">
+                        <a class="page-link"
+                           th:href="@{/words(page=${words.number - 1}, size=${words.size}, state=${param.state})}">
+                            «
+                        </a>
+                    </li>
+
+                    <!-- Номери сторінок -->
+                    <li class="page-item"
+                        th:each="p : ${#numbers.sequence(0, words.totalPages - 1)}"
+                        th:classappend="${p == words.number} ? 'active'">
+                        <a class="page-link"
+                           th:text="${p + 1}"
+                           th:href="@{/words(page=${p}, size=${words.size}, state=${param.state})}"></a>
+                    </li>
+
+                    <!-- Next -->
+                    <li class="page-item" th:classappend="${words.last} ? 'disabled'">
+                        <a class="page-link"
+                           th:href="@{/words(page=${words.number + 1}, size=${words.size}, state=${param.state})}">
+                            »
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+
+        </div>
+
+        <form method="get" class="row g-2 mb-4 text-start">
+            <div class="col-auto">
+                <label for="stateFilter" class="col-form-label fw-bold">Фільтр за станом:</label>
+            </div>
+
+            <div class="col-auto">
+                <select id="stateFilter" name="state" class="form-select"
+                        onchange="this.form.submit()">
+                    <option value="">— Усі —</option>
+
+                    <option th:each="s : ${T(org.sav.fornas.cards.client.cardsback.model.WordDto.StateEnum).values()}"
+                            th:value="${s.getValue()}"
+                            th:text="${s}"
+                            th:selected="${param.state != null and param.state[0] == s.getValue()}">
+                    </option>
+                </select>
+            </div>
+        </form>
+
         <div class="table-responsive">
             <table class="table table-hover table-sm text-start caption-top align-middle">
 
@@ -23,7 +79,7 @@
                 </thead>
 
                 <tbody>
-                <tr th:each="word : ${words}" th:object="${word}">
+                <tr th:each="word : ${words.content}" th:object="${word}">
 
                     <td>
                         <a th:href="@{'/delete(id=*{id})}"

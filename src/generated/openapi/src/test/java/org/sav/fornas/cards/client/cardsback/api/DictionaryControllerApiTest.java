@@ -14,6 +14,7 @@
 package org.sav.fornas.cards.client.cardsback.api;
 
 import org.sav.fornas.cards.client.cardsback.model.DictWord;
+import org.sav.fornas.cards.client.cardsback.model.WordDto;
 import org.junit.Test;
 import org.junit.Ignore;
 
@@ -43,7 +44,40 @@ public class DictionaryControllerApiTest {
      */
     @Test
     public void getNewWordsTest() {
-        List<DictWord> response = api.getNewWords();
+        List<WordDto> response = api.getNewWords();
+
+        // TODO: test validations
+    }
+    
+    /**
+     * 
+     *
+     * 
+     *
+     * @throws ApiException
+     *          if the Api call fails
+     */
+    @Test
+    public void getWordTest() {
+        String word = null;
+        DictWord response = api.getWord(word);
+
+        // TODO: test validations
+    }
+    
+    /**
+     * 
+     *
+     * 
+     *
+     * @throws ApiException
+     *          if the Api call fails
+     */
+    @Test
+    public void setMarkOnWordTest() {
+        Long wordId = null;
+        String mark = null;
+        api.setMarkOnWord(wordId, mark);
 
         // TODO: test validations
     }

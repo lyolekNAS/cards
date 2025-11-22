@@ -34,7 +34,7 @@ public class StateLimitControllerApiTest {
 
     
     /**
-     * 
+     * Get all state limits
      *
      * 
      *
@@ -42,8 +42,8 @@ public class StateLimitControllerApiTest {
      *          if the Api call fails
      */
     @Test
-    public void getAll1Test() {
-        List<StateLimitDto> response = api.getAll1();
+    public void getAllStateLimitsTest() {
+        List<StateLimitDto> response = api.getAllStateLimits();
 
         // TODO: test validations
     }

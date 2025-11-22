@@ -74,14 +74,39 @@ paths:
   /api/word/user/all:
     get:
       operationId: getAllByUser
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 0
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          default: 20
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: state
+        required: false
+        schema:
+          default: ""
+          type: string
+        style: form
       responses:
         "200":
           content:
             '*/*':
               schema:
-                items:
-                  $ref: '#/components/schemas/WordDto'
-                type: array
+                $ref: '#/components/schemas/WordsPageDtoWordDto'
           description: OK
       tags:
       - word-controller
@@ -181,7 +206,7 @@ paths:
       x-accepts: '*/*'
   /api/state/all:
     get:
-      operationId: getAll_1
+      operationId: getAllStateLimits
       responses:
         "200":
           content:
@@ -191,6 +216,7 @@ paths:
                   $ref: '#/components/schemas/StateLimitDto'
                 type: array
           description: OK
+      summary: Get all state limits
       tags:
       - state-limit-controller
       x-accepts: '*/*'
@@ -375,6 +401,61 @@ components:
         dictWordId:
           format: int64
           type: integer
+      type: object
+    WordsPageDtoWordDto:
+      example:
+        number: 0
+        size: 6
+        last: true
+        totalPages: 5
+        content:
+        - ukrainian: ukrainian
+          englishCnt: 1
+          ukrainianCnt: 5
+          nextTrain: 2000-01-23T04:56:07.000+00:00
+          lastTrain: 2000-01-23T04:56:07.000+00:00
+          english: english
+          description: description
+          id: 0
+          state: PAUSED
+          dictWordId: 5
+          lang: EN
+          userId: 6
+        - ukrainian: ukrainian
+          englishCnt: 1
+          ukrainianCnt: 5
+          nextTrain: 2000-01-23T04:56:07.000+00:00
+          lastTrain: 2000-01-23T04:56:07.000+00:00
+          english: english
+          description: description
+          id: 0
+          state: PAUSED
+          dictWordId: 5
+          lang: EN
+          userId: 6
+        first: true
+        totalElements: 1
+      properties:
+        content:
+          items:
+            $ref: '#/components/schemas/WordDto'
+          type: array
+        number:
+          format: int32
+          type: integer
+        size:
+          format: int32
+          type: integer
+        totalElements:
+          format: int64
+          type: integer
+        totalPages:
+          format: int32
+          type: integer
+        first:
+          type: boolean
+        last:
+          type: boolean
       type: object
     StatisticAttemptDto:
       example:

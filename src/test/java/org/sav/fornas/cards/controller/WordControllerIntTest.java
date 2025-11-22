@@ -10,6 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.sav.fornas.cards.client.cardsback.model.StateLimitDto;
 import org.sav.fornas.cards.client.cardsback.model.TrainedWordDto;
 import org.sav.fornas.cards.client.cardsback.model.WordDto;
+import org.sav.fornas.cards.client.cardsback.model.WordsPageDtoWordDto;
 import org.sav.fornas.cards.service.WordService;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -52,14 +53,17 @@ class WordControllerIntTest {
 
 	@Test
 	void testViewInfo() throws Exception {
-		List<WordDto> words = List.of(new WordDto(), new WordDto());
-		when(wordService.getWordsByUser()).thenReturn(words);
+		WordsPageDtoWordDto dto = new WordsPageDtoWordDto();
+		when(wordService.getWordsByUser(0, 20, "")).thenReturn(dto);
 
-		mockMvc.perform(get("/words"))
+		mockMvc.perform(get("/words")
+						.param("page", "0")
+						.param("size", "20")
+						.param("state", ""))
 				.andExpect(status().isOk())
 				.andExpect(view().name("words"))
 				.andExpect(model().attributeExists("words"))
-				.andExpect(model().attribute("words", words));
+				.andExpect(model().attribute("words", dto));
 	}
 
 	@Test

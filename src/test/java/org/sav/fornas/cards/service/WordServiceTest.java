@@ -8,6 +8,7 @@ import org.sav.fornas.cards.client.cardsback.api.WordControllerApi;
 import org.sav.fornas.cards.client.cardsback.model.StatisticDto;
 import org.sav.fornas.cards.client.cardsback.model.TrainedWordDto;
 import org.sav.fornas.cards.client.cardsback.model.WordDto;
+import org.sav.fornas.cards.client.cardsback.model.WordsPageDtoWordDto;
 import org.sav.fornas.dto.google.TranslationResponse;
 import org.sav.fornas.dto.google.TranslationResponse.Translation;
 import org.springframework.web.client.RestTemplate;
@@ -37,11 +38,12 @@ class WordServiceTest {
 
 	@Test
 	void getWordsByUser_shouldCallJwtRestTemplate() {
-		List<WordDto> expected = List.of(new WordDto());
-		when(wordControllerApi.getAllByUser())
+		WordsPageDtoWordDto expected = new WordsPageDtoWordDto();
+
+		when(wordControllerApi.getAllByUser(eq(0), eq(10), eq("")))
 				.thenReturn(expected);
 
-		List<WordDto> result = service.getWordsByUser();
+		WordsPageDtoWordDto result = service.getWordsByUser(0, 10, null);
 
 		assertThat(result).isEqualTo(expected);
 	}

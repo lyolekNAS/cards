@@ -17,6 +17,7 @@ import org.sav.fornas.cards.client.cardsback.model.StatisticDto;
 import org.sav.fornas.cards.client.cardsback.model.TrainedWordDto;
 import org.sav.fornas.cards.client.cardsback.model.Word;
 import org.sav.fornas.cards.client.cardsback.model.WordDto;
+import org.sav.fornas.cards.client.cardsback.model.WordsPageDtoWordDto;
 import org.junit.Test;
 import org.junit.Ignore;
 
@@ -124,7 +125,10 @@ public class WordControllerApiTest {
      */
     @Test
     public void getAllByUserTest() {
-        List<WordDto> response = api.getAllByUser();
+        Integer page = null;
+        Integer size = null;
+        String state = null;
+        WordsPageDtoWordDto response = api.getAllByUser(page, size, state);
 
         // TODO: test validations
     }

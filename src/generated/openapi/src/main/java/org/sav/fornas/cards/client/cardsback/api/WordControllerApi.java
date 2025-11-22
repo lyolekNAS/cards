@@ -6,6 +6,7 @@ import org.sav.fornas.cards.client.cardsback.model.StatisticDto;
 import org.sav.fornas.cards.client.cardsback.model.TrainedWordDto;
 import org.sav.fornas.cards.client.cardsback.model.Word;
 import org.sav.fornas.cards.client.cardsback.model.WordDto;
+import org.sav.fornas.cards.client.cardsback.model.WordsPageDtoWordDto;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -28,7 +29,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-19T10:57:34.683753620+02:00[Europe/Kyiv]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-22T14:32:06.688142937+02:00[Europe/Kyiv]")
 public class WordControllerApi {
     private ApiClient apiClient;
 
@@ -276,21 +277,27 @@ public class WordControllerApi {
      * 
      * 
      * <p><b>200</b> - OK
-     * @return List&lt;WordDto&gt;
+     * @param page  (optional, default to 0)
+     * @param size  (optional, default to 20)
+     * @param state  (optional, default to )
+     * @return WordsPageDtoWordDto
      * @throws RestClientException if an error occurs while attempting to invoke the API
      */
-    public List<WordDto> getAllByUser() throws RestClientException {
-        return getAllByUserWithHttpInfo().getBody();
+    public WordsPageDtoWordDto getAllByUser(Integer page, Integer size, String state) throws RestClientException {
+        return getAllByUserWithHttpInfo(page, size, state).getBody();
     }
 
     /**
      * 
      * 
      * <p><b>200</b> - OK
-     * @return ResponseEntity&lt;List&lt;WordDto&gt;&gt;
+     * @param page  (optional, default to 0)
+     * @param size  (optional, default to 20)
+     * @param state  (optional, default to )
+     * @return ResponseEntity&lt;WordsPageDtoWordDto&gt;
      * @throws RestClientException if an error occurs while attempting to invoke the API
      */
-    public ResponseEntity<List<WordDto>> getAllByUserWithHttpInfo() throws RestClientException {
+    public ResponseEntity<WordsPageDtoWordDto> getAllByUserWithHttpInfo(Integer page, Integer size, String state) throws RestClientException {
         Object localVarPostBody = null;
         
 
@@ -298,6 +305,11 @@ public class WordControllerApi {
         final HttpHeaders localVarHeaderParams = new HttpHeaders();
         final MultiValueMap<String, String> localVarCookieParams = new LinkedMultiValueMap<String, String>();
         final MultiValueMap<String, Object> localVarFormParams = new LinkedMultiValueMap<String, Object>();
+
+        localVarQueryParams.putAll(apiClient.parameterToMultiValueMap(null, "page", page));
+        localVarQueryParams.putAll(apiClient.parameterToMultiValueMap(null, "size", size));
+        localVarQueryParams.putAll(apiClient.parameterToMultiValueMap(null, "state", state));
+
 
         final String[] localVarAccepts = { 
             "*/*"
@@ -308,7 +320,7 @@ public class WordControllerApi {
 
         String[] localVarAuthNames = new String[] {  };
 
-        ParameterizedTypeReference<List<WordDto>> localReturnType = new ParameterizedTypeReference<List<WordDto>>() {};
+        ParameterizedTypeReference<WordsPageDtoWordDto> localReturnType = new ParameterizedTypeReference<WordsPageDtoWordDto>() {};
         return apiClient.invokeAPI("/api/word/user/all", HttpMethod.GET, Collections.<String, Object>emptyMap(), localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localReturnType);
     }
     /**

@@ -11,6 +11,7 @@ import org.sav.fornas.cards.client.cardsback.api.WordControllerApi;
 import org.sav.fornas.cards.client.cardsback.model.StatisticDto;
 import org.sav.fornas.cards.client.cardsback.model.TrainedWordDto;
 import org.sav.fornas.cards.client.cardsback.model.WordDto;
+import org.sav.fornas.cards.client.cardsback.model.WordsPageDtoWordDto;
 import org.sav.fornas.dto.google.TranslationResponse;
 import org.springframework.web.client.RestTemplate;
 
@@ -44,19 +45,24 @@ class WordServiceUnitTest {
 
 	@Test
 	void testGetWordsByUser() {
+		// given
+		WordsPageDtoWordDto mockPage = new WordsPageDtoWordDto();
+		WordDto w1 = new WordDto();
+		WordDto w2 = new WordDto();
+		mockPage.setContent(List.of(w1, w2));
 
-		List<WordDto> mockWords = List.of(new WordDto(), new WordDto());
+		when(wordControllerApi.getAllByUser(0, 10, ""))
+				.thenReturn(mockPage);
 
-		when(wordControllerApi.getAllByUser())
-				.thenReturn(mockWords);
+		// when
+		WordsPageDtoWordDto result = wordService.getWordsByUser(0, 10, null);
 
-		List<WordDto> result = wordService.getWordsByUser();
-
+		// then
 		assertNotNull(result);
-		assertEquals(2, result.size());
-
-		verify(wordControllerApi).getAllByUser();
+		assertEquals(2, result.getContent().size());
+		verify(wordControllerApi).getAllByUser(0, 10, "");
 	}
+
 
 	@Test
 	void testSaveWord() {

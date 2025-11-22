@@ -52,20 +52,4 @@ public class DictTransTest {
         // TODO: test wordText
     }
 
-    /**
-     * Test the property 'partOfSpeach'
-     */
-    @Test
-    public void partOfSpeachTest() {
-        // TODO: test partOfSpeach
-    }
-
-    /**
-     * Test the property 'confidence'
-     */
-    @Test
-    public void confidenceTest() {
-        // TODO: test confidence
-    }
-
 }

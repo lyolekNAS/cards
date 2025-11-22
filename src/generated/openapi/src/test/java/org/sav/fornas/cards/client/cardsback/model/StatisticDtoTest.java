@@ -81,4 +81,20 @@ public class StatisticDtoTest {
         // TODO: test totalAttemptSum
     }
 
+    /**
+     * Test the property 'totalKnown'
+     */
+    @Test
+    public void totalKnownTest() {
+        // TODO: test totalKnown
+    }
+
+    /**
+     * Test the property 'totalUninteresting'
+     */
+    @Test
+    public void totalUninterestingTest() {
+        // TODO: test totalUninteresting
+    }
+
 }

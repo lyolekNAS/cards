@@ -125,4 +125,12 @@ public class WordDtoTest {
         // TODO: test state
     }
 
+    /**
+     * Test the property 'dictWordId'
+     */
+    @Test
+    public void dictWordIdTest() {
+        // TODO: test dictWordId
+    }
+
 }

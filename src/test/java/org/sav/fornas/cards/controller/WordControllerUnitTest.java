@@ -2,10 +2,7 @@ package org.sav.fornas.cards.controller;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.sav.fornas.cards.client.cardsback.model.StateLimitDto;
-import org.sav.fornas.cards.client.cardsback.model.StatisticDto;
-import org.sav.fornas.cards.client.cardsback.model.TrainedWordDto;
-import org.sav.fornas.cards.client.cardsback.model.WordDto;
+import org.sav.fornas.cards.client.cardsback.model.*;
 import org.sav.fornas.cards.security.TokenService;
 import org.sav.fornas.cards.service.DictionaryService;
 import org.sav.fornas.cards.service.WordService;
@@ -36,12 +33,12 @@ class WordControllerUnitTest {
 
 	@Test
 	void viewInfo_shouldAddWordsToModel() {
-		List<WordDto> mockWords = List.of(new WordDto());
-		when(wordService.getWordsByUser()).thenReturn(mockWords);
+		WordsPageDtoWordDto mockPage = new WordsPageDtoWordDto();
+		when(wordService.getWordsByUser(0, 20, "")).thenReturn(mockPage);
 
-		String view = controller.viewInfo(model);
+		String view = controller.viewInfo(0, 20, "", model);
 
-		verify(model).addAttribute("words", mockWords);
+		verify(model).addAttribute("words", mockPage);
 		assertThat(view).isEqualTo("words");
 	}
 

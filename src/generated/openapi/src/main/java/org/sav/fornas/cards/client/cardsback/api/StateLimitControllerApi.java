@@ -25,7 +25,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-19T10:57:34.683753620+02:00[Europe/Kyiv]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-22T14:32:06.688142937+02:00[Europe/Kyiv]")
 public class StateLimitControllerApi {
     private ApiClient apiClient;
 
@@ -46,24 +46,24 @@ public class StateLimitControllerApi {
     }
 
     /**
-     * 
+     * Get all state limits
      * 
      * <p><b>200</b> - OK
      * @return List&lt;StateLimitDto&gt;
      * @throws RestClientException if an error occurs while attempting to invoke the API
      */
-    public List<StateLimitDto> getAll1() throws RestClientException {
-        return getAll1WithHttpInfo().getBody();
+    public List<StateLimitDto> getAllStateLimits() throws RestClientException {
+        return getAllStateLimitsWithHttpInfo().getBody();
     }
 
     /**
-     * 
+     * Get all state limits
      * 
      * <p><b>200</b> - OK
      * @return ResponseEntity&lt;List&lt;StateLimitDto&gt;&gt;
      * @throws RestClientException if an error occurs while attempting to invoke the API
      */
-    public ResponseEntity<List<StateLimitDto>> getAll1WithHttpInfo() throws RestClientException {
+    public ResponseEntity<List<StateLimitDto>> getAllStateLimitsWithHttpInfo() throws RestClientException {
         Object localVarPostBody = null;
         
 

@@ -19,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.time.OffsetDateTime;
+import org.sav.fornas.cards.client.cardsback.model.DictWord;
 import org.sav.fornas.cards.client.cardsback.model.WordState;
 import org.junit.Assert;
 import org.junit.Ignore;
@@ -116,6 +117,14 @@ public class WordTest {
     @Test
     public void stateTest() {
         // TODO: test state
+    }
+
+    /**
+     * Test the property 'dictWord'
+     */
+    @Test
+    public void dictWordTest() {
+        // TODO: test dictWord
     }
 
 }

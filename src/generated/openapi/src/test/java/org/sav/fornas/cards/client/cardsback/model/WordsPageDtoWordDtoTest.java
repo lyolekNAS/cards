@@ -21,73 +21,63 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.sav.fornas.cards.client.cardsback.model.DictTrans;
-import org.sav.fornas.cards.client.cardsback.model.DictWordDefinition;
-import org.sav.fornas.cards.client.cardsback.model.DictWordForm;
+import org.sav.fornas.cards.client.cardsback.model.WordDto;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
 /**
- * Model tests for DictWord
+ * Model tests for WordsPageDtoWordDto
  */
-public class DictWordTest {
-    private final DictWord model = new DictWord();
+public class WordsPageDtoWordDtoTest {
+    private final WordsPageDtoWordDto model = new WordsPageDtoWordDto();
 
     /**
-     * Model tests for DictWord
+     * Model tests for WordsPageDtoWordDto
      */
     @Test
-    public void testDictWord() {
-        // TODO: test DictWord
+    public void testWordsPageDtoWordDto() {
+        // TODO: test WordsPageDtoWordDto
     }
 
     /**
-     * Test the property 'id'
+     * Test the property 'content'
      */
     @Test
-    public void idTest() {
-        // TODO: test id
+    public void contentTest() {
+        // TODO: test content
     }
 
     /**
-     * Test the property 'wordText'
+     * Test the property 'page'
      */
     @Test
-    public void wordTextTest() {
-        // TODO: test wordText
+    public void pageTest() {
+        // TODO: test page
     }
 
     /**
-     * Test the property 'state'
+     * Test the property 'size'
      */
     @Test
-    public void stateTest() {
-        // TODO: test state
+    public void sizeTest() {
+        // TODO: test size
     }
 
     /**
-     * Test the property 'forms'
+     * Test the property 'totalElements'
      */
     @Test
-    public void formsTest() {
-        // TODO: test forms
+    public void totalElementsTest() {
+        // TODO: test totalElements
     }
 
     /**
-     * Test the property 'definitions'
+     * Test the property 'totalPages'
      */
     @Test
-    public void definitionsTest() {
-        // TODO: test definitions
-    }
-
-    /**
-     * Test the property 'translations'
-     */
-    @Test
-    public void translationsTest() {
-        // TODO: test translations
+    public void totalPagesTest() {
+        // TODO: test totalPages
     }
 
 }
