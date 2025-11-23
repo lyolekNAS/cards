@@ -16,28 +16,40 @@
             <nav>
                 <ul class="pagination">
 
+                    <!-- First -->
+                    <li class="page-item" th:classappend="${words.first} ? 'disabled'">
+                        <a class="page-link"
+                           th:href="@{/words(page=${words.first}, size=${words.size}, state=${param.state})}">
+                            <i class="bi bi-chevron-double-left"></i>
+                        </a>
+                    </li>
                     <!-- Previous -->
                     <li class="page-item" th:classappend="${words.first} ? 'disabled'">
                         <a class="page-link"
                            th:href="@{/words(page=${words.number - 1}, size=${words.size}, state=${param.state})}">
-                            «
+                            <i class="bi bi-chevron-compact-left"></i>
                         </a>
                     </li>
 
-                    <!-- Номери сторінок -->
-                    <li class="page-item"
-                        th:each="p : ${#numbers.sequence(0, words.totalPages - 1)}"
-                        th:classappend="${p == words.number} ? 'active'">
+                    <!-- current -->
+                    <li class="page-item active">
                         <a class="page-link"
-                           th:text="${p + 1}"
-                           th:href="@{/words(page=${p}, size=${words.size}, state=${param.state})}"></a>
+                           th:text="${words.number + 1}"
+                           th:href="@{/words(page=${words.number}, size=${words.size}, state=${param.state})}"></a>
                     </li>
 
                     <!-- Next -->
                     <li class="page-item" th:classappend="${words.last} ? 'disabled'">
                         <a class="page-link"
                            th:href="@{/words(page=${words.number + 1}, size=${words.size}, state=${param.state})}">
-                            »
+                            <i class="bi bi-chevron-right"></i>
+                        </a>
+                    </li>
+                    <!-- Last -->
+                    <li class="page-item" th:classappend="${words.last} ? 'disabled'">
+                        <a class="page-link"
+                           th:href="@{/words(page=${words.last}, size=${words.size}, state=${param.state})}">
+                            <i class="bi bi-chevron-double-right"></i>
                         </a>
                     </li>
 
