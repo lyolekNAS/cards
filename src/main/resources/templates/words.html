@@ -19,7 +19,7 @@
                     <!-- First -->
                     <li class="page-item" th:classappend="${words.first} ? 'disabled'">
                         <a class="page-link"
-                           th:href="@{/words(page=${words.first}, size=${words.size}, state=${param.state})}">
+                           th:href="@{/words(page=0, size=${words.size}, state=${param.state})}">
                             <i class="bi bi-chevron-double-left"></i>
                         </a>
                     </li>
@@ -48,7 +48,7 @@
                     <!-- Last -->
                     <li class="page-item" th:classappend="${words.last} ? 'disabled'">
                         <a class="page-link"
-                           th:href="@{/words(page=${words.last}, size=${words.size}, state=${param.state})}">
+                           th:href="@{/words(page=${words.totalPages - 1}, size=${words.size}, state=${param.state})}">
                             <i class="bi bi-chevron-double-right"></i>
                         </a>
                     </li>
