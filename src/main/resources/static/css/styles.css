@@ -2,3 +2,9 @@
     min-width: 400px;
     max-width: 500px;
 }
+
+.btn:active, .pressable:active {
+    transform: scale(0.94);
+    opacity: 0.7;
+    transition: transform .1s, opacity .1s;
+}

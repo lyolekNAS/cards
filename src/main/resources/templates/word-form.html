@@ -58,18 +58,18 @@
                 <div class="d-flex gap-2 mt-4">
 
                     <button th:if="${word.id == 0}" type="submit" th:formaction="@{/setSkipped}"
-                            class="btn btn-secondary w-100"
+                            class="btn btn-secondary w-100 pressable"
                             title="Не цікаво / Пропустити">
                         <i class="bi-emoji-dizzy" style="font-size: 1.5rem;"></i>
                     </button>
 
-                    <button type="submit" class="btn btn-primary w-100"
+                    <button type="submit" class="btn btn-primary w-100 pressable"
                             title="Зберегти зміни">
                         <i class="bi bi-emoji-heart-eyes" style="font-size: 1.5rem;"></i>
                     </button>
 
                     <button th:if="${word.id == 0}" type="submit" th:formaction="@{/setKnown}"
-                            class="btn btn-success w-100"
+                            class="btn btn-success w-100 pressable"
                             title="Знаю">
                         <i class="bi bi-emoji-sunglasses" style="font-size: 1.5rem;"></i>
                     </button>
