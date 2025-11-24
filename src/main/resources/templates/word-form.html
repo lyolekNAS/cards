@@ -10,7 +10,7 @@
         <div th:if="${word != null}">
             <h3 class="mb-4 text-primary" th:text="|Редагування слова №${word.id}|"></h3>
             <div th:if="${randomListSize != null}" th:text="${randomListSize}"></div>
-            <form th:action="@{/save}" th:object="${word}" method="post" class="text-start">
+            <form th:action="@{/save}" th:object="${word}" method="post" class="text-start" id="wordForm">
 
 
                 <input type="hidden" th:field="*{id}"/>
@@ -90,6 +90,15 @@
             window.location.href = editBaseUrl + '?w=' + encodeURIComponent(value);
         }
     });
+
+    let val = document.getElementById("wordForm");
+    val.onkeypress = function (key) {
+        let btn = 0 || key.keyCode || key.charCode;
+        if (btn == 13) {
+            key.preventDefault();
+        }
+    }
+</script>
 
 </script>
 </body>
