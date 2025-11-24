@@ -63,7 +63,7 @@ public class WordService {
 
 	public WordDto getWord(){
 		WordDto w = wordControllerApi.findWordToTrain();
-		if(w.getDescription() != null) {
+		if(w != null && w.getDescription() != null) {
 			w.description(w.getDescription().replace("\n", "<br/>"));
 		}
 		return w;
