@@ -1,5 +1,6 @@
 package org.sav.fornas.cards.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -50,8 +51,7 @@ public class WordController {
 	}
 
 	@GetMapping("/random")
-	public String randomWord(HttpSession session, Model model,
-							 @RequestParam(name = "w", defaultValue = "") String w) {
+	public String randomWord(HttpSession session, Model model, HttpServletRequest request) {
 
 		String key = (String) session.getAttribute("wordsKey");
 		if(key == null){
@@ -79,6 +79,16 @@ public class WordController {
 		WordDto word = !words.isEmpty() ? words.removeFirst() : null;
 		model.addAttribute("word", word);
 		model.addAttribute("randomListSize", words.size());
+		model.addAttribute("returnUrl", request.getServletPath());
+		return "word-form";
+	}
+
+	@GetMapping("/randomOne")
+	public String randomOneWord(HttpSession session, Model model, HttpServletRequest request) {
+
+		WordDto word = dictionaryService.getNewWord();
+		model.addAttribute("word", word);
+		model.addAttribute("returnUrl", request.getServletPath());
 		return "word-form";
 	}
 
@@ -96,15 +106,15 @@ public class WordController {
 	}
 
 	@PostMapping("/setSkipped")
-	public String setSkipped(@RequestParam Long dictWordId) {
+	public String setSkipped(@RequestParam Long dictWordId, @RequestParam String returnUrl) {
 		wordService.setMark(dictWordId, "SKIP");
-		return "redirect:/random";
+		return "redirect:" + returnUrl;
 	}
 
 	@PostMapping("/setKnown")
-	public String setKnown(@RequestParam Long dictWordId) {
+	public String setKnown(@RequestParam Long dictWordId, @RequestParam String returnUrl) {
 		wordService.setMark(dictWordId, "KNOWN");
-		return "redirect:/random";
+		return "redirect:" + returnUrl;
 	}
 
 	@GetMapping("/delete")

@@ -12,6 +12,7 @@
             <div th:if="${randomListSize != null}" th:text="${randomListSize}"></div>
             <form th:action="@{/save}" th:object="${word}" method="post" class="text-start" id="wordForm">
 
+                <input type="hidden" name="returnUrl" th:value="${returnUrl}" />
 
                 <input type="hidden" th:field="*{id}"/>
                 <input type="hidden" th:field="*{englishCnt}"/>

@@ -54,7 +54,7 @@ import java.time.OffsetDateTime;
 
 import org.sav.fornas.cards.client.cardsback.auth.Authentication;
 
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-22T14:32:06.688142937+02:00[Europe/Kyiv]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-24T17:43:25.791512854+02:00[Europe/Kyiv]")
 public class ApiClient extends JavaTimeFormatter {
     public enum CollectionFormat {
         CSV(","), TSV("\t"), SSV(" "), PIPES("|"), MULTI(null);

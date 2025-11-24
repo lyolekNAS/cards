@@ -38,6 +38,11 @@ public class DictionaryService {
 		return dictionaryControllerApi.getNewWords();
 	}
 
+	public WordDto getNewWord(){
+		log.debug(">>> getNewWord()");
+		return dictionaryControllerApi.getNewWord();
+	}
+
 	@Async
 	public CompletableFuture<List<WordDto>> getNewWordsAsync(String key, String token){
 		log.debug(">>> updateWordsAsync()");
