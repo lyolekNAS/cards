@@ -73,6 +73,10 @@ public class WordService {
 		return wordControllerApi.getStatistic();
 	}
 
+	public int pick5Paused(){
+		return wordControllerApi.pickRandom5FromPause();
+	}
+
 	public StateLimitDto getStateLimit(String value){
 		return stateLimitControllerApi.getById(value);
 	}

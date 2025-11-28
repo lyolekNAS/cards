@@ -11,6 +11,7 @@ All URIs are relative to *http://localhost:8052*
 | [**getAll**](WordControllerApi.md#getAll) | **GET** /api/word/all |  |
 | [**getAllByUser**](WordControllerApi.md#getAllByUser) | **GET** /api/word/user/all |  |
 | [**getStatistic**](WordControllerApi.md#getStatistic) | **GET** /api/word/statistic |  |
+| [**pickRandom5FromPause**](WordControllerApi.md#pickRandom5FromPause) | **POST** /api/word/pick5Paused |  |
 | [**processTrainedWord**](WordControllerApi.md#processTrainedWord) | **POST** /api/word/trained |  |
 
 
@@ -438,6 +439,66 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**StatisticDto**](StatisticDto.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: */*
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+
+
+## pickRandom5FromPause
+
+> Integer pickRandom5FromPause()
+
+
+
+### Example
+
+```java
+// Import classes:
+import org.sav.fornas.cards.client.cardsback.ApiClient;
+import org.sav.fornas.cards.client.cardsback.ApiException;
+import org.sav.fornas.cards.client.cardsback.Configuration;
+import org.sav.fornas.cards.client.cardsback.models.*;
+import org.sav.fornas.cards.client.cardsback.api.WordControllerApi;
+
+public class Example {
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("http://localhost:8052");
+
+        WordControllerApi apiInstance = new WordControllerApi(defaultClient);
+        try {
+            Integer result = apiInstance.pickRandom5FromPause();
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling WordControllerApi#pickRandom5FromPause");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+**Integer**
 
 ### Authorization
 

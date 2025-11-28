@@ -46,6 +46,20 @@ paths:
       - word-controller
       x-content-type: application/json
       x-accepts: '*/*'
+  /api/word/pick5Paused:
+    post:
+      operationId: pickRandom5FromPause
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                format: int32
+                type: integer
+          description: OK
+      tags:
+      - word-controller
+      x-accepts: '*/*'
   /api/dict/setMark:
     post:
       operationId: setMarkOnWord

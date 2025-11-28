@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   StateLimitDto.JSON_PROPERTY_DELAY,
   StateLimitDto.JSON_PROPERTY_COLOR
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-24T17:43:25.791512854+02:00[Europe/Kyiv]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-28T13:53:14.292225694+02:00[Europe/Kyiv]")
 public class StateLimitDto {
   /**
    * Gets or Sets state

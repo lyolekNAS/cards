@@ -47,6 +47,12 @@
                 <div th:text="|Знаю: ${statistics.totalKnown}|"></div>
                 <div th:text="|Не цікаво: ${statistics.totalUninteresting}|"></div>
             </div>
+
+            <a th:href="@{/pick5Paused}"
+               class="btn btn-primary btn-lg pressable"
+               title="Взяти 5 з паузи">
+                <i class="bi bi-collection">&nbsp;Взяти 5 з паузи</i>
+            </a>
         </div>
     </div>
 </body>

@@ -77,12 +77,18 @@ public class WordController {
 	}
 
 	@GetMapping("/randomOne")
-	public String randomOneWord(HttpSession session, Model model, HttpServletRequest request) {
+	public String randomOneWord(Model model, HttpServletRequest request) {
 
 		WordDto word = dictionaryService.getNewWord();
 		model.addAttribute("word", word);
 		model.addAttribute("returnUrl", request.getServletPath());
 		return "word-form";
+	}
+
+	@GetMapping("/pick5Paused")
+	public String pick10Paused() {
+		wordService.pick5Paused();
+		return "redirect:/statistic";
 	}
 
 	@GetMapping("/add")
