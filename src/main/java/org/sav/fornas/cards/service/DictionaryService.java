@@ -22,14 +22,14 @@ public class DictionaryService {
 	private final DictionaryControllerApi dictionaryControllerApi;
 	private final DictionaryControllerApi dictionaryControllerApiAsync;
 
-	private final Map<String, List<WordDto>> listCache = new ConcurrentHashMap<>();
-	private final Map<String, AtomicBoolean> stateCache = new ConcurrentHashMap<>();
+	private final Map<Long, List<WordDto>> listCache = new ConcurrentHashMap<>();
+	private final Map<Long, AtomicBoolean> stateCache = new ConcurrentHashMap<>();
 
 
-	public List<WordDto> getWords(String key) {
+	public List<WordDto> getWords(Long key) {
 		return Objects.requireNonNullElse(listCache.get(key), List.of());
 	}
-	public boolean isUpdating(String key) {
+	public boolean isUpdating(Long key) {
 		return stateCache.computeIfAbsent(key, k -> new AtomicBoolean(false)).get();
 	}
 
@@ -44,7 +44,7 @@ public class DictionaryService {
 	}
 
 	@Async
-	public CompletableFuture<List<WordDto>> getNewWordsAsync(String key, String token){
+	public CompletableFuture<List<WordDto>> getNewWordsAsync(Long key, String token){
 		log.debug(">>> updateWordsAsync()");
 
 		AtomicBoolean flag = stateCache.computeIfAbsent(key, k -> new AtomicBoolean(false));

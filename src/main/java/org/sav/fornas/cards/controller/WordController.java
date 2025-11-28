@@ -8,7 +8,8 @@ import org.sav.fornas.cards.client.cardsback.model.*;
 import org.sav.fornas.cards.security.TokenService;
 import org.sav.fornas.cards.service.DictionaryService;
 import org.sav.fornas.cards.service.WordService;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 import java.beans.PropertyEditorSupport;
 import java.time.OffsetDateTime;
 import java.util.List;
-import java.util.UUID;
 
 @Controller
 @Slf4j
@@ -51,13 +51,9 @@ public class WordController {
 	}
 
 	@GetMapping("/random")
-	public String randomWord(HttpSession session, Model model, HttpServletRequest request) {
+	public String randomWord(@AuthenticationPrincipal OidcUser user, Model model, HttpServletRequest request) {
 
-		String key = (String) session.getAttribute("wordsKey");
-		if(key == null){
-			key = UUID.randomUUID().toString();
-			session.setAttribute("wordsKey", key);
-		}
+		Long key = (Long) user.getClaims().get("userId");
 		log.debug(">>> key={}", key);
 		boolean isUpdating = dictionaryService.isUpdating(key);
 
@@ -68,11 +64,8 @@ public class WordController {
 
 			String token = tokenService.getAccessToken();
 
-			String localKey = key;
 			dictionaryService.getNewWordsAsync(key, token)
-					.thenRun(() -> {
-						log.debug(">>> async update finished for key {}", localKey);
-					});
+					.thenRun(() -> log.debug(">>> async update finished for key {}", key));
 
 		}
 
