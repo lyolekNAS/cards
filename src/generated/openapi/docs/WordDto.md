@@ -19,6 +19,8 @@
 |**lang** | [**LangEnum**](#LangEnum) |  |  [optional] |
 |**state** | [**StateEnum**](#StateEnum) |  |  [optional] |
 |**dictWordId** | **Long** |  |  [optional] |
+|**dictWordFreqSum** | **Long** |  |  [optional] |
+|**rarity** | **Integer** |  |  [optional] |
 
 
 

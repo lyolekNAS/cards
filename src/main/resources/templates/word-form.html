@@ -22,7 +22,16 @@
                 <input type="hidden" th:field="*{dictWordId}"/>
 
                 <div class="mb-3">
-                    <label for="englishInput" class="form-label fw-bold">Англійське слово</label>
+                    <label for="englishInput" class="form-label fw-bold d-flex align-items-center gap-2">
+                        <span>Англійське слово</span>
+                        <span th:if="${word.dictWordFreqSum > 0}"
+                              class="rarity-bars"
+                              th:title="${#numbers.formatInteger(word.dictWordFreqSum, 3, 'WHITESPACE')}">
+                            <span th:each="i : ${#numbers.sequence(1,5)}"
+                                  th:classappend="${i <= word.rarity} ? ' active' : ''">
+                            </span>
+                        </span>
+                    </label>
                     <input type="text" th:field="*{english}" class="form-control" id="englishInput" required/>
                 </div>
 

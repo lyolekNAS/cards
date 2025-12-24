@@ -39,9 +39,11 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   WordDto.JSON_PROPERTY_NEXT_TRAIN,
   WordDto.JSON_PROPERTY_LANG,
   WordDto.JSON_PROPERTY_STATE,
-  WordDto.JSON_PROPERTY_DICT_WORD_ID
+  WordDto.JSON_PROPERTY_DICT_WORD_ID,
+  WordDto.JSON_PROPERTY_DICT_WORD_FREQ_SUM,
+  WordDto.JSON_PROPERTY_RARITY
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-28T13:53:14.292225694+02:00[Europe/Kyiv]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-12-24T09:17:32.722751278+02:00[Europe/Kyiv]")
 public class WordDto {
   public static final String JSON_PROPERTY_ID = "id";
   private Long id;
@@ -162,6 +164,12 @@ public class WordDto {
 
   public static final String JSON_PROPERTY_DICT_WORD_ID = "dictWordId";
   private Long dictWordId;
+
+  public static final String JSON_PROPERTY_DICT_WORD_FREQ_SUM = "dictWordFreqSum";
+  private Long dictWordFreqSum;
+
+  public static final String JSON_PROPERTY_RARITY = "rarity";
+  private Integer rarity;
 
   public WordDto() {
   }
@@ -477,6 +485,58 @@ public class WordDto {
     this.dictWordId = dictWordId;
   }
 
+
+  public WordDto dictWordFreqSum(Long dictWordFreqSum) {
+    
+    this.dictWordFreqSum = dictWordFreqSum;
+    return this;
+  }
+
+   /**
+   * Get dictWordFreqSum
+   * @return dictWordFreqSum
+  **/
+  @jakarta.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_DICT_WORD_FREQ_SUM)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public Long getDictWordFreqSum() {
+    return dictWordFreqSum;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_DICT_WORD_FREQ_SUM)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setDictWordFreqSum(Long dictWordFreqSum) {
+    this.dictWordFreqSum = dictWordFreqSum;
+  }
+
+
+  public WordDto rarity(Integer rarity) {
+    
+    this.rarity = rarity;
+    return this;
+  }
+
+   /**
+   * Get rarity
+   * @return rarity
+  **/
+  @jakarta.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_RARITY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public Integer getRarity() {
+    return rarity;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_RARITY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setRarity(Integer rarity) {
+    this.rarity = rarity;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -497,12 +557,14 @@ public class WordDto {
         Objects.equals(this.nextTrain, wordDto.nextTrain) &&
         Objects.equals(this.lang, wordDto.lang) &&
         Objects.equals(this.state, wordDto.state) &&
-        Objects.equals(this.dictWordId, wordDto.dictWordId);
+        Objects.equals(this.dictWordId, wordDto.dictWordId) &&
+        Objects.equals(this.dictWordFreqSum, wordDto.dictWordFreqSum) &&
+        Objects.equals(this.rarity, wordDto.rarity);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, english, ukrainian, description, userId, englishCnt, ukrainianCnt, lastTrain, nextTrain, lang, state, dictWordId);
+    return Objects.hash(id, english, ukrainian, description, userId, englishCnt, ukrainianCnt, lastTrain, nextTrain, lang, state, dictWordId, dictWordFreqSum, rarity);
   }
 
   @Override
@@ -521,6 +583,8 @@ public class WordDto {
     sb.append("    lang: ").append(toIndentedString(lang)).append("\n");
     sb.append("    state: ").append(toIndentedString(state)).append("\n");
     sb.append("    dictWordId: ").append(toIndentedString(dictWordId)).append("\n");
+    sb.append("    dictWordFreqSum: ").append(toIndentedString(dictWordFreqSum)).append("\n");
+    sb.append("    rarity: ").append(toIndentedString(rarity)).append("\n");
     sb.append("}");
     return sb.toString();
   }

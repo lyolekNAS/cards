@@ -372,17 +372,19 @@ components:
     WordDto:
       example:
         ukrainian: ukrainian
+        nextTrain: 2000-01-23T04:56:07.000+00:00
+        dictWordFreqSum: 2
+        description: description
+        dictWordId: 5
+        userId: 6
         englishCnt: 1
         ukrainianCnt: 5
-        nextTrain: 2000-01-23T04:56:07.000+00:00
         lastTrain: 2000-01-23T04:56:07.000+00:00
         english: english
-        description: description
         id: 0
         state: PAUSED
-        dictWordId: 5
         lang: EN
-        userId: 6
+        rarity: 7
       properties:
         id:
           format: int64
@@ -428,6 +430,12 @@ components:
         dictWordId:
           format: int64
           type: integer
+        dictWordFreqSum:
+          format: int64
+          type: integer
+        rarity:
+          format: int32
+          type: integer
       type: object
     WordsPageDtoWordDto:
       example:
@@ -437,29 +445,33 @@ components:
         totalPages: 5
         content:
         - ukrainian: ukrainian
+          nextTrain: 2000-01-23T04:56:07.000+00:00
+          dictWordFreqSum: 2
+          description: description
+          dictWordId: 5
+          userId: 6
           englishCnt: 1
           ukrainianCnt: 5
-          nextTrain: 2000-01-23T04:56:07.000+00:00
           lastTrain: 2000-01-23T04:56:07.000+00:00
           english: english
-          description: description
           id: 0
           state: PAUSED
-          dictWordId: 5
           lang: EN
-          userId: 6
+          rarity: 7
         - ukrainian: ukrainian
+          nextTrain: 2000-01-23T04:56:07.000+00:00
+          dictWordFreqSum: 2
+          description: description
+          dictWordId: 5
+          userId: 6
           englishCnt: 1
           ukrainianCnt: 5
-          nextTrain: 2000-01-23T04:56:07.000+00:00
           lastTrain: 2000-01-23T04:56:07.000+00:00
           english: english
-          description: description
           id: 0
           state: PAUSED
-          dictWordId: 5
           lang: EN
-          userId: 6
+          rarity: 7
         first: true
         totalElements: 1
       properties:
