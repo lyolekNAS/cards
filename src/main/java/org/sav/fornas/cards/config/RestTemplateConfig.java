@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.client.ClientAuthorizationException;
 import org.springframework.security.oauth2.client.OAuth2AuthorizeRequest;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientManager;
@@ -36,7 +37,19 @@ public class RestTemplateConfig {
 								.principal(auth)
 								.build();
 
-						OAuth2AuthorizedClient authorizedClient = clientManager.authorize(authorizeRequest);
+						OAuth2AuthorizedClient authorizedClient;
+						try {
+							authorizedClient = clientManager.authorize(authorizeRequest);
+						} catch (ClientAuthorizationException ex) {
+
+							if ("invalid_grant".equals(ex.getError().getErrorCode())) {
+								log.warn("Refresh token invalid, retrying authorization");
+
+								authorizedClient = clientManager.authorize(authorizeRequest);
+							} else {
+								throw ex;
+							}
+						}
 
 						if (authorizedClient != null && authorizedClient.getAccessToken() != null) {
 							String token = authorizedClient.getAccessToken().getTokenValue();
