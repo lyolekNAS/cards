@@ -73,9 +73,11 @@
     </div>
 <script>
 function showTranslation() {
-    document.getElementById('translation').style.visibility = 'visible';
-    document.getElementById('actions').style.visibility = 'visible';
-    document.getElementById('editButton').style.visibility = 'visible';
+    if(document.getElementById('translation').style.visibility === 'hidden') {
+        document.getElementById('translation').style.visibility = 'visible';
+        document.getElementById('actions').style.visibility = 'visible';
+        document.getElementById('editButton').style.visibility = 'visible';
+    }
 }
 
 function submitForm(success) {

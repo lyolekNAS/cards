@@ -3,10 +3,12 @@
     max-width: 500px;
 }
 
-.btn:active, .pressable:active {
-    transform: scale(0.94);
+.btn:active, .pressable:active, .btn.is-pressed, .pressable.is-pressed {
+    transform: scale(0.66);
     opacity: 0.7;
-    transition: transform .1s, opacity .1s;
+    background-color: #FFFFFF;
+    border-color: #FFFFFF;
+    transition: transform .3s, opacity .3s, background-color .3s, border-color .3s;
 }
 
 .rarity-bars {
