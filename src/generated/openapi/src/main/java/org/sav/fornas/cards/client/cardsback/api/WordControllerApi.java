@@ -29,7 +29,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-12-24T09:17:32.722751278+02:00[Europe/Kyiv]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-22T11:28:19.770636968+03:00[Europe/Kyiv]")
 public class WordControllerApi {
     private ApiClient apiClient;
 
@@ -361,6 +361,94 @@ public class WordControllerApi {
 
         ParameterizedTypeReference<StatisticDto> localReturnType = new ParameterizedTypeReference<StatisticDto>() {};
         return apiClient.invokeAPI("/api/word/statistic", HttpMethod.GET, Collections.<String, Object>emptyMap(), localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localReturnType);
+    }
+    /**
+     * 
+     * 
+     * <p><b>200</b> - OK
+     * @param id  (required)
+     * @return WordDto
+     * @throws RestClientException if an error occurs while attempting to invoke the API
+     */
+    public WordDto getWordById(Long id) throws RestClientException {
+        return getWordByIdWithHttpInfo(id).getBody();
+    }
+
+    /**
+     * 
+     * 
+     * <p><b>200</b> - OK
+     * @param id  (required)
+     * @return ResponseEntity&lt;WordDto&gt;
+     * @throws RestClientException if an error occurs while attempting to invoke the API
+     */
+    public ResponseEntity<WordDto> getWordByIdWithHttpInfo(Long id) throws RestClientException {
+        Object localVarPostBody = null;
+        
+        // verify the required parameter 'id' is set
+        if (id == null) {
+            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Missing the required parameter 'id' when calling getWordById");
+        }
+        
+        // create path and map variables
+        final Map<String, Object> uriVariables = new HashMap<String, Object>();
+        uriVariables.put("id", id);
+
+        final MultiValueMap<String, String> localVarQueryParams = new LinkedMultiValueMap<String, String>();
+        final HttpHeaders localVarHeaderParams = new HttpHeaders();
+        final MultiValueMap<String, String> localVarCookieParams = new LinkedMultiValueMap<String, String>();
+        final MultiValueMap<String, Object> localVarFormParams = new LinkedMultiValueMap<String, Object>();
+
+        final String[] localVarAccepts = { 
+            "*/*"
+         };
+        final List<MediaType> localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        final String[] localVarContentTypes = {  };
+        final MediaType localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+        String[] localVarAuthNames = new String[] {  };
+
+        ParameterizedTypeReference<WordDto> localReturnType = new ParameterizedTypeReference<WordDto>() {};
+        return apiClient.invokeAPI("/api/word/{id}", HttpMethod.GET, uriVariables, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localReturnType);
+    }
+    /**
+     * 
+     * 
+     * <p><b>200</b> - OK
+     * @return List&lt;Long&gt;
+     * @throws RestClientException if an error occurs while attempting to invoke the API
+     */
+    public List<Long> getWordsForRetro() throws RestClientException {
+        return getWordsForRetroWithHttpInfo().getBody();
+    }
+
+    /**
+     * 
+     * 
+     * <p><b>200</b> - OK
+     * @return ResponseEntity&lt;List&lt;Long&gt;&gt;
+     * @throws RestClientException if an error occurs while attempting to invoke the API
+     */
+    public ResponseEntity<List<Long>> getWordsForRetroWithHttpInfo() throws RestClientException {
+        Object localVarPostBody = null;
+        
+
+        final MultiValueMap<String, String> localVarQueryParams = new LinkedMultiValueMap<String, String>();
+        final HttpHeaders localVarHeaderParams = new HttpHeaders();
+        final MultiValueMap<String, String> localVarCookieParams = new LinkedMultiValueMap<String, String>();
+        final MultiValueMap<String, Object> localVarFormParams = new LinkedMultiValueMap<String, Object>();
+
+        final String[] localVarAccepts = { 
+            "*/*"
+         };
+        final List<MediaType> localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        final String[] localVarContentTypes = {  };
+        final MediaType localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+        String[] localVarAuthNames = new String[] {  };
+
+        ParameterizedTypeReference<List<Long>> localReturnType = new ParameterizedTypeReference<List<Long>>() {};
+        return apiClient.invokeAPI("/api/word/retro", HttpMethod.GET, Collections.<String, Object>emptyMap(), localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localReturnType);
     }
     /**
      * 

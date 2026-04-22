@@ -9,7 +9,8 @@
         <div th:replace="~{fragments/navigation :: nav}"></div>
 
         <div onclick="showTranslation()">
-            <div class="mb-4">
+            <div class="mb-4"
+                 th:if="${mode == 'train'}">
                 <div class="progress" role="progressbar" style="height: 10px;">
                     <div class="progress-bar"
                          th:style="|width: ${progressPercent}%; background-color: ${stateColor};|">
@@ -39,7 +40,8 @@
 
             <div id="actions" class="d-flex justify-content-center mt-4" style="visibility: hidden;">
                 <form th:action="@{/trained}" method="get" id="trainForm"
-                      class="d-flex w-100 gap-2">
+                      class="d-flex w-100 gap-2"
+                      th:if="${mode == 'train'}">
 
                     <input type="hidden" name="id" th:value="${word.id}">
                     <input type="hidden" name="success" id="successField" value="">
@@ -67,6 +69,14 @@
                         <i class="bi bi-x-circle-fill" style="font-size: 1.5rem;"></i>
                     </button>
                 </form>
+
+                <button type="button"
+                        onclick="reRetro()"
+                        class="btn btn-success btn-lg pressable"
+                        style="flex: 4;"
+                        th:if="${mode == 'retro'}">
+                    <i class="bi bi-arrow-repeat" style="font-size: 1.5rem;"></i>
+                </button>
             </div>
 
         </div>
@@ -84,6 +94,11 @@ function submitForm(success) {
     document.getElementById('successField').value = success;
     document.getElementById('trainForm').submit();
 }
+
+function reRetro(){
+    document.location =  /*[[@{/retro}]]*/ '';
+}
+
 </script>
 </body>
 </html>

@@ -143,6 +143,19 @@ public class WordController {
 		model.addAttribute("progressPercent", progressPercent);
 		model.addAttribute("word", word);
 		model.addAttribute("stateColor", stateLimit.getColor());
+		model.addAttribute("mode", "train");
+		return "train";
+	}
+
+	@GetMapping("/retro")
+	public String retro(@AuthenticationPrincipal OidcUser user, Model model) {
+		Long key = (Long) user.getClaims().get("userId");
+		WordDto word = wordService.getRetroWord(key);
+		if(word == null){
+			return "redirect:/add";
+		}
+		model.addAttribute("word", word);
+		model.addAttribute("mode", "retro");
 		return "train";
 	}
 

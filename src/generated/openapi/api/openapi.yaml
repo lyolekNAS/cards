@@ -85,6 +85,28 @@ paths:
       tags:
       - dictionary-controller
       x-accepts: application/json
+  /api/word/{id}:
+    get:
+      operationId: getWordById
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WordDto'
+          description: OK
+      tags:
+      - word-controller
+      x-accepts: '*/*'
   /api/word/user/all:
     get:
       operationId: getAllByUser
@@ -147,6 +169,22 @@ paths:
             '*/*':
               schema:
                 $ref: '#/components/schemas/StatisticDto'
+          description: OK
+      tags:
+      - word-controller
+      x-accepts: '*/*'
+  /api/word/retro:
+    get:
+      operationId: getWordsForRetro
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  format: int64
+                  type: integer
+                type: array
           description: OK
       tags:
       - word-controller

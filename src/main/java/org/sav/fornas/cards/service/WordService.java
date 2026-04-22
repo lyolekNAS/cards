@@ -11,8 +11,13 @@ import org.sav.fornas.dto.google.TranslationResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.Instant;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 @Service
 @Slf4j
@@ -23,6 +28,12 @@ public class WordService {
 	private final WordControllerApi wordControllerApi;
 	private final DictionaryControllerApi dictionaryControllerApi;
 	private final StateLimitControllerApi stateLimitControllerApi;
+
+	private final Map<Long, List<Long>> retroCache = new ConcurrentHashMap<>();
+	private final Map<Long, Long> retroValidCache = new ConcurrentHashMap<>();
+
+	private final long retroTTL = 60*60;
+
 
 	public WordsPageDtoWordDto getWordsByUser(Integer page, Integer size, String state){
 		state = Objects.requireNonNullElse(state, "");
@@ -63,10 +74,27 @@ public class WordService {
 
 	public WordDto getWord(){
 		WordDto w = wordControllerApi.findWordToTrain();
-		if(w != null && w.getDescription() != null) {
-			w.description(w.getDescription().replace("\n", "<br/>"));
+		return clearDescription(w);
+	}
+
+	public WordDto getRetroWord(Long key){
+		long seconds = Instant.now().getEpochSecond();
+		List<Long> words;
+		if(retroValidCache.get(key) == null || seconds - retroValidCache.get(key) > retroTTL){
+			words = wordControllerApi.getWordsForRetro();
+			retroCache.put(key,words);
+			retroValidCache.put(key, seconds);
+		} else {
+			words = retroCache.get(key);
 		}
-		return w;
+		if (words == null || words.isEmpty()) {
+			return null;
+		}
+
+		Long randomWordId = words.get(ThreadLocalRandom.current().nextInt(words.size()));
+		WordDto word = wordControllerApi.getWordById(randomWordId);
+		clearDescription(word);
+		return word;
 	}
 
 	public StatisticDto getStatistics(){
@@ -97,4 +125,29 @@ public class WordService {
 			return "";
 		}
 	}
+
+	private WordDto clearDescription(WordDto w){
+		if(w != null && w.getDescription() != null) {
+			w.description(w.getDescription().replace("\n", "<br/>"));
+		}
+		return w;
+	}
+
+//	private WordDto toWordDto(Word word) {
+//		WordDto dto = new WordDto();
+//		dto.setId(word.getId());
+//		dto.setEnglish(word.getEnglish());
+//		dto.setUkrainian(word.getUkrainian());
+//		dto.setDescription(word.getDescription());
+//		dto.setUserId(word.getUserId());
+//		dto.setEnglishCnt(word.getEnglishCnt());
+//		dto.setUkrainianCnt(word.getUkrainianCnt());
+//		dto.setLastTrain(word.getLastTrain());
+//		dto.setNextTrain(word.getNextTrain());
+//		dto.setDictWord(word.getDictWord());
+//		if (word.getState() != null) {
+//			dto.setState(WordDto.StateEnum.fromValue(word.getState().getValue()));
+//		}
+//		return dto;
+//	}
 }

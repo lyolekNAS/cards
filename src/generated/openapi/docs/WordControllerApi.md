@@ -11,6 +11,8 @@ All URIs are relative to *http://localhost:8052*
 | [**getAll**](WordControllerApi.md#getAll) | **GET** /api/word/all |  |
 | [**getAllByUser**](WordControllerApi.md#getAllByUser) | **GET** /api/word/user/all |  |
 | [**getStatistic**](WordControllerApi.md#getStatistic) | **GET** /api/word/statistic |  |
+| [**getWordById**](WordControllerApi.md#getWordById) | **GET** /api/word/{id} |  |
+| [**getWordsForRetro**](WordControllerApi.md#getWordsForRetro) | **GET** /api/word/retro |  |
 | [**pickRandom5FromPause**](WordControllerApi.md#pickRandom5FromPause) | **POST** /api/word/pick5Paused |  |
 | [**processTrainedWord**](WordControllerApi.md#processTrainedWord) | **POST** /api/word/trained |  |
 
@@ -439,6 +441,130 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**StatisticDto**](StatisticDto.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: */*
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+
+
+## getWordById
+
+> WordDto getWordById(id)
+
+
+
+### Example
+
+```java
+// Import classes:
+import org.sav.fornas.cards.client.cardsback.ApiClient;
+import org.sav.fornas.cards.client.cardsback.ApiException;
+import org.sav.fornas.cards.client.cardsback.Configuration;
+import org.sav.fornas.cards.client.cardsback.models.*;
+import org.sav.fornas.cards.client.cardsback.api.WordControllerApi;
+
+public class Example {
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("http://localhost:8052");
+
+        WordControllerApi apiInstance = new WordControllerApi(defaultClient);
+        Long id = 56L; // Long | 
+        try {
+            WordDto result = apiInstance.getWordById(id);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling WordControllerApi#getWordById");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | **Long**|  | |
+
+### Return type
+
+[**WordDto**](WordDto.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: */*
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+
+
+## getWordsForRetro
+
+> List&lt;Long&gt; getWordsForRetro()
+
+
+
+### Example
+
+```java
+// Import classes:
+import org.sav.fornas.cards.client.cardsback.ApiClient;
+import org.sav.fornas.cards.client.cardsback.ApiException;
+import org.sav.fornas.cards.client.cardsback.Configuration;
+import org.sav.fornas.cards.client.cardsback.models.*;
+import org.sav.fornas.cards.client.cardsback.api.WordControllerApi;
+
+public class Example {
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("http://localhost:8052");
+
+        WordControllerApi apiInstance = new WordControllerApi(defaultClient);
+        try {
+            List<Long> result = apiInstance.getWordsForRetro();
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling WordControllerApi#getWordsForRetro");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+**List&lt;Long&gt;**
 
 ### Authorization
 
