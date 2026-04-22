@@ -9,8 +9,8 @@ import org.sav.fornas.cards.client.cardsback.model.StatisticDto;
 import org.sav.fornas.cards.client.cardsback.model.TrainedWordDto;
 import org.sav.fornas.cards.client.cardsback.model.WordDto;
 import org.sav.fornas.cards.client.cardsback.model.WordsPageDtoWordDto;
-import org.sav.fornas.dto.google.TranslationResponse;
-import org.sav.fornas.dto.google.TranslationResponse.Translation;
+import org.sav.fornas.cards.dto.google.TranslationResponse;
+import org.sav.fornas.cards.dto.google.TranslationResponse.Translation;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
