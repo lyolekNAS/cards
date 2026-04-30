@@ -24,24 +24,24 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
- * WordState
+ * DictWordExamples
  */
 @JsonPropertyOrder({
-  WordState.JSON_PROPERTY_ID,
-  WordState.JSON_PROPERTY_NAME
+  DictWordExamples.JSON_PROPERTY_ID,
+  DictWordExamples.JSON_PROPERTY_EXAMPLE
 })
 @jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-30T16:01:30.652764140+03:00[Europe/Kyiv]")
-public class WordState {
+public class DictWordExamples {
   public static final String JSON_PROPERTY_ID = "id";
-  private Integer id;
+  private Long id;
 
-  public static final String JSON_PROPERTY_NAME = "name";
-  private String name;
+  public static final String JSON_PROPERTY_EXAMPLE = "example";
+  private String example;
 
-  public WordState() {
+  public DictWordExamples() {
   }
 
-  public WordState id(Integer id) {
+  public DictWordExamples id(Long id) {
     
     this.id = id;
     return this;
@@ -55,41 +55,41 @@ public class WordState {
   @JsonProperty(JSON_PROPERTY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public Integer getId() {
+  public Long getId() {
     return id;
   }
 
 
   @JsonProperty(JSON_PROPERTY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
 
-  public WordState name(String name) {
+  public DictWordExamples example(String example) {
     
-    this.name = name;
+    this.example = example;
     return this;
   }
 
    /**
-   * Get name
-   * @return name
+   * Get example
+   * @return example
   **/
   @jakarta.annotation.Nullable
-  @JsonProperty(JSON_PROPERTY_NAME)
+  @JsonProperty(JSON_PROPERTY_EXAMPLE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public String getName() {
-    return name;
+  public String getExample() {
+    return example;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_NAME)
+  @JsonProperty(JSON_PROPERTY_EXAMPLE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setName(String name) {
-    this.name = name;
+  public void setExample(String example) {
+    this.example = example;
   }
 
   @Override
@@ -100,22 +100,22 @@ public class WordState {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    WordState wordState = (WordState) o;
-    return Objects.equals(this.id, wordState.id) &&
-        Objects.equals(this.name, wordState.name);
+    DictWordExamples dictWordExamples = (DictWordExamples) o;
+    return Objects.equals(this.id, dictWordExamples.id) &&
+        Objects.equals(this.example, dictWordExamples.example);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name);
+    return Objects.hash(id, example);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class WordState {\n");
+    sb.append("class DictWordExamples {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    example: ").append(toIndentedString(example)).append("\n");
     sb.append("}");
     return sb.toString();
   }

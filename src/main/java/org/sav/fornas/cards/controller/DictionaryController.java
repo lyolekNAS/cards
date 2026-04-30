@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.sav.fornas.cards.client.cardsback.model.WordDto;
 import org.sav.fornas.cards.service.DictionaryService;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -20,5 +21,10 @@ public class DictionaryController {
 	@RequestMapping("/getNewWords")
 	public List<WordDto> getNewWords(){
 		return dictionaryService.getNewWords();
+	}
+
+	@RequestMapping("/enrichWithExamples")
+	public WordDto enrichWithExamples(@RequestParam String word){
+		return dictionaryService.enrichWithExamples(word);
 	}
 }

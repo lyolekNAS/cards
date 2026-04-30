@@ -25,6 +25,7 @@ import java.util.Arrays;
 import java.util.List;
 import org.sav.fornas.cards.client.cardsback.model.DictTrans;
 import org.sav.fornas.cards.client.cardsback.model.DictWordDefinition;
+import org.sav.fornas.cards.client.cardsback.model.DictWordExamples;
 import org.sav.fornas.cards.client.cardsback.model.DictWordForm;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -38,9 +39,10 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   DictWord.JSON_PROPERTY_STATE,
   DictWord.JSON_PROPERTY_FORMS,
   DictWord.JSON_PROPERTY_DEFINITIONS,
-  DictWord.JSON_PROPERTY_TRANSLATIONS
+  DictWord.JSON_PROPERTY_TRANSLATIONS,
+  DictWord.JSON_PROPERTY_EXAMPLES
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-22T11:28:19.770636968+03:00[Europe/Kyiv]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-30T16:01:30.652764140+03:00[Europe/Kyiv]")
 public class DictWord {
   public static final String JSON_PROPERTY_ID = "id";
   private Long id;
@@ -59,6 +61,9 @@ public class DictWord {
 
   public static final String JSON_PROPERTY_TRANSLATIONS = "translations";
   private List<DictTrans> translations;
+
+  public static final String JSON_PROPERTY_EXAMPLES = "examples";
+  private List<DictWordExamples> examples;
 
   public DictWord() {
   }
@@ -242,6 +247,40 @@ public class DictWord {
     this.translations = translations;
   }
 
+
+  public DictWord examples(List<DictWordExamples> examples) {
+    
+    this.examples = examples;
+    return this;
+  }
+
+  public DictWord addExamplesItem(DictWordExamples examplesItem) {
+    if (this.examples == null) {
+      this.examples = new ArrayList<>();
+    }
+    this.examples.add(examplesItem);
+    return this;
+  }
+
+   /**
+   * Get examples
+   * @return examples
+  **/
+  @jakarta.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_EXAMPLES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public List<DictWordExamples> getExamples() {
+    return examples;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_EXAMPLES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setExamples(List<DictWordExamples> examples) {
+    this.examples = examples;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -256,12 +295,13 @@ public class DictWord {
         Objects.equals(this.state, dictWord.state) &&
         Objects.equals(this.forms, dictWord.forms) &&
         Objects.equals(this.definitions, dictWord.definitions) &&
-        Objects.equals(this.translations, dictWord.translations);
+        Objects.equals(this.translations, dictWord.translations) &&
+        Objects.equals(this.examples, dictWord.examples);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, wordText, state, forms, definitions, translations);
+    return Objects.hash(id, wordText, state, forms, definitions, translations, examples);
   }
 
   @Override
@@ -274,6 +314,7 @@ public class DictWord {
     sb.append("    forms: ").append(toIndentedString(forms)).append("\n");
     sb.append("    definitions: ").append(toIndentedString(definitions)).append("\n");
     sb.append("    translations: ").append(toIndentedString(translations)).append("\n");
+    sb.append("    examples: ").append(toIndentedString(examples)).append("\n");
     sb.append("}");
     return sb.toString();
   }

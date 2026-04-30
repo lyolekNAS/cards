@@ -13,6 +13,7 @@
 |**forms** | [**List&lt;DictWordForm&gt;**](DictWordForm.md) |  |  [optional] |
 |**definitions** | [**List&lt;DictWordDefinition&gt;**](DictWordDefinition.md) |  |  [optional] |
 |**translations** | [**List&lt;DictTrans&gt;**](DictTrans.md) |  |  [optional] |
+|**examples** | [**List&lt;DictWordExamples&gt;**](DictWordExamples.md) |  |  [optional] |
 
 
 

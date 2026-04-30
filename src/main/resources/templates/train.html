@@ -18,11 +18,25 @@
                 </div>
             </div>
 
-            <div class="card text-center border-0" onclick="showTranslation()">
+            <div class="card text-center border-0">
                 <div class="card-body">
 
-                    <h2 class="card-title fw-bolder mb-0"
-                        th:text="${word.lang.name() == 'EN' ? word.english : word.ukrainian}"></h2>
+                    <h2 class="card-title fw-bolder mb-0 d-flex justify-content-center align-items-center gap-2">
+                        <span th:text="${word.lang.name() == 'EN' ? word.english : word.ukrainian}"></span>
+                        <button type="button"
+                           th:if="${not #lists.isEmpty(word.examples)}"
+                           onclick="toggleExamples()"
+                           class="btn btn-primary btn-lg pressable"
+                           title="Приклади">
+                            <i class="bi bi-alphabet-uppercase"></i>
+                        </button>
+                    </h2>
+
+                    <div id="examples"
+                       class="card-text text-muted fst-italic d-none mt-2"
+                       style="visibility: hidden;">
+                        <div th:each="example: ${word.examples}" th:text="${example}"></div>
+                    </div>
 
                     <hr class="my-3" />
 
@@ -88,6 +102,9 @@ function showTranslation() {
         document.getElementById('actions').style.visibility = 'visible';
         document.getElementById('editButton').style.visibility = 'visible';
     }
+}
+function toggleExamples() {
+    document.getElementById('examples').classList.toggle('d-none');
 }
 
 function submitForm(success) {

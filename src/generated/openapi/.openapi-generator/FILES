@@ -8,6 +8,7 @@ build.sbt
 docs/DictTrans.md
 docs/DictWord.md
 docs/DictWordDefinition.md
+docs/DictWordExamples.md
 docs/DictWordForm.md
 docs/DictionaryControllerApi.md
 docs/MeControllerApi.md
@@ -47,6 +48,7 @@ src/main/java/org/sav/fornas/cards/client/cardsback/auth/HttpBearerAuth.java
 src/main/java/org/sav/fornas/cards/client/cardsback/model/DictTrans.java
 src/main/java/org/sav/fornas/cards/client/cardsback/model/DictWord.java
 src/main/java/org/sav/fornas/cards/client/cardsback/model/DictWordDefinition.java
+src/main/java/org/sav/fornas/cards/client/cardsback/model/DictWordExamples.java
 src/main/java/org/sav/fornas/cards/client/cardsback/model/DictWordForm.java
 src/main/java/org/sav/fornas/cards/client/cardsback/model/StateLimitDto.java
 src/main/java/org/sav/fornas/cards/client/cardsback/model/StatisticAttemptDto.java

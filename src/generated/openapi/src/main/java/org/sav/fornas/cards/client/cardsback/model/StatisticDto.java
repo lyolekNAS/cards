@@ -40,7 +40,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   StatisticDto.JSON_PROPERTY_TOTAL_KNOWN,
   StatisticDto.JSON_PROPERTY_TOTAL_UNINTERESTING
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-22T11:28:19.770636968+03:00[Europe/Kyiv]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-30T16:01:30.652764140+03:00[Europe/Kyiv]")
 public class StatisticDto {
   public static final String JSON_PROPERTY_STATISTICS_ATTEMPT_DTO = "statisticsAttemptDto";
   private List<StatisticAttemptDto> statisticsAttemptDto;
