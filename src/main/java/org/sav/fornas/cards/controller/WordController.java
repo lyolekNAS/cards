@@ -1,7 +1,6 @@
 package org.sav.fornas.cards.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.sav.fornas.cards.client.cardsback.model.*;
@@ -137,8 +136,8 @@ public class WordController {
 			return "redirect:/add";
 		}
 		StateLimitDto stateLimit = wordService.getStateLimit(word.getState().getValue());
-		int minCnt = Math.min(word.getEnglishCnt(), word.getUkrainianCnt());
-		double progressPercent = (double) (minCnt + 1) * 100 / (stateLimit.getAttempt() + 1);
+		int minCnt = word.getEnglishCnt() + word.getUkrainianCnt();
+		double progressPercent = (double) (minCnt + 1) * 100 / (stateLimit.getAttempt() * 2 + 1);
 
 		model.addAttribute("progressPercent", progressPercent);
 		model.addAttribute("word", word);
