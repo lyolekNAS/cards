@@ -137,7 +137,7 @@ public class WordController {
 		}
 		StateLimitDto stateLimit = wordService.getStateLimit(word.getState().getValue());
 		int minCnt = word.getEnglishCnt() + word.getUkrainianCnt();
-		double progressPercent = (double) (minCnt + 1) * 100 / (stateLimit.getAttempt() * 2 + 1);
+		double progressPercent = (double) (minCnt + 1) * 100 / (stateLimit.getAttempt() * 2);
 
 		model.addAttribute("progressPercent", progressPercent);
 		model.addAttribute("word", word);
