@@ -85,6 +85,27 @@ paths:
       tags:
       - dictionary-controller
       x-accepts: application/json
+  /api/dict/enrichWithSpeech:
+    post:
+      operationId: enrichWithSpeech
+      parameters:
+      - explode: true
+        in: query
+        name: word
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                type: string
+          description: OK
+      tags:
+      - dictionary-controller
+      x-accepts: '*/*'
   /api/dict/enrichWithExamples:
     post:
       operationId: enrichWithExamples

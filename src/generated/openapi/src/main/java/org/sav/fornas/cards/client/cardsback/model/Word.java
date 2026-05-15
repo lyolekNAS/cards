@@ -42,7 +42,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   Word.JSON_PROPERTY_STATE,
   Word.JSON_PROPERTY_DICT_WORD
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-04-30T16:01:30.652764140+03:00[Europe/Kyiv]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-05-15T14:17:14.804703776+03:00[Europe/Kyiv]")
 public class Word {
   public static final String JSON_PROPERTY_ID = "id";
   private Long id;

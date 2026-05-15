@@ -24,11 +24,18 @@
                     <h2 class="card-title fw-bolder mb-0 d-flex justify-content-center align-items-center gap-2">
                         <span th:text="${word.lang.name() == 'EN' ? word.english : word.ukrainian}"></span>
                         <button type="button"
-                           th:if="${not #lists.isEmpty(word.examples)}"
-                           onclick="toggleExamples()"
-                           class="btn btn-primary btn-sm pressable example-toggle-button"
-                           title="Приклади">
+                                th:if="${not #lists.isEmpty(word.examples)}"
+                                onclick="toggleExamples()"
+                                class="btn btn-primary btn-sm pressable small-toggle-button"
+                                title="Приклади">
                             <i class="bi bi-alphabet-uppercase"></i>
+                        </button>
+                        <button type="button"
+                                th:data-word="${word.english.toLowerCase()}"
+                                onclick="playAudio(this.getAttribute('data-word'))"
+                                class="btn  btn-primary btn-sm pressable small-toggle-button"
+                                title="Прослухати">
+                            <i class="bi bi-volume-up-fill"></i>
                         </button>
                     </h2>
 
@@ -95,6 +102,7 @@
         </div>
     </div>
 <script>
+const contextPath = "[[@{/}]]";
 function showTranslation() {
     if(document.getElementById('translation').style.visibility === 'hidden') {
         document.getElementById('translation').style.visibility = 'visible';
@@ -112,7 +120,18 @@ function submitForm(success) {
 }
 
 function reRetro(){
-    document.location =  /*[[@{/retro}]]*/ '';
+    document.location =  `${contextPath}retro`;
+}
+
+function playAudio(word) {
+    if (!word) return;
+
+    const audioPath = `${contextPath}speech-files/${word}.mp3`;
+    const audio = new Audio(audioPath);
+
+    audio.play().catch(error => {
+        console.error("Не вдалося відтворити аудіо. Можливо, файл ще не згенеровано:", error);
+    });
 }
 
 </script>

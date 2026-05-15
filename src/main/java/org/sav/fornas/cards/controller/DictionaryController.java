@@ -23,6 +23,11 @@ public class DictionaryController {
 		return dictionaryService.getNewWords();
 	}
 
+	@RequestMapping("/enrichWithSpeech")
+	public String enrichWithSpeech(@RequestParam String word){
+		return dictionaryService.enrichWithSpeech(word);
+	}
+
 	@RequestMapping("/enrichWithExamples")
 	public WordDto enrichWithExamples(@RequestParam String word){
 		return dictionaryService.enrichWithExamples(word);

@@ -47,6 +47,10 @@ public class DictionaryService {
 		return dictionaryControllerApi.enrichWithExamples(w);
 	}
 
+	public String enrichWithSpeech(String w){
+		return dictionaryControllerApi.enrichWithSpeech(w);
+	}
+
 	@Async
 	public CompletableFuture<List<WordDto>> getNewWordsAsync(Long key, String token){
 		log.debug(">>> updateWordsAsync()");
