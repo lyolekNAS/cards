@@ -32,17 +32,10 @@
                         </button>
                         <button type="button"
                                 th:data-word="${word.english.toLowerCase()}"
-                                onclick="playAudioAI(this.getAttribute('data-word'))"
-                                class="btn  btn-primary btn-sm pressable small-toggle-button"
-                                title="Прослухати">
-                            <i class="bi bi-volume-up-fill"></i>
-                        </button>
-                        <button type="button"
-                                th:data-word="${word.english.toLowerCase()}"
                                 onclick="playAudio(this.getAttribute('data-word'))"
                                 class="btn  btn-primary btn-sm pressable small-toggle-button"
                                 title="Прослухати">
-                            <i class="bi bi-volume-up"></i>
+                            <i class="bi bi-volume-up-fill"></i>
                         </button>
                     </h2>
 
@@ -128,17 +121,6 @@ function submitForm(success) {
 
 function reRetro(){
     document.location =  `${contextPath}retro`;
-}
-
-function playAudioAI(word) {
-    if (!word) return;
-
-    const audioPath = `${contextPath}speech-files/${word}.mp3`;
-    const audio = new Audio(audioPath);
-
-    audio.play().catch(error => {
-        console.error("Не вдалося відтворити аудіо. Можливо, файл ще не згенеровано:", error);
-    });
 }
 
 function playAudio(word) {
