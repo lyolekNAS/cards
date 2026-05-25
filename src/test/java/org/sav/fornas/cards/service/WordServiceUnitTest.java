@@ -9,6 +9,7 @@ import org.sav.fornas.cards.client.cardsback.api.DictionaryControllerApi;
 import org.sav.fornas.cards.client.cardsback.api.StateLimitControllerApi;
 import org.sav.fornas.cards.client.cardsback.api.WordControllerApi;
 import org.sav.fornas.cards.client.cardsback.model.StatisticDto;
+import org.sav.fornas.cards.client.cardsback.model.StateLimitDto;
 import org.sav.fornas.cards.client.cardsback.model.TrainedWordDto;
 import org.sav.fornas.cards.client.cardsback.model.WordDto;
 import org.sav.fornas.cards.client.cardsback.model.WordsPageDtoWordDto;
@@ -134,11 +135,13 @@ class WordServiceUnitTest {
 
 		WordDto word = new WordDto();
 		word.setEnglish("desk");
+		word.setDescription("line1\nline2");
 		when(wordControllerApi.findWordToTrain()).thenReturn(word);
 
 		WordDto result = wordService.getWord();
 
 		assertEquals("desk", result.getEnglish());
+		assertEquals("line1<br/>line2", result.getDescription());
 	}
 
 	@Test
@@ -161,5 +164,101 @@ class WordServiceUnitTest {
 		StatisticDto result = wordService.getStatistics();
 
 		assertEquals(expectedStatistic, result);
+	}
+
+	@Test
+	void findWord_EmptyInput_ReturnsEmptyWordWithoutApiCalls() {
+		WordDto result = wordService.findWord("");
+
+		assertNotNull(result);
+		assertNull(result.getEnglish());
+		verifyNoInteractions(wordControllerApi, gTranslateRestTemplate);
+	}
+
+	@Test
+	void findWord_NotFoundAndTranslateResponseNull_ReturnsWordWithEmptyTranslation() {
+		when(wordControllerApi.findWord("lamp")).thenReturn(null);
+		when(gTranslateRestTemplate.postForObject(
+				contains("/v2?target=uk&source=en&q=lamp"),
+				isNull(),
+				eq(TranslationResponse.class)))
+				.thenReturn(null);
+
+		WordDto result = wordService.findWord("lamp");
+
+		assertEquals("lamp", result.getEnglish());
+		assertEquals("", result.getUkrainian());
+	}
+
+	@Test
+	void setMark_DelegatesToDictionaryControllerApi() {
+		wordService.setMark(10L, "known");
+
+		verify(dictionaryControllerApi).setMarkOnWord(10L, "known");
+	}
+
+	@Test
+	void pick5Paused_ReturnsValueFromApi() {
+		when(wordControllerApi.pickRandom5FromPause()).thenReturn(4);
+
+		int result = wordService.pick5Paused();
+
+		assertEquals(4, result);
+		verify(wordControllerApi).pickRandom5FromPause();
+	}
+
+	@Test
+	void getStateLimit_ReturnsValueFromApi() {
+		StateLimitDto expected = new StateLimitDto();
+		when(stateLimitControllerApi.getById("NEW")).thenReturn(expected);
+
+		StateLimitDto result = wordService.getStateLimit("NEW");
+
+		assertEquals(expected, result);
+		verify(stateLimitControllerApi).getById("NEW");
+	}
+
+	@Test
+	void getStateLimits_ReturnsValueFromApi() {
+		List<StateLimitDto> expected = List.of(new StateLimitDto(), new StateLimitDto());
+		when(stateLimitControllerApi.getAllStateLimits()).thenReturn(expected);
+
+		List<StateLimitDto> result = wordService.getStateLimits();
+
+		assertEquals(expected, result);
+		verify(stateLimitControllerApi).getAllStateLimits();
+	}
+
+	@Test
+	void getRetroWord_WhenApiReturnsEmptyList_ReturnsNull() {
+		when(wordControllerApi.getWordsForRetro()).thenReturn(List.of());
+
+		WordDto result = wordService.getRetroWord(100L);
+
+		assertNull(result);
+		verify(wordControllerApi).getWordsForRetro();
+		verify(wordControllerApi, never()).getWordById(anyLong());
+	}
+
+	@Test
+	void getRetroWord_UsesCacheForSameKeyWithinTtl() {
+		Long key = 100L;
+		when(wordControllerApi.getWordsForRetro()).thenReturn(List.of(42L));
+
+		WordDto dto = new WordDto();
+		dto.setId(42L);
+		dto.setDescription("a\nb");
+		when(wordControllerApi.getWordById(42L)).thenReturn(dto);
+
+		WordDto first = wordService.getRetroWord(key);
+		WordDto second = wordService.getRetroWord(key);
+
+		assertNotNull(first);
+		assertNotNull(second);
+		assertEquals(42L, first.getId());
+		assertEquals("a<br/>b", first.getDescription());
+		assertEquals("a<br/>b", second.getDescription());
+		verify(wordControllerApi, times(1)).getWordsForRetro();
+		verify(wordControllerApi, times(2)).getWordById(42L);
 	}
 }
