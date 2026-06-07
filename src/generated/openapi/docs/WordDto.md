@@ -22,6 +22,7 @@
 |**dictWordFreqSum** | **Long** |  |  [optional] |
 |**rarity** | **Integer** |  |  [optional] |
 |**examples** | **List&lt;String&gt;** |  |  [optional] |
+|**aitranslated** | **Boolean** |  |  [optional] |
 
 
 

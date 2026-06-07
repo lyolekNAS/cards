@@ -85,27 +85,6 @@ paths:
       tags:
       - dictionary-controller
       x-accepts: application/json
-  /api/dict/enrichWithSpeech:
-    post:
-      operationId: enrichWithSpeech
-      parameters:
-      - explode: true
-        in: query
-        name: word
-        required: true
-        schema:
-          type: string
-        style: form
-      responses:
-        "200":
-          content:
-            '*/*':
-              schema:
-                type: string
-          description: OK
-      tags:
-      - dictionary-controller
-      x-accepts: '*/*'
   /api/dict/enrichWithExamples:
     post:
       operationId: enrichWithExamples
@@ -314,21 +293,6 @@ paths:
       tags:
       - state-limit-controller
       x-accepts: '*/*'
-  /api/junior/me:
-    get:
-      operationId: meJunior
-      responses:
-        "200":
-          content:
-            '*/*':
-              schema:
-                additionalProperties:
-                  type: object
-                type: object
-          description: OK
-      tags:
-      - me-controller
-      x-accepts: '*/*'
   /api/dict/getWord/{word}:
     get:
       operationId: getWord
@@ -378,36 +342,6 @@ paths:
       tags:
       - dictionary-controller
       x-accepts: '*/*'
-  /api/all/me:
-    get:
-      operationId: meAll
-      responses:
-        "200":
-          content:
-            '*/*':
-              schema:
-                additionalProperties:
-                  type: object
-                type: object
-          description: OK
-      tags:
-      - me-controller
-      x-accepts: '*/*'
-  /api/admin/me:
-    get:
-      operationId: meAdmin
-      responses:
-        "200":
-          content:
-            '*/*':
-              schema:
-                additionalProperties:
-                  type: object
-                type: object
-          description: OK
-      tags:
-      - me-controller
-      x-accepts: '*/*'
   /api/word/delete:
     delete:
       operationId: deleteWord
@@ -454,6 +388,7 @@ components:
         ukrainian: ukrainian
         nextTrain: 2000-01-23T04:56:07.000+00:00
         dictWordFreqSum: 2
+        aitranslated: true
         description: description
         dictWordId: 5
         userId: 6
@@ -523,6 +458,8 @@ components:
           items:
             type: string
           type: array
+        aitranslated:
+          type: boolean
       type: object
     WordsPageDtoWordDto:
       example:
@@ -534,6 +471,7 @@ components:
         - ukrainian: ukrainian
           nextTrain: 2000-01-23T04:56:07.000+00:00
           dictWordFreqSum: 2
+          aitranslated: true
           description: description
           dictWordId: 5
           userId: 6
@@ -551,6 +489,7 @@ components:
         - ukrainian: ukrainian
           nextTrain: 2000-01-23T04:56:07.000+00:00
           dictWordFreqSum: 2
+          aitranslated: true
           description: description
           dictWordId: 5
           userId: 6

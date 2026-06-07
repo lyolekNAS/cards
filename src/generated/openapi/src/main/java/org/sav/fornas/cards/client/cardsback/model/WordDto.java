@@ -45,9 +45,10 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   WordDto.JSON_PROPERTY_DICT_WORD_ID,
   WordDto.JSON_PROPERTY_DICT_WORD_FREQ_SUM,
   WordDto.JSON_PROPERTY_RARITY,
-  WordDto.JSON_PROPERTY_EXAMPLES
+  WordDto.JSON_PROPERTY_EXAMPLES,
+  WordDto.JSON_PROPERTY_AITRANSLATED
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-05-15T14:17:14.804703776+03:00[Europe/Kyiv]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-06-07T12:18:33.567984897+03:00[Europe/Kyiv]")
 public class WordDto {
   public static final String JSON_PROPERTY_ID = "id";
   private Long id;
@@ -177,6 +178,9 @@ public class WordDto {
 
   public static final String JSON_PROPERTY_EXAMPLES = "examples";
   private List<String> examples;
+
+  public static final String JSON_PROPERTY_AITRANSLATED = "aitranslated";
+  private Boolean aitranslated;
 
   public WordDto() {
   }
@@ -578,6 +582,32 @@ public class WordDto {
     this.examples = examples;
   }
 
+
+  public WordDto aitranslated(Boolean aitranslated) {
+    
+    this.aitranslated = aitranslated;
+    return this;
+  }
+
+   /**
+   * Get aitranslated
+   * @return aitranslated
+  **/
+  @jakarta.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_AITRANSLATED)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public Boolean getAitranslated() {
+    return aitranslated;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_AITRANSLATED)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setAitranslated(Boolean aitranslated) {
+    this.aitranslated = aitranslated;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -601,12 +631,13 @@ public class WordDto {
         Objects.equals(this.dictWordId, wordDto.dictWordId) &&
         Objects.equals(this.dictWordFreqSum, wordDto.dictWordFreqSum) &&
         Objects.equals(this.rarity, wordDto.rarity) &&
-        Objects.equals(this.examples, wordDto.examples);
+        Objects.equals(this.examples, wordDto.examples) &&
+        Objects.equals(this.aitranslated, wordDto.aitranslated);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, english, ukrainian, description, userId, englishCnt, ukrainianCnt, lastTrain, nextTrain, lang, state, dictWordId, dictWordFreqSum, rarity, examples);
+    return Objects.hash(id, english, ukrainian, description, userId, englishCnt, ukrainianCnt, lastTrain, nextTrain, lang, state, dictWordId, dictWordFreqSum, rarity, examples, aitranslated);
   }
 
   @Override
@@ -628,6 +659,7 @@ public class WordDto {
     sb.append("    dictWordFreqSum: ").append(toIndentedString(dictWordFreqSum)).append("\n");
     sb.append("    rarity: ").append(toIndentedString(rarity)).append("\n");
     sb.append("    examples: ").append(toIndentedString(examples)).append("\n");
+    sb.append("    aitranslated: ").append(toIndentedString(aitranslated)).append("\n");
     sb.append("}");
     return sb.toString();
   }

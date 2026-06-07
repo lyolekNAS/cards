@@ -36,7 +36,10 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="ukrainianInput" class="form-label fw-bold">Український переклад</label>
+                    <label for="ukrainianInput" class="form-label fw-bold">
+                        Український переклад
+                        <span th:if="${word.getAitranslated}">(AI)</span>
+                    </label>
                     <div class="input-group">
                         <input type="text" th:field="*{ukrainian}" class="form-control" id="ukrainianInput" required/>
 
