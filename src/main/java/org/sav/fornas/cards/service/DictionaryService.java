@@ -47,6 +47,10 @@ public class DictionaryService {
 		return dictionaryControllerApi.enrichWithExamples(w);
 	}
 
+	public WordDto enrichWithAiTranslations(String w){
+		return dictionaryControllerApi.enrichWithAiTranslations(w);
+	}
+
 //	public String enrichWithSpeech(String w){
 //		return dictionaryControllerApi.enrichWithSpeech(w);
 //	}

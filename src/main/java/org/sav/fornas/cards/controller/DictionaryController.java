@@ -32,4 +32,9 @@ public class DictionaryController {
 	public WordDto enrichWithExamples(@RequestParam String word){
 		return dictionaryService.enrichWithExamples(word);
 	}
+
+	@RequestMapping("/enrichWithAiTranslations")
+	public WordDto enrichWithAiTranslations(@RequestParam String word){
+		return dictionaryService.enrichWithAiTranslations(word);
+	}
 }

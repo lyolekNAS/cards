@@ -342,6 +342,27 @@ paths:
       tags:
       - dictionary-controller
       x-accepts: '*/*'
+  /api/dict/enrichWithAiTranslations:
+    get:
+      operationId: enrichWithAiTranslations
+      parameters:
+      - explode: true
+        in: query
+        name: word
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WordDto'
+          description: OK
+      tags:
+      - dictionary-controller
+      x-accepts: '*/*'
   /api/word/delete:
     delete:
       operationId: deleteWord
