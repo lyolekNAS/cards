@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   WordState.JSON_PROPERTY_ID,
   WordState.JSON_PROPERTY_NAME
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-06-24T09:55:18.925481675+03:00[Europe/Kyiv]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-06-25T13:22:38.507797388+03:00[Europe/Kyiv]")
 public class WordState {
   public static final String JSON_PROPERTY_ID = "id";
   private Integer id;

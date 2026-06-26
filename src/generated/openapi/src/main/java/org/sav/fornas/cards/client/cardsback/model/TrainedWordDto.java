@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   TrainedWordDto.JSON_PROPERTY_SUCCESS,
   TrainedWordDto.JSON_PROPERTY_LANG
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-06-24T09:55:18.925481675+03:00[Europe/Kyiv]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-06-25T13:22:38.507797388+03:00[Europe/Kyiv]")
 public class TrainedWordDto {
   public static final String JSON_PROPERTY_ID = "id";
   private Long id;

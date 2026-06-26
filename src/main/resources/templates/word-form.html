@@ -36,22 +36,22 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="ukrainianInput" class="form-label fw-bold">
-                        Український переклад
-                        <span th:if="${word.getAitranslated}">(AI)</span>
-                    </label>
-                    <div class="input-group">
-                        <input type="text" th:field="*{ukrainian}" class="form-control" id="ukrainianInput" required/>
+                    <label for="ukrainianInput" class="form-label fw-bold d-flex align-items-end gap-2">
+                        <span class="label-text">Український переклад</span>
+                        <span th:if="${word.getAitranslated}" class="small text-muted align-self-end">(AI)</span>
 
                         <a th:href="@{https://translate.google.com(sl='en', tl='uk', op='translate', text=${word.english})}"
                            target="_blank"
-                           class="btn btn-outline-secondary"
+                           class="btn btn-outline-secondary btn-sm align-self-end"
                            title="Перекласти у Google Translate">
 
                             <i class="bi bi-translate"
                                style="font-size: 1.25rem;"
                                aria-label="Google Translate Icon"></i>
                         </a>
+                    </label>
+                    <div class="input-group">
+                        <textarea th:field="*{ukrainian}" class="form-control" id="ukrainianInput" required rows="3"></textarea>
                     </div>
                 </div>
 
@@ -107,14 +107,15 @@
     });
 
     let val = document.getElementById("wordForm");
-    val.onkeypress = function (key) {
-        let btn = 0 || key.keyCode || key.charCode;
-        if (btn == 13) {
-            key.preventDefault();
+    val.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
+            const tag = event.target && event.target.tagName;
+            if (tag !== 'TEXTAREA') {
+                event.preventDefault();
+            }
         }
-    }
+    });
 </script>
 
-</script>
 </body>
 </html>
