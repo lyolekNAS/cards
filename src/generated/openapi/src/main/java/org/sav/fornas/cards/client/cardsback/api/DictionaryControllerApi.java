@@ -26,7 +26,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-06-25T13:22:38.507797388+03:00[Europe/Kyiv]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-06-29T14:43:09.562378239+03:00[Europe/Kyiv]")
 public class DictionaryControllerApi {
     private ApiClient apiClient;
 
@@ -270,6 +270,52 @@ public class DictionaryControllerApi {
 
         ParameterizedTypeReference<DictWord> localReturnType = new ParameterizedTypeReference<DictWord>() {};
         return apiClient.invokeAPI("/api/dict/getWord/{word}", HttpMethod.GET, uriVariables, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localReturnType);
+    }
+    /**
+     * 
+     * 
+     * <p><b>200</b> - OK
+     * @param wordId  (required)
+     * @throws RestClientException if an error occurs while attempting to invoke the API
+     */
+    public void resetWord(Long wordId) throws RestClientException {
+        resetWordWithHttpInfo(wordId);
+    }
+
+    /**
+     * 
+     * 
+     * <p><b>200</b> - OK
+     * @param wordId  (required)
+     * @return ResponseEntity&lt;Void&gt;
+     * @throws RestClientException if an error occurs while attempting to invoke the API
+     */
+    public ResponseEntity<Void> resetWordWithHttpInfo(Long wordId) throws RestClientException {
+        Object localVarPostBody = null;
+        
+        // verify the required parameter 'wordId' is set
+        if (wordId == null) {
+            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Missing the required parameter 'wordId' when calling resetWord");
+        }
+        
+
+        final MultiValueMap<String, String> localVarQueryParams = new LinkedMultiValueMap<String, String>();
+        final HttpHeaders localVarHeaderParams = new HttpHeaders();
+        final MultiValueMap<String, String> localVarCookieParams = new LinkedMultiValueMap<String, String>();
+        final MultiValueMap<String, Object> localVarFormParams = new LinkedMultiValueMap<String, Object>();
+
+        localVarQueryParams.putAll(apiClient.parameterToMultiValueMap(null, "wordId", wordId));
+
+
+        final String[] localVarAccepts = {  };
+        final List<MediaType> localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        final String[] localVarContentTypes = {  };
+        final MediaType localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+        String[] localVarAuthNames = new String[] {  };
+
+        ParameterizedTypeReference<Void> localReturnType = new ParameterizedTypeReference<Void>() {};
+        return apiClient.invokeAPI("/api/dict/reset", HttpMethod.POST, Collections.<String, Object>emptyMap(), localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localReturnType);
     }
     /**
      * 

@@ -49,6 +49,12 @@ public class WordController {
 		return "word-form";
 	}
 
+	@GetMapping("/reset")
+	public String resetWord(@RequestParam(name = "id", defaultValue = "") Long id, @RequestParam(name = "w", defaultValue = "") String w) {
+		dictionaryService.resetWord(id);
+		return "redirect:/edit?w=" + w;
+	}
+
 	@GetMapping("/random")
 	public String randomWord(@AuthenticationPrincipal OidcUser user, Model model, HttpServletRequest request) {
 

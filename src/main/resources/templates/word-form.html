@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{fragments/navigation :: header(_)}"></head>
 <body class="min-vh-100 d-flex justify-content-center align-items-center bg-light">
 
@@ -48,6 +48,15 @@
                             <i class="bi bi-translate"
                                style="font-size: 1.25rem;"
                                aria-label="Google Translate Icon"></i>
+                        </a>
+
+                        <a th:href="@{/reset(w=${word.english}, id=${word.dictWordId})}"
+                           class="btn btn-outline-secondary btn-sm align-self-end ms-auto"
+                           sec:authorize="hasRole('CARDS_ADMIN')"
+                           title="Повторно обробити">
+
+                            <i class="bi bi-arrow-repeat"
+                               style="font-size: 1.25rem;"></i>
                         </a>
                     </label>
                     <div class="input-group">

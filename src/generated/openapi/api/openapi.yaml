@@ -85,6 +85,24 @@ paths:
       tags:
       - dictionary-controller
       x-accepts: application/json
+  /api/dict/reset:
+    post:
+      operationId: resetWord
+      parameters:
+      - explode: true
+        in: query
+        name: wordId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: form
+      responses:
+        "200":
+          description: OK
+      tags:
+      - dictionary-controller
+      x-accepts: application/json
   /api/dict/enrichWithExamples:
     post:
       operationId: enrichWithExamples

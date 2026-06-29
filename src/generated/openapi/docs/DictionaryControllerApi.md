@@ -9,6 +9,7 @@ All URIs are relative to *http://localhost:8052*
 | [**getNewWord**](DictionaryControllerApi.md#getNewWord) | **GET** /api/dict/getNewWord |  |
 | [**getNewWords**](DictionaryControllerApi.md#getNewWords) | **GET** /api/dict/getNewWords |  |
 | [**getWord**](DictionaryControllerApi.md#getWord) | **GET** /api/dict/getWord/{word} |  |
+| [**resetWord**](DictionaryControllerApi.md#resetWord) | **POST** /api/dict/reset |  |
 | [**setMarkOnWord**](DictionaryControllerApi.md#setMarkOnWord) | **POST** /api/dict/setMark |  |
 
 
@@ -317,6 +318,69 @@ No authorization required
 
 - **Content-Type**: Not defined
 - **Accept**: */*
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+
+
+## resetWord
+
+> resetWord(wordId)
+
+
+
+### Example
+
+```java
+// Import classes:
+import org.sav.fornas.cards.client.cardsback.ApiClient;
+import org.sav.fornas.cards.client.cardsback.ApiException;
+import org.sav.fornas.cards.client.cardsback.Configuration;
+import org.sav.fornas.cards.client.cardsback.models.*;
+import org.sav.fornas.cards.client.cardsback.api.DictionaryControllerApi;
+
+public class Example {
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("http://localhost:8052");
+
+        DictionaryControllerApi apiInstance = new DictionaryControllerApi(defaultClient);
+        Long wordId = 56L; // Long | 
+        try {
+            apiInstance.resetWord(wordId);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DictionaryControllerApi#resetWord");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **wordId** | **Long**|  | |
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: Not defined
 
 
 ### HTTP response details
