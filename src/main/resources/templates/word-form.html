@@ -42,7 +42,7 @@
 
                         <a th:href="@{https://translate.google.com(sl='en', tl='uk', op='translate', text=${word.english})}"
                            target="_blank"
-                           class="btn btn-outline-secondary btn-sm align-self-end"
+                           class="btn btn-outline-primary btn-sm align-self-end"
                            title="Перекласти у Google Translate">
 
                             <i class="bi bi-translate"
@@ -51,7 +51,7 @@
                         </a>
 
                         <a th:href="@{/reset(w=${word.english}, id=${word.dictWordId})}"
-                           class="btn btn-outline-secondary btn-sm align-self-end ms-auto"
+                           class="btn btn-danger btn-sm align-self-end ms-auto"
                            sec:authorize="hasRole('CARDS_ADMIN')"
                            title="Повторно обробити">
 
