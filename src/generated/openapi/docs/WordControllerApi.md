@@ -524,7 +524,7 @@ No authorization required
 
 ## getWordsForRetro
 
-> List&lt;Long&gt; getWordsForRetro()
+> List&lt;String&gt; getWordsForRetro()
 
 
 
@@ -545,7 +545,7 @@ public class Example {
 
         WordControllerApi apiInstance = new WordControllerApi(defaultClient);
         try {
-            List<Long> result = apiInstance.getWordsForRetro();
+            List<String> result = apiInstance.getWordsForRetro();
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling WordControllerApi#getWordsForRetro");
@@ -564,7 +564,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-**List&lt;Long&gt;**
+**List&lt;String&gt;**
 
 ### Authorization
 

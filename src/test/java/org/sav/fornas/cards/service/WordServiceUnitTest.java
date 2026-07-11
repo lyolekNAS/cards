@@ -243,12 +243,12 @@ class WordServiceUnitTest {
 	@Test
 	void getRetroWord_UsesCacheForSameKeyWithinTtl() {
 		Long key = 100L;
-		when(wordControllerApi.getWordsForRetro()).thenReturn(List.of(42L));
+		when(wordControllerApi.getWordsForRetro()).thenReturn(List.of("retro"));
 
 		WordDto dto = new WordDto();
 		dto.setId(42L);
 		dto.setDescription("a\nb");
-		when(wordControllerApi.getWordById(42L)).thenReturn(dto);
+		when(wordControllerApi.findWord("retro")).thenReturn(dto);
 
 		WordDto first = wordService.getRetroWord(key);
 		WordDto second = wordService.getRetroWord(key);
@@ -259,6 +259,6 @@ class WordServiceUnitTest {
 		assertEquals("a<br/>b", first.getDescription());
 		assertEquals("a<br/>b", second.getDescription());
 		verify(wordControllerApi, times(1)).getWordsForRetro();
-		verify(wordControllerApi, times(2)).getWordById(42L);
+		verify(wordControllerApi, times(2)).findWord("retro");
 	}
 }

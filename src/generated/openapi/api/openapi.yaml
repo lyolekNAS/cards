@@ -221,8 +221,7 @@ paths:
             '*/*':
               schema:
                 items:
-                  format: int64
-                  type: integer
+                  type: string
                 type: array
           description: OK
       tags:

@@ -27,7 +27,7 @@ public class WordService {
 	private final DictionaryControllerApi dictionaryControllerApi;
 	private final StateLimitControllerApi stateLimitControllerApi;
 
-	private final Map<Long, List<Long>> retroCache = new ConcurrentHashMap<>();
+	private final Map<Long, List<String>> retroCache = new ConcurrentHashMap<>();
 	private final Map<Long, Long> retroValidCache = new ConcurrentHashMap<>();
 
 	private final long retroTTL = 60*60;
@@ -77,7 +77,7 @@ public class WordService {
 
 	public WordDto getRetroWord(Long key){
 		long seconds = Instant.now().getEpochSecond();
-		List<Long> words;
+		List<String> words;
 		if(retroValidCache.get(key) == null || seconds - retroValidCache.get(key) > retroTTL){
 			words = wordControllerApi.getWordsForRetro();
 			retroCache.put(key,words);
@@ -89,8 +89,8 @@ public class WordService {
 			return null;
 		}
 
-		Long randomWordId = words.get(ThreadLocalRandom.current().nextInt(words.size()));
-		WordDto word = wordControllerApi.getWordById(randomWordId);
+		String randomWord = words.get(ThreadLocalRandom.current().nextInt(words.size()));
+		WordDto word = wordControllerApi.findWord(randomWord);
 		clearDescription(word);
 		return word;
 	}

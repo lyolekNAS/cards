@@ -29,7 +29,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-06-29T14:43:09.562378239+03:00[Europe/Kyiv]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-07-11T13:27:27.592879875+03:00[Europe/Kyiv]")
 public class WordControllerApi {
     private ApiClient apiClient;
 
@@ -415,10 +415,10 @@ public class WordControllerApi {
      * 
      * 
      * <p><b>200</b> - OK
-     * @return List&lt;Long&gt;
+     * @return List&lt;String&gt;
      * @throws RestClientException if an error occurs while attempting to invoke the API
      */
-    public List<Long> getWordsForRetro() throws RestClientException {
+    public List<String> getWordsForRetro() throws RestClientException {
         return getWordsForRetroWithHttpInfo().getBody();
     }
 
@@ -426,10 +426,10 @@ public class WordControllerApi {
      * 
      * 
      * <p><b>200</b> - OK
-     * @return ResponseEntity&lt;List&lt;Long&gt;&gt;
+     * @return ResponseEntity&lt;List&lt;String&gt;&gt;
      * @throws RestClientException if an error occurs while attempting to invoke the API
      */
-    public ResponseEntity<List<Long>> getWordsForRetroWithHttpInfo() throws RestClientException {
+    public ResponseEntity<List<String>> getWordsForRetroWithHttpInfo() throws RestClientException {
         Object localVarPostBody = null;
         
 
@@ -447,7 +447,7 @@ public class WordControllerApi {
 
         String[] localVarAuthNames = new String[] {  };
 
-        ParameterizedTypeReference<List<Long>> localReturnType = new ParameterizedTypeReference<List<Long>>() {};
+        ParameterizedTypeReference<List<String>> localReturnType = new ParameterizedTypeReference<List<String>>() {};
         return apiClient.invokeAPI("/api/word/retro", HttpMethod.GET, Collections.<String, Object>emptyMap(), localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localReturnType);
     }
     /**
