@@ -8,7 +8,11 @@
 
         <div th:replace="~{fragments/navigation :: nav}"></div>
         <div th:if="${word != null}">
-            <h3 class="mb-4 text-primary" th:text="|Редагування слова №${word.id}|"></h3>
+            <h3 class="mb-4 text-primary" th:if="${word.id == 0}" th:text="|Редагування слова №${word.id}|"></h3>
+            <h3 class="mb-4 text-primary" th:unless="${word.id == 0}">
+                <a th:href="@{/edit-card(w=${word.english})}" class="text-reset text-decoration-none"
+                   th:text="|Редагування слова №${word.id}|"></a>
+            </h3>
             <div th:if="${randomListSize != null}" th:text="${randomListSize}"></div>
             <form th:action="@{/save}" th:object="${word}" method="post" class="text-start" id="wordForm">
 

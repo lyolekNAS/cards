@@ -58,15 +58,22 @@ public class WordService {
 		if(!w.isEmpty()) {
 			word = wordControllerApi.findWord(w);
 			log.debug(">>> Word found: {}", word);
-			if(word == null){
-				word = new WordDto();
-				word.setEnglish(w);
-				word.setUkrainian(getTranslated(w));
-			}
 		} else {
 			word = new WordDto();
 		}
 		log.debug(">>> Word returned: {}", word);
+		return word;
+	}
+
+	public WordDto findCardWord(String w){
+		WordDto word;
+		if(!w.isEmpty()) {
+			word = wordControllerApi.findWordCard(w);
+			log.debug(">>> Word card found: {}", word);
+		} else {
+			word = new WordDto();
+		}
+		log.debug(">>> Word card returned: {}", word);
 		return word;
 	}
 

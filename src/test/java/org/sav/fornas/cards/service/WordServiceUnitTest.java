@@ -104,33 +104,6 @@ class WordServiceUnitTest {
 	}
 
 	@Test
-	void testFindWord_notFound_callsTranslation() {
-		when(wordControllerApi.findWord("sofa"))
-				.thenReturn(null);
-
-		TranslationResponse translationResponse = new TranslationResponse();
-		TranslationResponse.Translation translation = new TranslationResponse.Translation();
-		TranslationResponse.Data data = new TranslationResponse.Data();
-		data.setTranslations(List.of(translation));
-		translation.setTranslatedText("диван");
-		translationResponse.setData(data);
-
-		when(gTranslateRestTemplate.postForObject(
-						Mockito.contains("/v2?target=uk&source=en&q=sofa"),
-						Mockito.isNull(),
-						eq(TranslationResponse.class)))
-				.thenReturn(translationResponse);
-
-		WordDto result = wordService.findWord("sofa");
-
-		assertEquals("sofa", result.getEnglish());
-		assertEquals("диван", result.getUkrainian());
-
-		verify(wordControllerApi).findWord("sofa");
-		verify(gTranslateRestTemplate).postForObject(anyString(), any(), eq(TranslationResponse.class));
-	}
-
-	@Test
 	void testGetWord() {
 
 		WordDto word = new WordDto();
@@ -173,21 +146,6 @@ class WordServiceUnitTest {
 		assertNotNull(result);
 		assertNull(result.getEnglish());
 		verifyNoInteractions(wordControllerApi, gTranslateRestTemplate);
-	}
-
-	@Test
-	void findWord_NotFoundAndTranslateResponseNull_ReturnsWordWithEmptyTranslation() {
-		when(wordControllerApi.findWord("lamp")).thenReturn(null);
-		when(gTranslateRestTemplate.postForObject(
-				contains("/v2?target=uk&source=en&q=lamp"),
-				isNull(),
-				eq(TranslationResponse.class)))
-				.thenReturn(null);
-
-		WordDto result = wordService.findWord("lamp");
-
-		assertEquals("lamp", result.getEnglish());
-		assertEquals("", result.getUkrainian());
 	}
 
 	@Test

@@ -49,6 +49,16 @@ public class WordController {
 		return "word-form";
 	}
 
+	@GetMapping("/edit-card")
+	public String showCardForm(Model model, @RequestParam(name = "w", defaultValue = "") String w) {
+		WordDto word = wordService.findCardWord(w.toLowerCase());
+		if (word.getState() == null) {
+			word.setState(WordDto.StateEnum.STAGE_1);
+		}
+		model.addAttribute("word", word);
+		return "word-form";
+	}
+
 	@GetMapping("/reset")
 	public String resetWord(@RequestParam(name = "id", defaultValue = "") Long id, @RequestParam(name = "w", defaultValue = "") String w) {
 		dictionaryService.resetWord(id);

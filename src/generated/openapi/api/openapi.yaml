@@ -248,6 +248,27 @@ paths:
       tags:
       - word-controller
       x-accepts: '*/*'
+  /api/word/find-card:
+    get:
+      operationId: findWordCard
+      parameters:
+      - explode: true
+        in: query
+        name: w
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WordDto'
+          description: OK
+      tags:
+      - word-controller
+      x-accepts: '*/*'
   /api/word/all:
     get:
       operationId: getAll

@@ -7,6 +7,7 @@ All URIs are relative to *http://localhost:8052*
 | [**addWord**](WordControllerApi.md#addWord) | **POST** /api/word/save |  |
 | [**deleteWord**](WordControllerApi.md#deleteWord) | **DELETE** /api/word/delete |  |
 | [**findWord**](WordControllerApi.md#findWord) | **GET** /api/word/find |  |
+| [**findWordCard**](WordControllerApi.md#findWordCard) | **GET** /api/word/find-card |  |
 | [**findWordToTrain**](WordControllerApi.md#findWordToTrain) | **GET** /api/word/train |  |
 | [**getAll**](WordControllerApi.md#getAll) | **GET** /api/word/all |  |
 | [**getAllByUser**](WordControllerApi.md#getAllByUser) | **GET** /api/word/user/all |  |
@@ -174,6 +175,70 @@ public class Example {
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling WordControllerApi#findWord");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **w** | **String**|  | |
+
+### Return type
+
+[**WordDto**](WordDto.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: */*
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+
+
+## findWordCard
+
+> WordDto findWordCard(w)
+
+
+
+### Example
+
+```java
+// Import classes:
+import org.sav.fornas.cards.client.cardsback.ApiClient;
+import org.sav.fornas.cards.client.cardsback.ApiException;
+import org.sav.fornas.cards.client.cardsback.Configuration;
+import org.sav.fornas.cards.client.cardsback.models.*;
+import org.sav.fornas.cards.client.cardsback.api.WordControllerApi;
+
+public class Example {
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("http://localhost:8052");
+
+        WordControllerApi apiInstance = new WordControllerApi(defaultClient);
+        String w = "w_example"; // String | 
+        try {
+            WordDto result = apiInstance.findWordCard(w);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling WordControllerApi#findWordCard");
             System.err.println("Status code: " + e.getCode());
             System.err.println("Reason: " + e.getResponseBody());
             System.err.println("Response headers: " + e.getResponseHeaders());

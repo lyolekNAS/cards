@@ -76,24 +76,6 @@ class WordServiceTest {
 	}
 
 	@Test
-	void findWord_missing_shouldTranslate() {
-		when(wordControllerApi.findWord("dog")).thenReturn(null);
-
-		TranslationResponse response = new TranslationResponse();
-		Translation translation = new Translation();
-		translation.setTranslatedText("собака");
-		response.setData(new TranslationResponse.Data());
-		response.getData().setTranslations(List.of(translation));
-		when(gTranslateRestTemplate.postForObject(anyString(), isNull(), eq(TranslationResponse.class)))
-				.thenReturn(response);
-
-		WordDto result = service.findWord("dog");
-
-		assertThat(result.getEnglish()).isEqualTo("dog");
-		assertThat(result.getUkrainian()).isEqualTo("собака");
-	}
-
-	@Test
 	void getWord_shouldCallRestTemplate() {
 		WordDto dto = new WordDto();
 		when(wordControllerApi.findWordToTrain()).thenReturn(dto);
