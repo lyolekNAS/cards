@@ -53,50 +53,50 @@
 
                     <hr class="my-3" />
 
-                    <div class="card-text text-muted fst-italic text-start"
+                    <div id="actions" class="d-flex justify-content-center mt-4" style="visibility: hidden;">
+                        <form th:action="@{/trained}" method="get" id="trainForm"
+                              class="d-flex w-100 gap-2"
+                              th:if="${mode == 'train'}">
+
+                            <input type="hidden" name="id" th:value="${word.id}">
+                            <input type="hidden" name="success" id="successField" value="">
+                            <input type="hidden" name="lang" th:value="${word.lang}">
+
+                            <button type="button"
+                                    onclick="submitForm(true)"
+                                    class="btn btn-success btn-lg pressable"
+                                    style="flex: 4;">
+                                <i class="bi bi-check-circle-fill" style="font-size: 1.5rem;"></i>
+                            </button>
+
+                            <a id="editButton"
+                               th:href="@{/edit(w=${word.english})}"
+                               class="btn btn-primary btn-lg pressable"
+                               style="visibility: hidden; flex: 2;"
+                               title="Редагувати слово">
+                                <i class="bi bi-pencil" style="font-size: 1.5rem;"></i>
+                            </a>
+
+                            <button type="button"
+                                    onclick="submitForm(false)"
+                                    class="btn btn-danger btn-lg pressable"
+                                    style="flex: 4;">
+                                <i class="bi bi-x-circle-fill" style="font-size: 1.5rem;"></i>
+                            </button>
+                        </form>
+
+                        <button type="button"
+                                onclick="reRetro()"
+                                class="btn btn-success btn-lg pressable"
+                                style="flex: 4;"
+                                th:if="${mode == 'retro'}">
+                            <i class="bi bi-arrow-repeat" style="font-size: 1.5rem;"></i>
+                        </button>
+                    </div>
+
+                    <div id="description" class="card-text text-muted fst-italic text-start" style="visibility: hidden;"
                        th:utext="${word.description}"></div>
                 </div>
-            </div>
-
-            <div id="actions" class="d-flex justify-content-center mt-4" style="visibility: hidden;">
-                <form th:action="@{/trained}" method="get" id="trainForm"
-                      class="d-flex w-100 gap-2"
-                      th:if="${mode == 'train'}">
-
-                    <input type="hidden" name="id" th:value="${word.id}">
-                    <input type="hidden" name="success" id="successField" value="">
-                    <input type="hidden" name="lang" th:value="${word.lang}">
-
-                    <button type="button"
-                            onclick="submitForm(true)"
-                            class="btn btn-success btn-lg pressable"
-                            style="flex: 4;">
-                        <i class="bi bi-check-circle-fill" style="font-size: 1.5rem;"></i>
-                    </button>
-
-                    <a id="editButton"
-                       th:href="@{/edit(w=${word.english})}"
-                       class="btn btn-primary btn-lg pressable"
-                       style="visibility: hidden; flex: 2;"
-                       title="Редагувати слово">
-                        <i class="bi bi-pencil" style="font-size: 1.5rem;"></i>
-                    </a>
-
-                    <button type="button"
-                            onclick="submitForm(false)"
-                            class="btn btn-danger btn-lg pressable"
-                            style="flex: 4;">
-                        <i class="bi bi-x-circle-fill" style="font-size: 1.5rem;"></i>
-                    </button>
-                </form>
-
-                <button type="button"
-                        onclick="reRetro()"
-                        class="btn btn-success btn-lg pressable"
-                        style="flex: 4;"
-                        th:if="${mode == 'retro'}">
-                    <i class="bi bi-arrow-repeat" style="font-size: 1.5rem;"></i>
-                </button>
             </div>
 
         </div>
@@ -107,6 +107,7 @@ function showTranslation() {
     if(document.getElementById('translation').style.visibility === 'hidden') {
         document.getElementById('translation').style.visibility = 'visible';
         document.getElementById('actions').style.visibility = 'visible';
+        document.getElementById('description').style.visibility = 'visible';
         document.getElementById('editButton').style.visibility = 'visible';
     }
 }
