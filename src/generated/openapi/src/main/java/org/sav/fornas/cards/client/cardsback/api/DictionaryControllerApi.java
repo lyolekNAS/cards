@@ -26,7 +26,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-07-13T14:08:05.152272436+03:00[Europe/Kyiv]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-07-17T14:46:01.573469768+03:00[Europe/Kyiv]")
 public class DictionaryControllerApi {
     private ApiClient apiClient;
 
@@ -143,6 +143,55 @@ public class DictionaryControllerApi {
 
         ParameterizedTypeReference<WordDto> localReturnType = new ParameterizedTypeReference<WordDto>() {};
         return apiClient.invokeAPI("/api/dict/enrichWithExamples", HttpMethod.POST, Collections.<String, Object>emptyMap(), localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localReturnType);
+    }
+    /**
+     * 
+     * 
+     * <p><b>200</b> - OK
+     * @param level  (required)
+     * @return WordDto
+     * @throws RestClientException if an error occurs while attempting to invoke the API
+     */
+    public WordDto findWordToSuggest(Integer level) throws RestClientException {
+        return findWordToSuggestWithHttpInfo(level).getBody();
+    }
+
+    /**
+     * 
+     * 
+     * <p><b>200</b> - OK
+     * @param level  (required)
+     * @return ResponseEntity&lt;WordDto&gt;
+     * @throws RestClientException if an error occurs while attempting to invoke the API
+     */
+    public ResponseEntity<WordDto> findWordToSuggestWithHttpInfo(Integer level) throws RestClientException {
+        Object localVarPostBody = null;
+        
+        // verify the required parameter 'level' is set
+        if (level == null) {
+            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Missing the required parameter 'level' when calling findWordToSuggest");
+        }
+        
+        // create path and map variables
+        final Map<String, Object> uriVariables = new HashMap<String, Object>();
+        uriVariables.put("level", level);
+
+        final MultiValueMap<String, String> localVarQueryParams = new LinkedMultiValueMap<String, String>();
+        final HttpHeaders localVarHeaderParams = new HttpHeaders();
+        final MultiValueMap<String, String> localVarCookieParams = new LinkedMultiValueMap<String, String>();
+        final MultiValueMap<String, Object> localVarFormParams = new LinkedMultiValueMap<String, Object>();
+
+        final String[] localVarAccepts = { 
+            "*/*"
+         };
+        final List<MediaType> localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        final String[] localVarContentTypes = {  };
+        final MediaType localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+        String[] localVarAuthNames = new String[] {  };
+
+        ParameterizedTypeReference<WordDto> localReturnType = new ParameterizedTypeReference<WordDto>() {};
+        return apiClient.invokeAPI("/api/dict/findWordToSuggest/{level}", HttpMethod.GET, uriVariables, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localReturnType);
     }
     /**
      * 

@@ -40,22 +40,24 @@ public class WordController {
 	}
 
 	@GetMapping("/edit")
-	public String showForm(Model model, @RequestParam(name = "w", defaultValue = "") String w) {
+	public String showForm(Model model, @RequestParam(name = "w", defaultValue = "") String w, HttpServletRequest request) {
 		WordDto word = wordService.findWord(w.toLowerCase());
 		if (word.getState() == null) {
 			word.setState(WordDto.StateEnum.STAGE_1);
 		}
 		model.addAttribute("word", word);
+		model.addAttribute("returnUrl", request.getServletPath() + "?w=" + w);
 		return "word-form";
 	}
 
 	@GetMapping("/edit-card")
-	public String showCardForm(Model model, @RequestParam(name = "w", defaultValue = "") String w) {
+	public String showCardForm(Model model, @RequestParam(name = "w", defaultValue = "") String w, HttpServletRequest request) {
 		WordDto word = wordService.findCardWord(w.toLowerCase());
 		if (word.getState() == null) {
 			word.setState(WordDto.StateEnum.STAGE_1);
 		}
 		model.addAttribute("word", word);
+		model.addAttribute("returnUrl", "/edit?w=" + w);
 		return "word-form";
 	}
 
@@ -100,6 +102,16 @@ public class WordController {
 		return "word-form";
 	}
 
+	@GetMapping(value = {"/findWordToSuggest", "/findWordToSuggest/{level}"})
+	public String findWordToSuggest(@PathVariable(required = false) Integer level, Model model, HttpServletRequest request) {
+		level = level == null ? 1 : level;
+		WordDto word = dictionaryService.findWordToSuggest(level);
+		model.addAttribute("word", word);
+		model.addAttribute("level", level);
+		model.addAttribute("returnUrl", request.getServletPath());
+		return "word-form";
+	}
+
 	@GetMapping("/pick5Paused")
 	public String pick10Paused() {
 		wordService.pick5Paused();
@@ -112,11 +124,11 @@ public class WordController {
 	}
 
 	@PostMapping("/save")
-	public String saveWord(@ModelAttribute WordDto wordDto) {
+	public String saveWord(@ModelAttribute WordDto wordDto, @RequestParam String returnUrl) {
 
 		log.debug(">>> saveWord={}", wordDto);
 		WordDto newWord = wordService.saveWord(wordDto);
-		return "redirect:/edit?w=" + newWord.getEnglish();
+		return "redirect:" + returnUrl;
 	}
 
 	@PostMapping("/setSkipped")

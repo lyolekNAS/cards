@@ -108,7 +108,8 @@ class WordControllerIntTest {
 
 		mockMvc.perform(post("/save")
 						.param("english", savedWord.getEnglish())
-						.param("ukrainian", savedWord.getUkrainian()))
+						.param("ukrainian", savedWord.getUkrainian())
+						.param("returnUrl", "/edit?w=" + savedWord.getEnglish()))
 				.andExpect(status().is3xxRedirection())
 				.andExpect(redirectedUrl("/edit?w=" + savedWord.getEnglish()));
 	}
@@ -179,4 +180,3 @@ class WordControllerIntTest {
 		assertEquals(word, captured);
 	}
 }
-
