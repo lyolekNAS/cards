@@ -2,6 +2,7 @@ package org.sav.fornas.cards.client.cardsback.api;
 
 import org.sav.fornas.cards.client.cardsback.ApiClient;
 
+import org.sav.fornas.cards.client.cardsback.model.StatisticDictionaryDto;
 import org.sav.fornas.cards.client.cardsback.model.StatisticDto;
 import org.sav.fornas.cards.client.cardsback.model.TrainedWordDto;
 import org.sav.fornas.cards.client.cardsback.model.Word;
@@ -29,7 +30,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-07-17T14:46:01.573469768+03:00[Europe/Kyiv]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-07-18T15:37:20.786499163+03:00[Europe/Kyiv]")
 public class WordControllerApi {
     private ApiClient apiClient;
 
@@ -371,6 +372,45 @@ public class WordControllerApi {
 
         ParameterizedTypeReference<WordsPageDtoWordDto> localReturnType = new ParameterizedTypeReference<WordsPageDtoWordDto>() {};
         return apiClient.invokeAPI("/api/word/user/all", HttpMethod.GET, Collections.<String, Object>emptyMap(), localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localReturnType);
+    }
+    /**
+     * 
+     * 
+     * <p><b>200</b> - OK
+     * @return List&lt;StatisticDictionaryDto&gt;
+     * @throws RestClientException if an error occurs while attempting to invoke the API
+     */
+    public List<StatisticDictionaryDto> getDictStatistic() throws RestClientException {
+        return getDictStatisticWithHttpInfo().getBody();
+    }
+
+    /**
+     * 
+     * 
+     * <p><b>200</b> - OK
+     * @return ResponseEntity&lt;List&lt;StatisticDictionaryDto&gt;&gt;
+     * @throws RestClientException if an error occurs while attempting to invoke the API
+     */
+    public ResponseEntity<List<StatisticDictionaryDto>> getDictStatisticWithHttpInfo() throws RestClientException {
+        Object localVarPostBody = null;
+        
+
+        final MultiValueMap<String, String> localVarQueryParams = new LinkedMultiValueMap<String, String>();
+        final HttpHeaders localVarHeaderParams = new HttpHeaders();
+        final MultiValueMap<String, String> localVarCookieParams = new LinkedMultiValueMap<String, String>();
+        final MultiValueMap<String, Object> localVarFormParams = new LinkedMultiValueMap<String, Object>();
+
+        final String[] localVarAccepts = { 
+            "*/*"
+         };
+        final List<MediaType> localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        final String[] localVarContentTypes = {  };
+        final MediaType localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+        String[] localVarAuthNames = new String[] {  };
+
+        ParameterizedTypeReference<List<StatisticDictionaryDto>> localReturnType = new ParameterizedTypeReference<List<StatisticDictionaryDto>>() {};
+        return apiClient.invokeAPI("/api/word/dict-statistic", HttpMethod.GET, Collections.<String, Object>emptyMap(), localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localReturnType);
     }
     /**
      * 

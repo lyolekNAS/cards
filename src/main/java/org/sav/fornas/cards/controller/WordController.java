@@ -152,8 +152,10 @@ public class WordController {
 	@GetMapping("/statistic")
 	public String statistic(Model model) {
 		StatisticDto statisticDto = wordService.getStatistics();
+		List<StatisticDictionaryDto> dicStatisticDto = wordService.getDictStatistics();
 		log.debug(">>> statistic={}", statisticDto);
 		model.addAttribute("statistics", statisticDto);
+		model.addAttribute("dicStatistics", dicStatisticDto);
 		return "statistic";
 	}
 

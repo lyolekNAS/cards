@@ -269,6 +269,21 @@ paths:
       tags:
       - word-controller
       x-accepts: '*/*'
+  /api/word/dict-statistic:
+    get:
+      operationId: getDictStatistic
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: '#/components/schemas/StatisticDictionaryDto'
+                type: array
+          description: OK
+      tags:
+      - word-controller
+      x-accepts: '*/*'
   /api/word/all:
     get:
       operationId: getAll
@@ -380,9 +395,23 @@ paths:
       tags:
       - dictionary-controller
       x-accepts: '*/*'
-  /api/dict/findWordToSuggest/{level}:
+  /api/dict/findWordToSuggest:
     get:
       operationId: findWordToSuggest
+      parameters: []
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WordDto'
+          description: OK
+      tags:
+      - dictionary-controller
+      x-accepts: '*/*'
+  /api/dict/findWordToSuggest/{level}:
+    get:
+      operationId: findWordToSuggest_1
       parameters:
       - explode: false
         in: path
@@ -686,6 +715,25 @@ components:
         totalUninteresting:
           format: int64
           type: integer
+      type: object
+    StatisticDictionaryDto:
+      example:
+        inUserCount: 1
+        level: 0
+        inComonCount: 6
+      properties:
+        level:
+          format: int32
+          type: integer
+          writeOnly: true
+        inComonCount:
+          format: int32
+          type: integer
+          writeOnly: true
+        inUserCount:
+          format: int32
+          type: integer
+          writeOnly: true
       type: object
     DictTrans:
       example:

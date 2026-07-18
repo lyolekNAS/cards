@@ -43,8 +43,8 @@ public class DictionaryService {
 		return dictionaryControllerApi.getNewWord();
 	}
 
-	public WordDto findWordToSuggest(int level){
-		return dictionaryControllerApi.findWordToSuggest(level);
+	public WordDto findWordToSuggest(Integer level){
+		return dictionaryControllerApi.findWordToSuggest1(level);
 	}
 
 	public WordDto enrichWithExamples(String w){

@@ -106,6 +106,10 @@ public class WordService {
 		return wordControllerApi.getStatistic();
 	}
 
+	public List<StatisticDictionaryDto> getDictStatistics(){
+		return wordControllerApi.getDictStatistic();
+	}
+
 	public int pick5Paused(){
 		return wordControllerApi.pickRandom5FromPause();
 	}

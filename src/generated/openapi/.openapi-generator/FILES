@@ -15,6 +15,7 @@ docs/StateLimitControllerApi.md
 docs/StateLimitDto.md
 docs/StatisticAttemptDto.md
 docs/StatisticComonDto.md
+docs/StatisticDictionaryDto.md
 docs/StatisticDto.md
 docs/TrainedWordDto.md
 docs/Word.md
@@ -51,9 +52,11 @@ src/main/java/org/sav/fornas/cards/client/cardsback/model/DictWordForm.java
 src/main/java/org/sav/fornas/cards/client/cardsback/model/StateLimitDto.java
 src/main/java/org/sav/fornas/cards/client/cardsback/model/StatisticAttemptDto.java
 src/main/java/org/sav/fornas/cards/client/cardsback/model/StatisticComonDto.java
+src/main/java/org/sav/fornas/cards/client/cardsback/model/StatisticDictionaryDto.java
 src/main/java/org/sav/fornas/cards/client/cardsback/model/StatisticDto.java
 src/main/java/org/sav/fornas/cards/client/cardsback/model/TrainedWordDto.java
 src/main/java/org/sav/fornas/cards/client/cardsback/model/Word.java
 src/main/java/org/sav/fornas/cards/client/cardsback/model/WordDto.java
 src/main/java/org/sav/fornas/cards/client/cardsback/model/WordState.java
 src/main/java/org/sav/fornas/cards/client/cardsback/model/WordsPageDtoWordDto.java
+src/test/java/org/sav/fornas/cards/client/cardsback/model/StatisticDictionaryDtoTest.java

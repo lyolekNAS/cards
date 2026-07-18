@@ -11,6 +11,7 @@ All URIs are relative to *http://localhost:8052*
 | [**findWordToTrain**](WordControllerApi.md#findWordToTrain) | **GET** /api/word/train |  |
 | [**getAll**](WordControllerApi.md#getAll) | **GET** /api/word/all |  |
 | [**getAllByUser**](WordControllerApi.md#getAllByUser) | **GET** /api/word/user/all |  |
+| [**getDictStatistic**](WordControllerApi.md#getDictStatistic) | **GET** /api/word/dict-statistic |  |
 | [**getStatistic**](WordControllerApi.md#getStatistic) | **GET** /api/word/statistic |  |
 | [**getWordById**](WordControllerApi.md#getWordById) | **GET** /api/word/{id} |  |
 | [**getWordsForRetro**](WordControllerApi.md#getWordsForRetro) | **GET** /api/word/retro |  |
@@ -446,6 +447,66 @@ public class Example {
 ### Return type
 
 [**WordsPageDtoWordDto**](WordsPageDtoWordDto.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: */*
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+
+
+## getDictStatistic
+
+> List&lt;StatisticDictionaryDto&gt; getDictStatistic()
+
+
+
+### Example
+
+```java
+// Import classes:
+import org.sav.fornas.cards.client.cardsback.ApiClient;
+import org.sav.fornas.cards.client.cardsback.ApiException;
+import org.sav.fornas.cards.client.cardsback.Configuration;
+import org.sav.fornas.cards.client.cardsback.models.*;
+import org.sav.fornas.cards.client.cardsback.api.WordControllerApi;
+
+public class Example {
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("http://localhost:8052");
+
+        WordControllerApi apiInstance = new WordControllerApi(defaultClient);
+        try {
+            List<StatisticDictionaryDto> result = apiInstance.getDictStatistic();
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling WordControllerApi#getDictStatistic");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**List&lt;StatisticDictionaryDto&gt;**](StatisticDictionaryDto.md)
 
 ### Authorization
 

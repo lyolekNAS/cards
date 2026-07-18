@@ -47,6 +47,28 @@
                 <div th:text="|Знаю: ${statistics.totalKnown}|"></div>
                 <div th:text="|Не цікаво: ${statistics.totalUninteresting}|"></div>
             </div>
+            <table class="table table-striped table-hover table-sm text-start caption-top align-middle">
+
+                <thead>
+                <tr class="table-primary">
+                    <th>Рівень</th>
+                    <th class="text-center">В словнику</th>
+                    <th class="text-center">В тебе</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="statCommon, statCommonStat : ${dicStatistics}"
+                    th:with="attempt=${statistics.statisticsAttemptDto[statCommonStat.index]}">
+
+                    <td th:text="${statCommon.level}" class="fw-bold"></td>
+
+                    <td th:text="${statCommon.inComonCount}" class="text-center"></td>
+
+                    <td th:text="${statCommon.inUserCount} + ' (' + ${T(java.lang.Math).round(statCommon.inUserCount * 100.0 / statCommon.inComonCount)} + '%)'" class="text-center"></td>
+                </tr>
+                </tbody>
+            </table>
 
             <a th:href="@{/pick5Paused}"
                class="btn btn-primary btn-lg pressable"
