@@ -7,7 +7,7 @@
     <div class="container container-sm p-4 bg-white shadow-lg rounded-3 text-center my-4 flex-shrink-0">
 
         <div th:replace="~{fragments/navigation :: nav}"></div>
-        <div th:if="${word != null}">
+        <div th:if="${word != null}" id="cardForm">
             <h3 class="mb-4 text-primary" th:if="${word.id == 0}" th:text="|Редагування слова №${word.id}|"></h3>
             <h3 class="mb-4 text-primary" th:unless="${word.id == 0}">
                 <a th:href="@{/edit-card(w=${word.english})}" class="text-reset text-decoration-none"
@@ -123,8 +123,26 @@
 
     const editBaseUrl = /*[[@{/edit}]]*/ '';
     const findWordToSuggestBaseUrl = /*[[@{/findWordToSuggest}]]*/ '';
+    const returnUrl = /*[[${returnUrl}]]*/ '';
+    const englishInput = document.getElementById('englishInput');
 
-    document.getElementById('englishInput').addEventListener('change', function () {
+    // Якщо returnUrl містить findWordToSuggest, приховуємо значення
+    const isFromFindWordToSuggest = returnUrl && returnUrl.startsWith('/findWordToSuggest');
+    if (isFromFindWordToSuggest) {
+        // Зберігаємо оригінальне значення
+        englishInput.dataset.originalValue = englishInput.value;
+        englishInput.value = '';
+
+        // При першому кліку показуємо значення
+        document.getElementById('cardForm').addEventListener('click', function() {
+            if (englishInput.value === '' && englishInput.dataset.originalValue) {
+                englishInput.value = englishInput.dataset.originalValue;
+                englishInput.removeAttribute('data-original-value');
+            }
+        }, { once: true });
+    }
+
+    englishInput.addEventListener('change', function () {
         const value = this.value.trim();
         if (value.length > 0) {
             window.location.href = editBaseUrl + '?w=' + encodeURIComponent(value);
