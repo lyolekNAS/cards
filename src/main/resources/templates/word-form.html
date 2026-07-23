@@ -87,6 +87,7 @@
 
                     <button th:if="${word.id == 0}" type="submit" th:formaction="@{/setSkipped}"
                             class="btn btn-secondary w-100 pressable"
+                            th:disabled="${word.uninteresting}"
                             title="Не цікаво / Пропустити">
                         <i class="bi-emoji-dizzy" style="font-size: 1.5rem;"></i>
                     </button>
@@ -98,6 +99,7 @@
 
                     <button th:if="${word.id == 0}" type="submit" th:formaction="@{/setKnown}"
                             class="btn btn-success w-100 pressable"
+                            th:disabled="${word.known}"
                             title="Знаю">
                         <i class="bi bi-emoji-sunglasses" style="font-size: 1.5rem;"></i>
                     </button>

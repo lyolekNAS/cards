@@ -46,9 +46,11 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   WordDto.JSON_PROPERTY_DICT_WORD_FREQ_SUM,
   WordDto.JSON_PROPERTY_RARITY,
   WordDto.JSON_PROPERTY_EXAMPLES,
-  WordDto.JSON_PROPERTY_AITRANSLATED
+  WordDto.JSON_PROPERTY_AITRANSLATED,
+  WordDto.JSON_PROPERTY_UNINTERESTING,
+  WordDto.JSON_PROPERTY_KNOWN
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-07-18T15:37:20.786499163+03:00[Europe/Kyiv]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-07-23T16:07:41.844981657+03:00[Europe/Kyiv]")
 public class WordDto {
   public static final String JSON_PROPERTY_ID = "id";
   private Long id;
@@ -181,6 +183,12 @@ public class WordDto {
 
   public static final String JSON_PROPERTY_AITRANSLATED = "aitranslated";
   private Boolean aitranslated;
+
+  public static final String JSON_PROPERTY_UNINTERESTING = "uninteresting";
+  private Boolean uninteresting;
+
+  public static final String JSON_PROPERTY_KNOWN = "known";
+  private Boolean known;
 
   public WordDto() {
   }
@@ -608,6 +616,58 @@ public class WordDto {
     this.aitranslated = aitranslated;
   }
 
+
+  public WordDto uninteresting(Boolean uninteresting) {
+    
+    this.uninteresting = uninteresting;
+    return this;
+  }
+
+   /**
+   * Get uninteresting
+   * @return uninteresting
+  **/
+  @jakarta.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_UNINTERESTING)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public Boolean getUninteresting() {
+    return uninteresting;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_UNINTERESTING)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setUninteresting(Boolean uninteresting) {
+    this.uninteresting = uninteresting;
+  }
+
+
+  public WordDto known(Boolean known) {
+    
+    this.known = known;
+    return this;
+  }
+
+   /**
+   * Get known
+   * @return known
+  **/
+  @jakarta.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_KNOWN)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public Boolean getKnown() {
+    return known;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_KNOWN)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setKnown(Boolean known) {
+    this.known = known;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -632,12 +692,14 @@ public class WordDto {
         Objects.equals(this.dictWordFreqSum, wordDto.dictWordFreqSum) &&
         Objects.equals(this.rarity, wordDto.rarity) &&
         Objects.equals(this.examples, wordDto.examples) &&
-        Objects.equals(this.aitranslated, wordDto.aitranslated);
+        Objects.equals(this.aitranslated, wordDto.aitranslated) &&
+        Objects.equals(this.uninteresting, wordDto.uninteresting) &&
+        Objects.equals(this.known, wordDto.known);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, english, ukrainian, description, userId, englishCnt, ukrainianCnt, lastTrain, nextTrain, lang, state, dictWordId, dictWordFreqSum, rarity, examples, aitranslated);
+    return Objects.hash(id, english, ukrainian, description, userId, englishCnt, ukrainianCnt, lastTrain, nextTrain, lang, state, dictWordId, dictWordFreqSum, rarity, examples, aitranslated, uninteresting, known);
   }
 
   @Override
@@ -660,6 +722,8 @@ public class WordDto {
     sb.append("    rarity: ").append(toIndentedString(rarity)).append("\n");
     sb.append("    examples: ").append(toIndentedString(examples)).append("\n");
     sb.append("    aitranslated: ").append(toIndentedString(aitranslated)).append("\n");
+    sb.append("    uninteresting: ").append(toIndentedString(uninteresting)).append("\n");
+    sb.append("    known: ").append(toIndentedString(known)).append("\n");
     sb.append("}");
     return sb.toString();
   }

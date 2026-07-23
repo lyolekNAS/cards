@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   DictTrans.JSON_PROPERTY_ID,
   DictTrans.JSON_PROPERTY_WORD_TEXT
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-07-18T15:37:20.786499163+03:00[Europe/Kyiv]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-07-23T16:07:41.844981657+03:00[Europe/Kyiv]")
 public class DictTrans {
   public static final String JSON_PROPERTY_ID = "id";
   private Long id;

@@ -59,4 +59,3 @@ src/main/java/org/sav/fornas/cards/client/cardsback/model/Word.java
 src/main/java/org/sav/fornas/cards/client/cardsback/model/WordDto.java
 src/main/java/org/sav/fornas/cards/client/cardsback/model/WordState.java
 src/main/java/org/sav/fornas/cards/client/cardsback/model/WordsPageDtoWordDto.java
-src/test/java/org/sav/fornas/cards/client/cardsback/model/StatisticDictionaryDtoTest.java

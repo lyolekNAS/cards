@@ -23,6 +23,8 @@
 |**rarity** | **Integer** |  |  [optional] |
 |**examples** | **List&lt;String&gt;** |  |  [optional] |
 |**aitranslated** | **Boolean** |  |  [optional] |
+|**uninteresting** | **Boolean** |  |  [optional] |
+|**known** | **Boolean** |  |  [optional] |
 
 
 
