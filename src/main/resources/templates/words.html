@@ -94,7 +94,7 @@
                 <tr th:each="word : ${words.content}" th:object="${word}">
 
                     <td>
-                        <a th:href="@{'/delete(id=*{id})}"
+                        <a th:href="@{/delete(id=*{id})}"
                            class="btn btn-sm btn-outline-danger"
                            title="Видалити слово"
                            onclick="return confirm('Ви впевнені, що хочете видалити слово?');">
@@ -103,7 +103,7 @@
                     </td>
 
                     <td>
-                        <a th:href="@{'/edit?w=' + *{english}}" class="fw-bold text-decoration-none">
+                        <a th:href="@{/edit?w=*{english}}" class="fw-bold text-decoration-none">
                             <span th:text="*{english}"></span>
                         </a>
                     </td>
