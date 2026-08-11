@@ -41,7 +41,15 @@
 
                     <div id="examples"
                        class="card-text text-muted fst-italic d-none mt-2">
-                        <div th:each="example: ${word.examples}" th:text="${example}"></div>
+                        <div th:each="example: ${word.examples}">
+                            <span th:id="'example-' + ${example.id}" th:text="${example.text}"/>
+                            <button type="button"
+                                    th:onclick="'playAudio(document.getElementById(\'example-' + ${example.id} + '\').textContent)'"
+                                    class="btn  btn-primary btn-sm pressable small-toggle-button"
+                                    title="Прослухати">
+                                <i class="bi bi-volume-up-fill"></i>
+                            </button>
+                        </div>
                     </div>
 
                     <hr class="my-3" />

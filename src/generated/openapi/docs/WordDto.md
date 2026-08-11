@@ -21,7 +21,7 @@
 |**dictWordId** | **Long** |  |  [optional] |
 |**dictWordFreqSum** | **Long** |  |  [optional] |
 |**rarity** | **Integer** |  |  [optional] |
-|**examples** | **List&lt;String&gt;** |  |  [optional] |
+|**examples** | [**List&lt;ExampleDto&gt;**](ExampleDto.md) |  |  [optional] |
 |**aitranslated** | **Boolean** |  |  [optional] |
 |**uninteresting** | **Boolean** |  |  [optional] |
 |**known** | **Boolean** |  |  [optional] |

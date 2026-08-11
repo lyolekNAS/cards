@@ -2,6 +2,7 @@ package org.sav.fornas.cards.controller;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.sav.fornas.cards.client.cardsback.model.ExampleDto;
 import org.sav.fornas.cards.client.cardsback.model.WordDto;
 import org.sav.fornas.cards.service.DictionaryService;
 
@@ -35,10 +36,13 @@ class DictionaryControllerUnitTest {
 
 	@Test
 	void enrichWithExamples_shouldReturnWordFromService() {
+		var example = new ExampleDto();
+		example.setText("A table is in the room.");
+		example.setId(1L);
 		dictionaryService.wordToReturn = new WordDto()
 				.id(10L)
 				.english("table")
-				.examples(List.of("A table is in the room."));
+				.examples(List.of(example));
 
 		WordDto result = controller.enrichWithExamples("table");
 

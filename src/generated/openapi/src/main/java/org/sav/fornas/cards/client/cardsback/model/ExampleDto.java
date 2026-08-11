@@ -24,24 +24,24 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
- * DictTrans
+ * ExampleDto
  */
 @JsonPropertyOrder({
-  DictTrans.JSON_PROPERTY_ID,
-  DictTrans.JSON_PROPERTY_WORD_TEXT
+  ExampleDto.JSON_PROPERTY_ID,
+  ExampleDto.JSON_PROPERTY_TEXT
 })
 @jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-11T21:57:02.832259984+03:00[Europe/Kyiv]")
-public class DictTrans {
+public class ExampleDto {
   public static final String JSON_PROPERTY_ID = "id";
   private Long id;
 
-  public static final String JSON_PROPERTY_WORD_TEXT = "wordText";
-  private String wordText;
+  public static final String JSON_PROPERTY_TEXT = "text";
+  private String text;
 
-  public DictTrans() {
+  public ExampleDto() {
   }
 
-  public DictTrans id(Long id) {
+  public ExampleDto id(Long id) {
     
     this.id = id;
     return this;
@@ -67,29 +67,29 @@ public class DictTrans {
   }
 
 
-  public DictTrans wordText(String wordText) {
+  public ExampleDto text(String text) {
     
-    this.wordText = wordText;
+    this.text = text;
     return this;
   }
 
    /**
-   * Get wordText
-   * @return wordText
+   * Get text
+   * @return text
   **/
   @jakarta.annotation.Nullable
-  @JsonProperty(JSON_PROPERTY_WORD_TEXT)
+  @JsonProperty(JSON_PROPERTY_TEXT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public String getWordText() {
-    return wordText;
+  public String getText() {
+    return text;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_WORD_TEXT)
+  @JsonProperty(JSON_PROPERTY_TEXT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setWordText(String wordText) {
-    this.wordText = wordText;
+  public void setText(String text) {
+    this.text = text;
   }
 
   @Override
@@ -100,22 +100,22 @@ public class DictTrans {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    DictTrans dictTrans = (DictTrans) o;
-    return Objects.equals(this.id, dictTrans.id) &&
-        Objects.equals(this.wordText, dictTrans.wordText);
+    ExampleDto exampleDto = (ExampleDto) o;
+    return Objects.equals(this.id, exampleDto.id) &&
+        Objects.equals(this.text, exampleDto.text);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, wordText);
+    return Objects.hash(id, text);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class DictTrans {\n");
+    sb.append("class ExampleDto {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    wordText: ").append(toIndentedString(wordText)).append("\n");
+    sb.append("    text: ").append(toIndentedString(text)).append("\n");
     sb.append("}");
     return sb.toString();
   }

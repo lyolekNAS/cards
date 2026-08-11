@@ -493,6 +493,17 @@ components:
           - UA
           type: string
       type: object
+    ExampleDto:
+      example:
+        id: 9
+        text: text
+      properties:
+        id:
+          format: int64
+          type: integer
+        text:
+          type: string
+      type: object
     WordDto:
       example:
         ukrainian: ukrainian
@@ -506,8 +517,10 @@ components:
         englishCnt: 1
         ukrainianCnt: 5
         examples:
-        - examples
-        - examples
+        - id: 9
+          text: text
+        - id: 9
+          text: text
         known: true
         lastTrain: 2000-01-23T04:56:07.000+00:00
         english: english
@@ -568,7 +581,7 @@ components:
           type: integer
         examples:
           items:
-            type: string
+            $ref: '#/components/schemas/ExampleDto'
           type: array
         aitranslated:
           type: boolean
@@ -595,8 +608,10 @@ components:
           englishCnt: 1
           ukrainianCnt: 5
           examples:
-          - examples
-          - examples
+          - id: 9
+            text: text
+          - id: 9
+            text: text
           known: true
           lastTrain: 2000-01-23T04:56:07.000+00:00
           english: english
@@ -615,8 +630,10 @@ components:
           englishCnt: 1
           ukrainianCnt: 5
           examples:
-          - examples
-          - examples
+          - id: 9
+            text: text
+          - id: 9
+            text: text
           known: true
           lastTrain: 2000-01-23T04:56:07.000+00:00
           english: english

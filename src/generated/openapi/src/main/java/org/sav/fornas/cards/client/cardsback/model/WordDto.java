@@ -24,6 +24,7 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.sav.fornas.cards.client.cardsback.model.ExampleDto;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
@@ -50,7 +51,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   WordDto.JSON_PROPERTY_UNINTERESTING,
   WordDto.JSON_PROPERTY_KNOWN
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-07-23T16:07:41.844981657+03:00[Europe/Kyiv]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-11T21:57:02.832259984+03:00[Europe/Kyiv]")
 public class WordDto {
   public static final String JSON_PROPERTY_ID = "id";
   private Long id;
@@ -179,7 +180,7 @@ public class WordDto {
   private Integer rarity;
 
   public static final String JSON_PROPERTY_EXAMPLES = "examples";
-  private List<String> examples;
+  private List<ExampleDto> examples;
 
   public static final String JSON_PROPERTY_AITRANSLATED = "aitranslated";
   private Boolean aitranslated;
@@ -557,13 +558,13 @@ public class WordDto {
   }
 
 
-  public WordDto examples(List<String> examples) {
+  public WordDto examples(List<ExampleDto> examples) {
     
     this.examples = examples;
     return this;
   }
 
-  public WordDto addExamplesItem(String examplesItem) {
+  public WordDto addExamplesItem(ExampleDto examplesItem) {
     if (this.examples == null) {
       this.examples = new ArrayList<>();
     }
@@ -579,14 +580,14 @@ public class WordDto {
   @JsonProperty(JSON_PROPERTY_EXAMPLES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public List<String> getExamples() {
+  public List<ExampleDto> getExamples() {
     return examples;
   }
 
 
   @JsonProperty(JSON_PROPERTY_EXAMPLES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setExamples(List<String> examples) {
+  public void setExamples(List<ExampleDto> examples) {
     this.examples = examples;
   }
 

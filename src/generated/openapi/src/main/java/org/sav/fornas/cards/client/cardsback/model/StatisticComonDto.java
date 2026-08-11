@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   StatisticComonDto.JSON_PROPERTY_STATE_ID,
   StatisticComonDto.JSON_PROPERTY_COUNT
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-07-23T16:07:41.844981657+03:00[Europe/Kyiv]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-11T21:57:02.832259984+03:00[Europe/Kyiv]")
 public class StatisticComonDto {
   public static final String JSON_PROPERTY_STATE_ID = "stateId";
   private Integer stateId;

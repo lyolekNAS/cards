@@ -2,6 +2,7 @@ package org.sav.fornas.cards.controller;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.sav.fornas.cards.client.cardsback.model.ExampleDto;
 import org.sav.fornas.cards.client.cardsback.model.WordDto;
 import org.sav.fornas.cards.service.DictionaryService;
 import org.springframework.test.web.servlet.MockMvc;
@@ -47,16 +48,20 @@ class DictionaryControllerIntTest {
 
 	@Test
 	void enrichWithExamples_shouldReturnWordAsJson() throws Exception {
+		var example = new ExampleDto();
+		example.setText("Put the book on the table.");
+		example.setId(1L);
 		dictionaryService.wordToReturn = new WordDto()
 				.id(5L)
 				.english("table")
-				.examples(List.of("Put the book on the table."));
+				.examples(List.of(example));
 
 		mockMvc.perform(get("/enrichWithExamples").param("word", "table"))
 				.andExpect(status().isOk())
 				.andExpect(jsonPath("$.id").value(5))
 				.andExpect(jsonPath("$.english").value("table"))
-				.andExpect(jsonPath("$.examples[0]").value("Put the book on the table."));
+				.andExpect(jsonPath("$.examples[0].text").value("Put the book on the table."))
+				.andExpect(jsonPath("$.examples[0].id").value(1));
 
 		assertThat(dictionaryService.enrichWithExamplesCalls).isEqualTo(1);
 		assertThat(dictionaryService.lastWordArg).isEqualTo("table");
