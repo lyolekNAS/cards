@@ -24,13 +24,6 @@
                     <h2 class="card-title fw-bolder mb-0 d-flex justify-content-center align-items-center gap-2">
                         <span th:text="${word.lang.name() == 'EN' ? word.english : word.ukrainian}"></span>
                         <button type="button"
-                                th:if="${not #lists.isEmpty(word.examples)}"
-                                onclick="toggleExamples()"
-                                class="btn btn-primary btn-sm pressable small-toggle-button"
-                                title="Приклади">
-                            <i class="bi bi-alphabet-uppercase"></i>
-                        </button>
-                        <button type="button"
                                 th:data-word="${word.english.toLowerCase()}"
                                 onclick="playAudio(this.getAttribute('data-word'))"
                                 class="btn  btn-primary btn-sm pressable small-toggle-button"
@@ -38,19 +31,6 @@
                             <i class="bi bi-volume-up-fill"></i>
                         </button>
                     </h2>
-
-                    <div id="examples"
-                       class="card-text text-muted fst-italic d-none mt-2">
-                        <div th:each="example: ${word.examples}">
-                            <span th:id="'example-' + ${example.id}" th:text="${example.text}"/>
-                            <button type="button"
-                                    th:onclick="'playAudio(document.getElementById(\'example-' + ${example.id} + '\').textContent)'"
-                                    class="btn  btn-primary btn-sm pressable small-toggle-button"
-                                    title="Прослухати">
-                                <i class="bi bi-volume-up-fill"></i>
-                            </button>
-                        </div>
-                    </div>
 
                     <hr class="my-3" />
 
@@ -104,6 +84,21 @@
 
                     <div id="description" class="card-text text-muted fst-italic text-start" style="visibility: hidden;"
                        th:utext="${word.description}"></div>
+
+
+                    <div id="examples"
+                         class="card-text text-muted fst-italic text-start" style="visibility: hidden;">
+                        <hr class="my-3" />
+                        <div th:each="example: ${word.examples}">
+                            <span th:id="'example-' + ${example.id}" th:text="${example.text}"/>
+                            <button type="button"
+                                    th:onclick="'playAudio(document.getElementById(\'example-' + ${example.id} + '\').textContent)'"
+                                    class="btn  btn-primary btn-sm pressable small-toggle-button"
+                                    title="Прослухати">
+                                <i class="bi bi-volume-up-fill"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -117,10 +112,8 @@ function showTranslation() {
         document.getElementById('actions').style.visibility = 'visible';
         document.getElementById('description').style.visibility = 'visible';
         document.getElementById('editButton').style.visibility = 'visible';
+        document.getElementById('examples').style.visibility = 'visible';
     }
-}
-function toggleExamples() {
-    document.getElementById('examples').classList.toggle('d-none');
 }
 
 function submitForm(success) {
