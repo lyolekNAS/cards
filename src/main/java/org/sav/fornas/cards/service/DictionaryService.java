@@ -55,6 +55,10 @@ public class DictionaryService {
 		return dictionaryControllerApi.enrichWithAiTranslations(w);
 	}
 
+	public WordDto enrichWithAiSynonyms(String w){
+		return dictionaryControllerApi.enrichWithAiSynonyms(w);
+	}
+
 	public void resetWord(Long id){
 		dictionaryControllerApi.resetWord(id);
 	}

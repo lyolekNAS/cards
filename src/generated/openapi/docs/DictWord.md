@@ -14,6 +14,7 @@
 |**definitions** | [**List&lt;DictWordDefinition&gt;**](DictWordDefinition.md) |  |  [optional] |
 |**translations** | [**List&lt;DictTrans&gt;**](DictTrans.md) |  |  [optional] |
 |**examples** | [**List&lt;DictWordExamples&gt;**](DictWordExamples.md) |  |  [optional] |
+|**synonyms** | [**List&lt;DictWordSynonym&gt;**](DictWordSynonym.md) |  |  [optional] |
 
 
 

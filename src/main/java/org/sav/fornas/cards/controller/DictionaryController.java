@@ -37,4 +37,9 @@ public class DictionaryController {
 	public WordDto enrichWithAiTranslations(@RequestParam String word){
 		return dictionaryService.enrichWithAiTranslations(word);
 	}
+
+	@RequestMapping("/enrichWithAiSynonyms")
+	public WordDto enrichWithAiSynonyms(@RequestParam String word){
+		return dictionaryService.enrichWithAiSynonyms(word);
+	}
 }

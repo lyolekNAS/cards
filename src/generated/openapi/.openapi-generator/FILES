@@ -10,6 +10,7 @@ docs/DictWord.md
 docs/DictWordDefinition.md
 docs/DictWordExamples.md
 docs/DictWordForm.md
+docs/DictWordSynonym.md
 docs/DictionaryControllerApi.md
 docs/ExampleDto.md
 docs/StateLimitControllerApi.md
@@ -50,6 +51,7 @@ src/main/java/org/sav/fornas/cards/client/cardsback/model/DictWord.java
 src/main/java/org/sav/fornas/cards/client/cardsback/model/DictWordDefinition.java
 src/main/java/org/sav/fornas/cards/client/cardsback/model/DictWordExamples.java
 src/main/java/org/sav/fornas/cards/client/cardsback/model/DictWordForm.java
+src/main/java/org/sav/fornas/cards/client/cardsback/model/DictWordSynonym.java
 src/main/java/org/sav/fornas/cards/client/cardsback/model/ExampleDto.java
 src/main/java/org/sav/fornas/cards/client/cardsback/model/StateLimitDto.java
 src/main/java/org/sav/fornas/cards/client/cardsback/model/StatisticAttemptDto.java
@@ -61,4 +63,4 @@ src/main/java/org/sav/fornas/cards/client/cardsback/model/Word.java
 src/main/java/org/sav/fornas/cards/client/cardsback/model/WordDto.java
 src/main/java/org/sav/fornas/cards/client/cardsback/model/WordState.java
 src/main/java/org/sav/fornas/cards/client/cardsback/model/WordsPageDtoWordDto.java
-src/test/java/org/sav/fornas/cards/client/cardsback/model/ExampleDtoTest.java
+src/test/java/org/sav/fornas/cards/client/cardsback/model/DictWordSynonymTest.java
