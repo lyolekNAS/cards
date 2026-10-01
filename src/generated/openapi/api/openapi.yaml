@@ -531,6 +531,9 @@ components:
         nextTrain: 2000-01-23T04:56:07.000+00:00
         dictWordFreqSum: 2
         aitranslated: true
+        synonyms:
+        - synonyms
+        - synonyms
         description: description
         uninteresting: true
         dictWordId: 5
@@ -604,9 +607,13 @@ components:
           items:
             $ref: '#/components/schemas/ExampleDto'
           type: array
-        uninteresting:
-          type: boolean
+        synonyms:
+          items:
+            type: string
+          type: array
         aitranslated:
+          type: boolean
+        uninteresting:
           type: boolean
         known:
           type: boolean
@@ -622,6 +629,9 @@ components:
           nextTrain: 2000-01-23T04:56:07.000+00:00
           dictWordFreqSum: 2
           aitranslated: true
+          synonyms:
+          - synonyms
+          - synonyms
           description: description
           uninteresting: true
           dictWordId: 5
@@ -644,6 +654,9 @@ components:
           nextTrain: 2000-01-23T04:56:07.000+00:00
           dictWordFreqSum: 2
           aitranslated: true
+          synonyms:
+          - synonyms
+          - synonyms
           description: description
           uninteresting: true
           dictWordId: 5
