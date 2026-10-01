@@ -452,6 +452,27 @@ paths:
       tags:
       - dictionary-controller
       x-accepts: '*/*'
+  /api/dict/enrichWithAiSynonyms:
+    get:
+      operationId: enrichWithAiSynonyms
+      parameters:
+      - explode: true
+        in: query
+        name: word
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/WordDto'
+          description: OK
+      tags:
+      - dictionary-controller
+      x-accepts: '*/*'
   /api/word/delete:
     delete:
       operationId: deleteWord
@@ -583,9 +604,9 @@ components:
           items:
             $ref: '#/components/schemas/ExampleDto'
           type: array
-        aitranslated:
-          type: boolean
         uninteresting:
+          type: boolean
+        aitranslated:
           type: boolean
         known:
           type: boolean
@@ -782,6 +803,9 @@ components:
           id: 4
         - wordText: wordText
           id: 4
+        synonyms:
+        - id: 1
+        - id: 1
         wordText: wordText
         id: 2
         state: 7
@@ -824,6 +848,10 @@ components:
           items:
             $ref: '#/components/schemas/DictWordExamples'
           type: array
+        synonyms:
+          items:
+            $ref: '#/components/schemas/DictWordSynonym'
+          type: array
       type: object
     DictWordDefinition:
       example:
@@ -865,6 +893,14 @@ components:
           format: int64
           type: integer
       type: object
+    DictWordSynonym:
+      example:
+        id: 1
+      properties:
+        id:
+          format: int64
+          type: integer
+      type: object
     Word:
       example:
         ukrainian: ukrainian
@@ -890,6 +926,9 @@ components:
             id: 4
           - wordText: wordText
             id: 4
+          synonyms:
+          - id: 1
+          - id: 1
           wordText: wordText
           id: 2
           state: 7

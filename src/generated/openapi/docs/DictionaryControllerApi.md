@@ -4,6 +4,7 @@ All URIs are relative to *http://localhost:8052*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
+| [**enrichWithAiSynonyms**](DictionaryControllerApi.md#enrichWithAiSynonyms) | **GET** /api/dict/enrichWithAiSynonyms |  |
 | [**enrichWithAiTranslations**](DictionaryControllerApi.md#enrichWithAiTranslations) | **GET** /api/dict/enrichWithAiTranslations |  |
 | [**enrichWithExamples**](DictionaryControllerApi.md#enrichWithExamples) | **POST** /api/dict/enrichWithExamples |  |
 | [**findWordToSuggest**](DictionaryControllerApi.md#findWordToSuggest) | **GET** /api/dict/findWordToSuggest |  |
@@ -14,6 +15,70 @@ All URIs are relative to *http://localhost:8052*
 | [**resetWord**](DictionaryControllerApi.md#resetWord) | **POST** /api/dict/reset |  |
 | [**setMarkOnWord**](DictionaryControllerApi.md#setMarkOnWord) | **POST** /api/dict/setMark |  |
 
+
+
+## enrichWithAiSynonyms
+
+> WordDto enrichWithAiSynonyms(word)
+
+
+
+### Example
+
+```java
+// Import classes:
+import org.sav.fornas.cards.client.cardsback.ApiClient;
+import org.sav.fornas.cards.client.cardsback.ApiException;
+import org.sav.fornas.cards.client.cardsback.Configuration;
+import org.sav.fornas.cards.client.cardsback.models.*;
+import org.sav.fornas.cards.client.cardsback.api.DictionaryControllerApi;
+
+public class Example {
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("http://localhost:8052");
+
+        DictionaryControllerApi apiInstance = new DictionaryControllerApi(defaultClient);
+        String word = "word_example"; // String | 
+        try {
+            WordDto result = apiInstance.enrichWithAiSynonyms(word);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DictionaryControllerApi#enrichWithAiSynonyms");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **word** | **String**|  | |
+
+### Return type
+
+[**WordDto**](WordDto.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: */*
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
 
 
 ## enrichWithAiTranslations

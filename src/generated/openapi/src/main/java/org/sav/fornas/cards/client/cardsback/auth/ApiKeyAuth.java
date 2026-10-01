@@ -3,7 +3,7 @@ package org.sav.fornas.cards.client.cardsback.auth;
 import org.springframework.http.HttpHeaders;
 import org.springframework.util.MultiValueMap;
 
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-11T21:57:02.832259984+03:00[Europe/Kyiv]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-25T21:48:27.651447726+03:00[Europe/Kyiv]")
 public class ApiKeyAuth implements Authentication {
     private final String location;
     private final String paramName;

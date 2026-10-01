@@ -27,6 +27,7 @@ import org.sav.fornas.cards.client.cardsback.model.DictTrans;
 import org.sav.fornas.cards.client.cardsback.model.DictWordDefinition;
 import org.sav.fornas.cards.client.cardsback.model.DictWordExamples;
 import org.sav.fornas.cards.client.cardsback.model.DictWordForm;
+import org.sav.fornas.cards.client.cardsback.model.DictWordSynonym;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
@@ -40,9 +41,10 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   DictWord.JSON_PROPERTY_FORMS,
   DictWord.JSON_PROPERTY_DEFINITIONS,
   DictWord.JSON_PROPERTY_TRANSLATIONS,
-  DictWord.JSON_PROPERTY_EXAMPLES
+  DictWord.JSON_PROPERTY_EXAMPLES,
+  DictWord.JSON_PROPERTY_SYNONYMS
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-08-11T21:57:02.832259984+03:00[Europe/Kyiv]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-25T21:48:27.651447726+03:00[Europe/Kyiv]")
 public class DictWord {
   public static final String JSON_PROPERTY_ID = "id";
   private Long id;
@@ -64,6 +66,9 @@ public class DictWord {
 
   public static final String JSON_PROPERTY_EXAMPLES = "examples";
   private List<DictWordExamples> examples;
+
+  public static final String JSON_PROPERTY_SYNONYMS = "synonyms";
+  private List<DictWordSynonym> synonyms;
 
   public DictWord() {
   }
@@ -281,6 +286,40 @@ public class DictWord {
     this.examples = examples;
   }
 
+
+  public DictWord synonyms(List<DictWordSynonym> synonyms) {
+    
+    this.synonyms = synonyms;
+    return this;
+  }
+
+  public DictWord addSynonymsItem(DictWordSynonym synonymsItem) {
+    if (this.synonyms == null) {
+      this.synonyms = new ArrayList<>();
+    }
+    this.synonyms.add(synonymsItem);
+    return this;
+  }
+
+   /**
+   * Get synonyms
+   * @return synonyms
+  **/
+  @jakarta.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_SYNONYMS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public List<DictWordSynonym> getSynonyms() {
+    return synonyms;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_SYNONYMS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setSynonyms(List<DictWordSynonym> synonyms) {
+    this.synonyms = synonyms;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -296,12 +335,13 @@ public class DictWord {
         Objects.equals(this.forms, dictWord.forms) &&
         Objects.equals(this.definitions, dictWord.definitions) &&
         Objects.equals(this.translations, dictWord.translations) &&
-        Objects.equals(this.examples, dictWord.examples);
+        Objects.equals(this.examples, dictWord.examples) &&
+        Objects.equals(this.synonyms, dictWord.synonyms);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, wordText, state, forms, definitions, translations, examples);
+    return Objects.hash(id, wordText, state, forms, definitions, translations, examples, synonyms);
   }
 
   @Override
@@ -315,6 +355,7 @@ public class DictWord {
     sb.append("    definitions: ").append(toIndentedString(definitions)).append("\n");
     sb.append("    translations: ").append(toIndentedString(translations)).append("\n");
     sb.append("    examples: ").append(toIndentedString(examples)).append("\n");
+    sb.append("    synonyms: ").append(toIndentedString(synonyms)).append("\n");
     sb.append("}");
     return sb.toString();
   }
