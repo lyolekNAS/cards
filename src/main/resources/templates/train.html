@@ -99,6 +99,15 @@
                             </button>
                         </div>
                     </div>
+
+
+                    <div id="synonyms"
+                         class="card-text text-muted fst-italic text-start" style="visibility: hidden;">
+                        <hr class="my-3" />
+                        <div th:each="synonym: ${word.synonyms}">
+                            <a th:href="@{/edit(w=${synonym})}" th:text="${synonym}" target="_blank"/>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -113,6 +122,7 @@ function showTranslation() {
         document.getElementById('description').style.visibility = 'visible';
         document.getElementById('editButton').style.visibility = 'visible';
         document.getElementById('examples').style.visibility = 'visible';
+        document.getElementById('synonyms').style.visibility = 'visible';
     }
 }
 
