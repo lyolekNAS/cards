@@ -23,6 +23,7 @@
 |**rarity** | **Integer** |  |  [optional] |
 |**examples** | [**List&lt;ExampleDto&gt;**](ExampleDto.md) |  |  [optional] |
 |**synonyms** | **List&lt;String&gt;** |  |  [optional] |
+|**knownWords** | **List&lt;String&gt;** |  |  [optional] |
 |**aitranslated** | **Boolean** |  |  [optional] |
 |**uninteresting** | **Boolean** |  |  [optional] |
 |**known** | **Boolean** |  |  [optional] |

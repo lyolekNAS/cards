@@ -10,17 +10,25 @@ import org.sav.fornas.cards.dto.google.TranslationResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
 public class WordService {
+
+	private static final Pattern WORD_PATTERN = Pattern.compile("[\\p{L}\\p{M}][\\p{L}\\p{M}\\p{N}]*(?:['’\\-][\\p{L}\\p{M}\\p{N}]+)*");
 
 	private final RestTemplate gTranslateRestTemplate;
 	private final WordControllerApi wordControllerApi;
@@ -79,7 +87,7 @@ public class WordService {
 
 	public WordDto getWord(){
 		WordDto w = wordControllerApi.findWordToTrain();
-		return clearDescription(w);
+		return processCardText(w);
 	}
 
 	public WordDto getRetroWord(Long key){
@@ -98,8 +106,7 @@ public class WordService {
 
 		String randomWord = words.get(ThreadLocalRandom.current().nextInt(words.size()));
 		WordDto word = wordControllerApi.findWord(randomWord);
-		clearDescription(word);
-		return word;
+		return processCardText(word);
 	}
 
 	public StatisticDto getStatistics(){
@@ -135,11 +142,71 @@ public class WordService {
 		}
 	}
 
-	private WordDto clearDescription(WordDto w){
-		if(w != null && w.getDescription() != null) {
-			w.description(w.getDescription().replace("\n", "<br/>"));
+	private WordDto processCardText(WordDto word) {
+		if (word == null) {
+			return null;
 		}
-		return w;
+		Set<String> knownWords = word.getKnownWords() == null
+				? Set.of()
+				: word.getKnownWords().stream()
+						.filter(Objects::nonNull)
+						.map(value -> value.toLowerCase(Locale.ROOT))
+						.collect(java.util.stream.Collectors.toSet());
+
+		if (word.getDescription() != null) {
+			word.setDescription(linkUnknownWords(word.getDescription(), knownWords, true));
+		}
+		if (word.getExamples() != null) {
+			word.getExamples().stream()
+					.filter(Objects::nonNull)
+					.filter(example -> example.getText() != null)
+					.forEach(example -> example.setText(linkUnknownWords(example.getText(), knownWords, false)));
+		}
+		return word;
+	}
+
+	private String linkUnknownWords(String text, Set<String> knownWords, boolean preserveNewlines) {
+		Matcher matcher = WORD_PATTERN.matcher(text);
+		StringBuilder html = new StringBuilder();
+		int position = 0;
+		while (matcher.find()) {
+			appendEscapedText(html, text.substring(position, matcher.start()), preserveNewlines);
+
+			String word = matcher.group();
+			if (knownWords.contains(word.toLowerCase(Locale.ROOT))) {
+				appendEscapedText(html, word, false);
+			} else {
+				String encodedWord = URLEncoder.encode(word, StandardCharsets.UTF_8).replace("+", "%20");
+				html.append("<a href=\"edit?w=")
+						.append(encodedWord)
+						.append("\" target=\"_blank\">");
+				appendEscapedText(html, word, false);
+				html.append("</a>");
+			}
+			position = matcher.end();
+		}
+		appendEscapedText(html, text.substring(position), preserveNewlines);
+		return html.toString();
+	}
+
+	private void appendEscapedText(StringBuilder html, String text, boolean preserveNewlines) {
+		for (int i = 0; i < text.length(); i++) {
+			char character = text.charAt(i);
+			switch (character) {
+				case '&' -> html.append("&amp;");
+				case '<' -> html.append("&lt;");
+				case '>' -> html.append("&gt;");
+				case '"' -> html.append("&quot;");
+				case '\'' -> html.append("&#39;");
+				case '\n' -> html.append(preserveNewlines ? "<br/>" : "\n");
+				case '\r' -> {
+					if (!preserveNewlines) {
+						html.append(character);
+					}
+				}
+				default -> html.append(character);
+			}
+		}
 	}
 
 //	private WordDto toWordDto(Word word) {

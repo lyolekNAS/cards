@@ -48,11 +48,12 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   WordDto.JSON_PROPERTY_RARITY,
   WordDto.JSON_PROPERTY_EXAMPLES,
   WordDto.JSON_PROPERTY_SYNONYMS,
+  WordDto.JSON_PROPERTY_KNOWN_WORDS,
   WordDto.JSON_PROPERTY_AITRANSLATED,
   WordDto.JSON_PROPERTY_UNINTERESTING,
   WordDto.JSON_PROPERTY_KNOWN
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-02T00:15:47.224647422+03:00[Europe/Kyiv]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-08T22:59:59.941239019+03:00[Europe/Kyiv]")
 public class WordDto {
   public static final String JSON_PROPERTY_ID = "id";
   private Long id;
@@ -185,6 +186,9 @@ public class WordDto {
 
   public static final String JSON_PROPERTY_SYNONYMS = "synonyms";
   private List<String> synonyms;
+
+  public static final String JSON_PROPERTY_KNOWN_WORDS = "knownWords";
+  private List<String> knownWords;
 
   public static final String JSON_PROPERTY_AITRANSLATED = "aitranslated";
   private Boolean aitranslated;
@@ -630,6 +634,40 @@ public class WordDto {
   }
 
 
+  public WordDto knownWords(List<String> knownWords) {
+    
+    this.knownWords = knownWords;
+    return this;
+  }
+
+  public WordDto addKnownWordsItem(String knownWordsItem) {
+    if (this.knownWords == null) {
+      this.knownWords = new ArrayList<>();
+    }
+    this.knownWords.add(knownWordsItem);
+    return this;
+  }
+
+   /**
+   * Get knownWords
+   * @return knownWords
+  **/
+  @jakarta.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_KNOWN_WORDS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public List<String> getKnownWords() {
+    return knownWords;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_KNOWN_WORDS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setKnownWords(List<String> knownWords) {
+    this.knownWords = knownWords;
+  }
+
+
   public WordDto aitranslated(Boolean aitranslated) {
     
     this.aitranslated = aitranslated;
@@ -732,6 +770,7 @@ public class WordDto {
         Objects.equals(this.rarity, wordDto.rarity) &&
         Objects.equals(this.examples, wordDto.examples) &&
         Objects.equals(this.synonyms, wordDto.synonyms) &&
+        Objects.equals(this.knownWords, wordDto.knownWords) &&
         Objects.equals(this.aitranslated, wordDto.aitranslated) &&
         Objects.equals(this.uninteresting, wordDto.uninteresting) &&
         Objects.equals(this.known, wordDto.known);
@@ -739,7 +778,7 @@ public class WordDto {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, english, ukrainian, description, userId, englishCnt, ukrainianCnt, lastTrain, nextTrain, lang, state, dictWordId, dictWordFreqSum, rarity, examples, synonyms, aitranslated, uninteresting, known);
+    return Objects.hash(id, english, ukrainian, description, userId, englishCnt, ukrainianCnt, lastTrain, nextTrain, lang, state, dictWordId, dictWordFreqSum, rarity, examples, synonyms, knownWords, aitranslated, uninteresting, known);
   }
 
   @Override
@@ -762,6 +801,7 @@ public class WordDto {
     sb.append("    rarity: ").append(toIndentedString(rarity)).append("\n");
     sb.append("    examples: ").append(toIndentedString(examples)).append("\n");
     sb.append("    synonyms: ").append(toIndentedString(synonyms)).append("\n");
+    sb.append("    knownWords: ").append(toIndentedString(knownWords)).append("\n");
     sb.append("    aitranslated: ").append(toIndentedString(aitranslated)).append("\n");
     sb.append("    uninteresting: ").append(toIndentedString(uninteresting)).append("\n");
     sb.append("    known: ").append(toIndentedString(known)).append("\n");

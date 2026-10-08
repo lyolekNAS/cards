@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   StatisticDictionaryDto.JSON_PROPERTY_IN_COMON_COUNT,
   StatisticDictionaryDto.JSON_PROPERTY_IN_USER_COUNT
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-02T00:15:47.224647422+03:00[Europe/Kyiv]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-08T22:59:59.941239019+03:00[Europe/Kyiv]")
 public class StatisticDictionaryDto {
   public static final String JSON_PROPERTY_LEVEL = "level";
   private Integer level;

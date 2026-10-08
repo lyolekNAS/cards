@@ -538,6 +538,9 @@ components:
         uninteresting: true
         dictWordId: 5
         userId: 6
+        knownWords:
+        - knownWords
+        - knownWords
         englishCnt: 1
         ukrainianCnt: 5
         examples:
@@ -611,6 +614,10 @@ components:
           items:
             type: string
           type: array
+        knownWords:
+          items:
+            type: string
+          type: array
         aitranslated:
           type: boolean
         uninteresting:
@@ -636,6 +643,9 @@ components:
           uninteresting: true
           dictWordId: 5
           userId: 6
+          knownWords:
+          - knownWords
+          - knownWords
           englishCnt: 1
           ukrainianCnt: 5
           examples:
@@ -661,6 +671,9 @@ components:
           uninteresting: true
           dictWordId: 5
           userId: 6
+          knownWords:
+          - knownWords
+          - knownWords
           englishCnt: 1
           ukrainianCnt: 5
           examples:
@@ -817,8 +830,10 @@ components:
         - wordText: wordText
           id: 4
         synonyms:
-        - id: 1
-        - id: 1
+        - synonym: synonym
+          id: 1
+        - synonym: synonym
+          id: 1
         wordText: wordText
         id: 2
         state: 7
@@ -908,11 +923,14 @@ components:
       type: object
     DictWordSynonym:
       example:
+        synonym: synonym
         id: 1
       properties:
         id:
           format: int64
           type: integer
+        synonym:
+          type: string
       type: object
     Word:
       example:
@@ -940,8 +958,10 @@ components:
           - wordText: wordText
             id: 4
           synonyms:
-          - id: 1
-          - id: 1
+          - synonym: synonym
+            id: 1
+          - synonym: synonym
+            id: 1
           wordText: wordText
           id: 2
           state: 7

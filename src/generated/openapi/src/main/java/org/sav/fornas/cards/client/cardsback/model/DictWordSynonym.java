@@ -27,12 +27,16 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
  * DictWordSynonym
  */
 @JsonPropertyOrder({
-  DictWordSynonym.JSON_PROPERTY_ID
+  DictWordSynonym.JSON_PROPERTY_ID,
+  DictWordSynonym.JSON_PROPERTY_SYNONYM
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-02T00:15:47.224647422+03:00[Europe/Kyiv]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-08T22:59:59.941239019+03:00[Europe/Kyiv]")
 public class DictWordSynonym {
   public static final String JSON_PROPERTY_ID = "id";
   private Long id;
+
+  public static final String JSON_PROPERTY_SYNONYM = "synonym";
+  private String synonym;
 
   public DictWordSynonym() {
   }
@@ -62,6 +66,32 @@ public class DictWordSynonym {
     this.id = id;
   }
 
+
+  public DictWordSynonym synonym(String synonym) {
+    
+    this.synonym = synonym;
+    return this;
+  }
+
+   /**
+   * Get synonym
+   * @return synonym
+  **/
+  @jakarta.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_SYNONYM)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public String getSynonym() {
+    return synonym;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_SYNONYM)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setSynonym(String synonym) {
+    this.synonym = synonym;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -71,12 +101,13 @@ public class DictWordSynonym {
       return false;
     }
     DictWordSynonym dictWordSynonym = (DictWordSynonym) o;
-    return Objects.equals(this.id, dictWordSynonym.id);
+    return Objects.equals(this.id, dictWordSynonym.id) &&
+        Objects.equals(this.synonym, dictWordSynonym.synonym);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id);
+    return Objects.hash(id, synonym);
   }
 
   @Override
@@ -84,6 +115,7 @@ public class DictWordSynonym {
     StringBuilder sb = new StringBuilder();
     sb.append("class DictWordSynonym {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    synonym: ").append(toIndentedString(synonym)).append("\n");
     sb.append("}");
     return sb.toString();
   }

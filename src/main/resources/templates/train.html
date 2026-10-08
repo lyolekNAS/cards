@@ -90,7 +90,7 @@
                          class="card-text text-muted fst-italic text-start" style="visibility: hidden;">
                         <hr class="my-3" />
                         <div th:each="example: ${word.examples}">
-                            <span th:id="'example-' + ${example.id}" th:text="${example.text}"/>
+                            <span th:id="'example-' + ${example.id}" th:utext="${example.text}"></span>
                             <button type="button"
                                     th:onclick="'playAudio(document.getElementById(\'example-' + ${example.id} + '\').textContent)'"
                                     class="btn  btn-primary btn-sm pressable small-toggle-button"

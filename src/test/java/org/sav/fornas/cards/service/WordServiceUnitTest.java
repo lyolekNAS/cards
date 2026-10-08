@@ -8,6 +8,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.sav.fornas.cards.client.cardsback.api.DictionaryControllerApi;
 import org.sav.fornas.cards.client.cardsback.api.StateLimitControllerApi;
 import org.sav.fornas.cards.client.cardsback.api.WordControllerApi;
+import org.sav.fornas.cards.client.cardsback.model.ExampleDto;
 import org.sav.fornas.cards.client.cardsback.model.StatisticDto;
 import org.sav.fornas.cards.client.cardsback.model.StateLimitDto;
 import org.sav.fornas.cards.client.cardsback.model.TrainedWordDto;
@@ -114,7 +115,23 @@ class WordServiceUnitTest {
 		WordDto result = wordService.getWord();
 
 		assertEquals("desk", result.getEnglish());
-		assertEquals("line1<br/>line2", result.getDescription());
+		assertEquals("<a href=\"/edit?w=line1\">line1</a><br/><a href=\"/edit?w=line2\">line2</a>", result.getDescription());
+	}
+
+	@Test
+	void getWord_linksUnknownWordsInDescriptionAndExamples() {
+		WordDto word = new WordDto();
+		word.setKnownWords(List.of("known", "can't"));
+		word.setDescription("Known, unknown & <unsafe>\ncan't stop");
+		word.setExamples(List.of(new ExampleDto().text("known example!")));
+		when(wordControllerApi.findWordToTrain()).thenReturn(word);
+
+		WordDto result = wordService.getWord();
+
+		assertEquals("Known, <a href=\"/edit?w=unknown\">unknown</a> &amp; &lt;<a href=\"/edit?w=unsafe\">unsafe</a>&gt;<br/>can&#39;t <a href=\"/edit?w=stop\">stop</a>",
+				result.getDescription());
+		assertEquals("known <a href=\"/edit?w=example\">example</a>!",
+				result.getExamples().getFirst().getText());
 	}
 
 	@Test
@@ -203,10 +220,13 @@ class WordServiceUnitTest {
 		Long key = 100L;
 		when(wordControllerApi.getWordsForRetro()).thenReturn(List.of("retro"));
 
-		WordDto dto = new WordDto();
-		dto.setId(42L);
-		dto.setDescription("a\nb");
-		when(wordControllerApi.findWord("retro")).thenReturn(dto);
+		WordDto firstDto = new WordDto();
+		firstDto.setId(42L);
+		firstDto.setDescription("a\nb");
+		WordDto secondDto = new WordDto();
+		secondDto.setId(42L);
+		secondDto.setDescription("a\nb");
+		when(wordControllerApi.findWord("retro")).thenReturn(firstDto, secondDto);
 
 		WordDto first = wordService.getRetroWord(key);
 		WordDto second = wordService.getRetroWord(key);
@@ -214,8 +234,8 @@ class WordServiceUnitTest {
 		assertNotNull(first);
 		assertNotNull(second);
 		assertEquals(42L, first.getId());
-		assertEquals("a<br/>b", first.getDescription());
-		assertEquals("a<br/>b", second.getDescription());
+		assertEquals("<a href=\"/edit?w=a\">a</a><br/><a href=\"/edit?w=b\">b</a>", first.getDescription());
+		assertEquals("<a href=\"/edit?w=a\">a</a><br/><a href=\"/edit?w=b\">b</a>", second.getDescription());
 		verify(wordControllerApi, times(1)).getWordsForRetro();
 		verify(wordControllerApi, times(2)).findWord("retro");
 	}
