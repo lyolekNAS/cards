@@ -115,7 +115,7 @@ class WordServiceUnitTest {
 		WordDto result = wordService.getWord();
 
 		assertEquals("desk", result.getEnglish());
-		assertEquals("<a href=\"/edit?w=line1\">line1</a><br/><a href=\"/edit?w=line2\">line2</a>", result.getDescription());
+		assertEquals("<a href=\"edit?w=line1\" target=\"_blank\">line1</a><br/><a href=\"edit?w=line2\" target=\"_blank\">line2</a>", result.getDescription());
 	}
 
 	@Test
@@ -128,9 +128,9 @@ class WordServiceUnitTest {
 
 		WordDto result = wordService.getWord();
 
-		assertEquals("Known, <a href=\"/edit?w=unknown\">unknown</a> &amp; &lt;<a href=\"/edit?w=unsafe\">unsafe</a>&gt;<br/>can&#39;t <a href=\"/edit?w=stop\">stop</a>",
+		assertEquals("Known, <a href=\"edit?w=unknown\" target=\"_blank\">unknown</a> &amp; &lt;<a href=\"edit?w=unsafe\" target=\"_blank\">unsafe</a>&gt;<br/>can&#39;t <a href=\"edit?w=stop\" target=\"_blank\">stop</a>",
 				result.getDescription());
-		assertEquals("known <a href=\"/edit?w=example\">example</a>!",
+		assertEquals("known <a href=\"edit?w=example\" target=\"_blank\">example</a>!",
 				result.getExamples().getFirst().getText());
 	}
 
@@ -234,8 +234,8 @@ class WordServiceUnitTest {
 		assertNotNull(first);
 		assertNotNull(second);
 		assertEquals(42L, first.getId());
-		assertEquals("<a href=\"/edit?w=a\">a</a><br/><a href=\"/edit?w=b\">b</a>", first.getDescription());
-		assertEquals("<a href=\"/edit?w=a\">a</a><br/><a href=\"/edit?w=b\">b</a>", second.getDescription());
+		assertEquals("<a href=\"edit?w=a\" target=\"_blank\">a</a><br/><a href=\"edit?w=b\" target=\"_blank\">b</a>", first.getDescription());
+		assertEquals("<a href=\"edit?w=a\" target=\"_blank\">a</a><br/><a href=\"edit?w=b\" target=\"_blank\">b</a>", second.getDescription());
 		verify(wordControllerApi, times(1)).getWordsForRetro();
 		verify(wordControllerApi, times(2)).findWord("retro");
 	}
